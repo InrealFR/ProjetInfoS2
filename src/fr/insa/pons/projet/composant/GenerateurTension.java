@@ -13,11 +13,20 @@ import static fr.insa.pons.projet.complex.Complex.creeRec;
  * @author hugop
  */
 public class GenerateurTension extends Composant{
-double fem ;
+ private double fem ;
 public GenerateurTension(){
 super();
 fem = 0 ;
 }
+
+    public double getFem() {
+        return fem;
+    }
+
+    public void setFem(double fem) {
+        this.fem = fem;
+    }
+
 public GenerateurTension(double fem){
 super();
 this.fem = fem ;
@@ -32,7 +41,7 @@ public void coeffGamma(double pulsation){
 setCoeffGamma(creeRec(fem,0));
 }
 public String toString(){
-return(getNom()) ;
+return(getNom()+" Alpha = "+getCoeffAlpha()+" Beta = "+getCoeffBeta()+" Gamma ="+getCoeffGamma()) ;
 }
 }
 

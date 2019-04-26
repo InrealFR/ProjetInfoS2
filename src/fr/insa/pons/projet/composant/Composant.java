@@ -17,7 +17,7 @@ private Complex coeffAlpha ;
 private Complex coeffBeta ; 
 private Complex coeffGamma ;
 public Composant(){
-nom = null ;
+nom = "" ;
 coeffAlpha = coeffBeta = coeffGamma = new Complex();
 }
 public Composant(String nom,Complex coeffAlpha,Complex coeffBeta,Complex coeffGamma){

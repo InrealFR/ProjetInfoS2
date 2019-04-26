@@ -6,6 +6,7 @@
 package fr.insa.pons.projet.complex;
 
 import fr.insa.Lire;
+import java.text.DecimalFormat;
 
 /**
  *
@@ -14,7 +15,8 @@ import fr.insa.Lire;
 public class Complex {
 private final double mod ;
 private final double arg ;
-     
+
+DecimalFormat df = new DecimalFormat("#.###");
 public Complex(double mod, double arg) {
     this.mod= mod ;
     this.arg = arg ;
@@ -41,7 +43,7 @@ return(new Complex(mod,arg)) ;
 }
 @Override
 public String toString(){
-return(this.mod*Math.cos(arg)+ "+ i*"+ this.mod*Math.sin(arg) + " = "+this.mod+"*e^"+this.arg) ;
+return(df.format(this.mod*Math.cos(arg))+ "+ i*"+ df.format(this.mod*Math.sin(arg)) + " = "+df.format(this.mod)+"*e^"+df.format(this.arg)) ;
 }
 public static Complex entrerRec() {
 System.out.println("Partie reelle ?") ;
