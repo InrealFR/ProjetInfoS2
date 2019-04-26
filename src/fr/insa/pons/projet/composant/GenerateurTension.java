@@ -22,14 +22,17 @@ public GenerateurTension(double fem){
 super();
 this.fem = fem ;
 }
-public void CoeffAlpha(){
+public void coeffAlpha(double pulsation){
 setCoeffAlpha(creeRec(1,0)) ;
 }
-public void CoeffBeta(){
+public void coeffBeta(double pulsation){
 setCoeffBeta(new Complex());
 }
-public void CoeffGamma(){
+public void coeffGamma(double pulsation){
 setCoeffGamma(creeRec(fem,0));
 }
-
+public String toString(){
+return(getNom()) ;
 }
+}
+
