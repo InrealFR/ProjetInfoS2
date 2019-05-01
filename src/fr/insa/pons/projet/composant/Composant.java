@@ -6,6 +6,7 @@
 package fr.insa.pons.projet.composant;
 
 import fr.insa.pons.projet.complex.Complex;
+import fr.insa.pons.projet.noeud.Noeuds;
 
 /**
  *
@@ -18,7 +19,8 @@ public abstract class Composant {
     private String nom;
     private double omega;
     private int id ;
-    
+    private Noeuds NoeudDepart ;
+    private Noeuds NoeudArrive ;
     
     // Constructeur
     
