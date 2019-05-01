@@ -11,24 +11,23 @@ import fr.insa.pons.projet.complex.Complex;
  *
  * @author lherman01
  */
-public class GenerateurTension extends Composant {
+public class Condensateur extends Composant {
     
     //attributs
-    private double fem;
+    public double capacite;
     
-    
-    //constructeur
-    public GenerateurTension(double f){
-        this.fem=f;
+    //Constructeurs
+    public Condensateur(double c){
+        this.capacite=c;
     }
     
-    // selecteurs
-    public double getFem(){
-        return this.fem;
+    //selecteurs
+    public double getCapacite(){
+        return this.capacite;
     }
     
-    public void setFem(double f){
-        this.fem=f;
+    public void setCapacite(double c){
+        this.capacite=c;
     }
     
     //methodes
@@ -39,19 +38,17 @@ public class GenerateurTension extends Composant {
     
     @Override
     public Complex beta(){
-        return Complex.creePol(0,0);
+        return Complex.creePol(0,1/(this.capacite*this.getOmega()));
     }
     
     @Override
     public Complex gamma(){
-        return Complex.creeRec(this.fem,0);
+        return Complex.creeRec(0,0);
     }
-    
-    
     @Override
     public String toString(){
-        return  this.getNom()+this.getId()
-                +"/ fem = "+this.fem
-                +" /l'équation linéaire correspondante est: "+this.equaLineaire();
+        return this.getNom()+this.getId() 
+                +" / C= "+this.capacite
+                +" / l'équation linéaire correspondante est: "+this.equaLineaire();
     }
 }

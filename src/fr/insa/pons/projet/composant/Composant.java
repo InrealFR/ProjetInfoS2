@@ -9,58 +9,61 @@ import fr.insa.pons.projet.complex.Complex;
 
 /**
  *
- * @author hugop
+ * @author lherman01
  */
 public abstract class Composant {
-private String nom ;
-private Complex coeffAlpha ;
-private Complex coeffBeta ; 
-private Complex coeffGamma ;
-public Composant(){
-nom = "" ;
-coeffAlpha = coeffBeta = coeffGamma = new Complex();
-}
-public Composant(String nom,Complex coeffAlpha,Complex coeffBeta,Complex coeffGamma){
-this.nom = nom ;
-this.coeffAlpha = coeffAlpha ;
-this.coeffBeta = coeffBeta ;
-this.coeffGamma = coeffGamma ;
-}
+    
+    // Les attributs
+    
+    private String nom;
+    private double omega;
+    private int id ;
+    
+    // Constructeur
+    
+    public Composant(){
+    nom = "" ;
+    omega = 0;
+    id=0;
+    }
+
+    public Composant(String nom, double omega, int id) {
+        this.nom = nom;
+        this.omega = omega;
+        this.id = id;
+    }
+  
+    
+    
+    public int getId(){
+        return id;}
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNom() {
-        return nom;
+        return this.nom;
     }
-
-    public void setNom(String nom) {
-        this.nom = nom;
+    
+    public void setNom(String nom){
+        this.nom=nom;}
+    
+    public double getOmega(){
+        return this.omega;}
+    
+    public void setOmega(double omega){
+        this.omega=omega;}
+    
+    //Les méthodes
+    
+    public abstract Complex alpha();
+    public abstract Complex beta();
+    public abstract Complex gamma();
+    public abstract String toString();
+    public String equaLineaire(){
+        return this.alpha()+"U+"+this.beta()+"I+"+this.gamma()+"=0";
     }
-
-    public Complex getCoeffAlpha() {
-        return coeffAlpha;
-    }
-
-    public void setCoeffAlpha(Complex coeffAlpha) {
-        this.coeffAlpha = coeffAlpha;
-    }
-
-    public Complex getCoeffBeta() {
-        return coeffBeta;
-    }
-
-    public void setCoeffBeta(Complex coeffBeta) {
-        this.coeffBeta = coeffBeta;
-    }
-
-    public Complex getCoeffGamma() {
-        return coeffGamma;
-    }
-
-    public void setCoeffGamma(Complex coeffGamma) {
-        this.coeffGamma = coeffGamma;
-    }
-
-public abstract String toString() ;
-public abstract void coeffAlpha(double pulsation) ;
-public abstract void coeffBeta(double pulsation);
-public abstract void coeffGamma(double pulsation);
+    
 }
+    

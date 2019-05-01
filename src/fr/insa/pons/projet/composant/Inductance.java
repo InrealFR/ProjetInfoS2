@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.insa.pons.projet.composant ;
+package fr.insa.pons.projet.composant;
 
 import fr.insa.pons.projet.complex.Complex;
 
@@ -11,24 +11,23 @@ import fr.insa.pons.projet.complex.Complex;
  *
  * @author lherman01
  */
-public class GenerateurTension extends Composant {
+public class Inductance extends Composant {
     
-    //attributs
-    private double fem;
-    
+    //attribut
+    private double inductance;
     
     //constructeur
-    public GenerateurTension(double f){
-        this.fem=f;
+    public Inductance(double L){
+        this.inductance=L;
     }
     
-    // selecteurs
-    public double getFem(){
-        return this.fem;
+    //selecteurs
+    public double getInductance(){
+        return this.inductance;
     }
     
-    public void setFem(double f){
-        this.fem=f;
+    public void setInductance(double L){
+        this.inductance=L;
     }
     
     //methodes
@@ -39,19 +38,17 @@ public class GenerateurTension extends Composant {
     
     @Override
     public Complex beta(){
-        return Complex.creePol(0,0);
+        return Complex.creePol(0,-this.getOmega()*this.inductance);
     }
     
     @Override
     public Complex gamma(){
-        return Complex.creeRec(this.fem,0);
+        return Complex.creeRec(0,0);
     }
-    
-    
     @Override
     public String toString(){
         return  this.getNom()+this.getId()
-                +"/ fem = "+this.fem
-                +" /l'équation linéaire correspondante est: "+this.equaLineaire();
+                +" / L= "+this.inductance
+                +" / l'équation linéaire correspondante est: "+this.equaLineaire();
     }
 }
