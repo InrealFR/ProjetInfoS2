@@ -6,6 +6,7 @@
 package fr.insa.pons.projet.composant ;
 
 import fr.insa.pons.projet.complex.Complex;
+import fr.insa.pons.projet.noeud.Noeuds;
 
 /**
  *
@@ -18,8 +19,11 @@ public class GenerateurTension extends Composant {
     
     
     //constructeur
-    public GenerateurTension(double f){
-        this.fem=f;
+    
+
+    public GenerateurTension(double fem, String nom, double omega, int id, Noeuds NoeudDepart, Noeuds NoeudArrive) {
+        super(nom, omega, id, NoeudDepart, NoeudArrive);
+        this.fem = fem;
     }
     
     // selecteurs

@@ -13,23 +13,12 @@ import java.util.ArrayList;
  * @author hugop
  */
 public class Circuit {
-private double pulsation ;
 private ArrayList<Composant>Composants ;
 public Circuit(){
-pulsation = 0 ;
 }
 
-    public Circuit(double pulsation, ArrayList<Composant> Composants) {
-        this.pulsation = pulsation;
+    public Circuit( ArrayList<Composant> Composants) {
         this.Composants = Composants;
-    }
-
-    public double getPulsation() {
-        return pulsation;
-    }
-
-    public void setPulsation(double pulsation) {
-        this.pulsation = pulsation;
     }
 
     public ArrayList<Composant> getComposants() {

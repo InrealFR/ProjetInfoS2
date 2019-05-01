@@ -28,12 +28,21 @@ public abstract class Composant {
     nom = "" ;
     omega = 0;
     id=0;
+    NoeudDepart = NoeudArrive = new Noeuds();
     }
 
     public Composant(String nom, double omega, int id) {
         this.nom = nom;
         this.omega = omega;
         this.id = id;
+    }
+
+    public Composant(String nom, double omega, int id, Noeuds NoeudDepart, Noeuds NoeudArrive) {
+        this.nom = nom;
+        this.omega = omega;
+        this.id = id;
+        this.NoeudDepart = NoeudDepart;
+        this.NoeudArrive = NoeudArrive;
     }
   
     

@@ -21,7 +21,13 @@ public class Noeuds {
     private int id;
     private ArrayList<Composant>Depart ;
     private ArrayList<Composant>Arrive ;
-
+    
+    
+    public Noeuds(){
+    coordx = coordy = 0 ;
+    id = 0 ;
+    Depart = Arrive = null ;
+    }
     public Noeuds(double coordx, double coordy, int id, ArrayList<Composant> Depart, ArrayList<Composant> Arrive) {
         this.coordx = coordx;
         this.coordy = coordy;
@@ -30,17 +36,6 @@ public class Noeuds {
         this.Arrive = Arrive;
     }
     
-
-    
-    
-    
-    
-    
-    @Override
-    public String toString (){
-        return("Noeud "+this.id+": ("+this.coordx+";"+this.coordy+") ");
-    }
-
     public double getCoordx() {
         return coordx;
     }
@@ -80,5 +75,12 @@ public class Noeuds {
     public void setArrive(ArrayList<Composant> Arrive) {
         this.Arrive = Arrive;
     }
+
+    public String toString (){
+        return "Noeud "+id+ "x :"+coordx+" y :"+coordy+
+                "/n Depart :"+Depart+
+                "/n Arrive :"+Arrive ;
+    }
+    
     }
 
