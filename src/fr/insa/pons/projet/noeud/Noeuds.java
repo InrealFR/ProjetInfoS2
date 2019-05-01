@@ -9,84 +9,76 @@
  * @author louise
  */
 package fr.insa.pons.projet.noeud;
-import fr.insa.Lire ;
+
+import fr.insa.pons.projet.composant.Composant;
+import java.util.ArrayList;
 
 public class Noeuds {
     
     // Attributs
-    private final double coordx;
-    private final double coordy;
-    private final int id;
-    
-    //constructeurs
-    
-    //sans arguments
-    Noeuds(){
-        this.coordx=0.0;
-        this.coordy=0.0;
-        this.id=0;
+    private double coordx;
+    private double coordy;
+    private int id;
+    private ArrayList<Composant>Depart ;
+    private ArrayList<Composant>Arrive ;
+
+    public Noeuds(double coordx, double coordy, int id, ArrayList<Composant> Depart, ArrayList<Composant> Arrive) {
+        this.coordx = coordx;
+        this.coordy = coordy;
+        this.id = id;
+        this.Depart = Depart;
+        this.Arrive = Arrive;
     }
     
-    //avec les coordonnées & identifiant
-    Noeuds(double x, double y, int i){
-        this.coordx = x;
-        this.coordy = y;
-        this.id = i;
-    }
+
     
-    // Créer une instance de la classe Noeud
     
-       public static Noeuds CreeNoeud(double x, double y, int i){
-        return new Noeuds(x,y,i);
-    }
-    //gets & sets
     
-    //gets
     
-    public double getCoordx (){
-        return this.coordx;}
-     
-    public double getCoordy (){
-        return this.coordy;}
-    
-    public int getId (){
-        return this.id;}
-    
-    public double[] getCoord (){
-        double [] coord = new double [2];
-        coord[0]=this.coordx;
-        coord[1]=this.coordy;
-        return coord;
-    }
-    
-    //sets
-    
- 
-    
-    // je sais pas comment faire un set heeeelp!
-    public void setId(int i){
-        double x = this.getCoordx();
-        double y = this.getCoordy();
-        Noeuds N = CreeNoeud(x,y,i) ;
-    }
-    
-    public void setCoordx(int x){
-        double y = this.getCoordy();
-        int i = this.getId();
-        Noeuds N = CreeNoeud(x,y,i);
-    }
-    
-    public void setCoordy(int y){
-        double x = this.getCoordx();
-        int i = this.getId();
-        Noeuds N = CreeNoeud(x,y,i);
-    }
-    
-    // Le toString
     
     @Override
     public String toString (){
         return("Noeud "+this.id+": ("+this.coordx+";"+this.coordy+") ");
+    }
+
+    public double getCoordx() {
+        return coordx;
+    }
+
+    public void setCoordx(double coordx) {
+        this.coordx = coordx;
+    }
+
+    public double getCoordy() {
+        return coordy;
+    }
+
+    public void setCoordy(double coordy) {
+        this.coordy = coordy;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public ArrayList<Composant> getDepart() {
+        return Depart;
+    }
+
+    public void setDepart(ArrayList<Composant> Depart) {
+        this.Depart = Depart;
+    }
+
+    public ArrayList<Composant> getArrive() {
+        return Arrive;
+    }
+
+    public void setArrive(ArrayList<Composant> Arrive) {
+        this.Arrive = Arrive;
     }
     }
 

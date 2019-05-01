@@ -19,6 +19,7 @@ public abstract class Composant {
     private double omega;
     private int id ;
     
+    
     // Constructeur
     
     public Composant(){
