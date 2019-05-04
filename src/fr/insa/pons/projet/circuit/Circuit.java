@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 package fr.insa.pons.projet.circuit;
-
-import fr.insa.pons.projet.composant.Composant;
+import fr.insa.Lire;
+import fr.insa.pons.projet.composant.*;
 import java.util.ArrayList;
 
 /**
@@ -13,12 +13,17 @@ import java.util.ArrayList;
  * @author hugop
  */
 public class Circuit {
+private GenerateurTension gen ;
 private ArrayList<Composant>Composants ;
-public Circuit(){
-}
 
-    public Circuit( ArrayList<Composant> Composants) {
+
+public Circuit(){
+gen = new GenerateurTension();
+        }
+
+    public Circuit( ArrayList<Composant> Composants, GenerateurTension gen) {
         this.Composants = Composants;
+        this.gen = gen ;
     }
 
     public ArrayList<Composant> getComposants() {
@@ -29,6 +34,14 @@ public Circuit(){
         this.Composants = Composants;
     }
 
+    public GenerateurTension getGen() {
+        return gen;
+    }
 
+    public void setGen(GenerateurTension gen) {
+        this.gen = gen;
+    }
+
+   
 }
 

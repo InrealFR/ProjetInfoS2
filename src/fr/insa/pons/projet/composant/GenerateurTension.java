@@ -21,6 +21,10 @@ public class GenerateurTension extends Composant {
     //constructeur
     
 
+    public GenerateurTension() {
+     super();
+    }
+
     public GenerateurTension(double fem, String nom, double omega, int id, Noeuds NoeudDepart, Noeuds NoeudArrive) {
         super(nom, omega, id, NoeudDepart, NoeudArrive);
         this.fem = fem;
