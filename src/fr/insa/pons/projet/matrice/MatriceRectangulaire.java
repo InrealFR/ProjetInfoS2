@@ -5,6 +5,9 @@
  */
 package fr.insa.pons.projet.matrice;
 import fr.insa.pons.projet.complex.Complex ;
+import static fr.insa.pons.projet.complex.Complex.mult;
+import static fr.insa.pons.projet.complex.Complex.plus;
+
 /**
  *
  * @author hugop
@@ -18,5 +21,30 @@ public Complex[][] matrice ;
         this.nbLigne = nbLigne;
         this.nbColonne = nbColonne;
         matrice = new Complex[nbLigne][nbColonne] ;
-    }    
+    }
+
+static Complex[][] multiplier(Complex[][] M1, Complex[][] M2) throws Exception {
+    int n = M1.length ;
+    Complex[][] M = new Complex[n][n];
+    if(M1==null||M2==null){
+        throw new Exception("L'une des matrices n'est pas definie");
+    }
+    if(M1[0].length != M2.length){
+        throw new Exception("La produit matricielle n'est pas possible");
+    }else {
+        for(int i = 0;i<n;i++)
+        {
+            for(int j =0;j<n;j++)
+            {
+                M[i][j]=new Complex();
+                for(int k=0;k<n;k++)
+                {
+                    M[i][j]=plus(M[i][j],mult(M1[i][k],M2[k][j]));
+                }
+            }
+        }
+    }
+ return M; 
+}
+    
 }
