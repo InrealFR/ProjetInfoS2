@@ -31,6 +31,10 @@ public class Interface extends javax.swing.JFrame {
         jPanel_AffichageCircuit = new javax.swing.JPanel();
         jPanel_Composants = new javax.swing.JPanel();
         jPanel_AffichageCalculs = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabelPulsation = new javax.swing.JLabel();
+        jTextFieldPulsation = new javax.swing.JTextField();
+        jButtonCalculs = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -39,7 +43,16 @@ public class Interface extends javax.swing.JFrame {
         setTitle("CircuitRLC");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jPanel_AffichageCircuit.setLayout(new javax.swing.BoxLayout(jPanel_AffichageCircuit, javax.swing.BoxLayout.LINE_AXIS));
+        javax.swing.GroupLayout jPanel_AffichageCircuitLayout = new javax.swing.GroupLayout(jPanel_AffichageCircuit);
+        jPanel_AffichageCircuit.setLayout(jPanel_AffichageCircuitLayout);
+        jPanel_AffichageCircuitLayout.setHorizontalGroup(
+            jPanel_AffichageCircuitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel_AffichageCircuitLayout.setVerticalGroup(
+            jPanel_AffichageCircuitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 274, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel_ComposantsLayout = new javax.swing.GroupLayout(jPanel_Composants);
         jPanel_Composants.setLayout(jPanel_ComposantsLayout);
@@ -52,15 +65,50 @@ public class Interface extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        jLabel1.setText("Calculs :");
+
+        jLabelPulsation.setText("Pulsation :");
+
+        jTextFieldPulsation.setText("Entrer pulsation");
+        jTextFieldPulsation.setToolTipText("entrer la pulsation ici");
+        jTextFieldPulsation.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextFieldPulsationMouseClicked(evt);
+            }
+        });
+
+        jButtonCalculs.setText("Calculer");
+        jButtonCalculs.setToolTipText("Met à jour les calculs ");
+
         javax.swing.GroupLayout jPanel_AffichageCalculsLayout = new javax.swing.GroupLayout(jPanel_AffichageCalculs);
         jPanel_AffichageCalculs.setLayout(jPanel_AffichageCalculsLayout);
         jPanel_AffichageCalculsLayout.setHorizontalGroup(
             jPanel_AffichageCalculsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel_AffichageCalculsLayout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
+                .addGap(398, 398, 398))
+            .addGroup(jPanel_AffichageCalculsLayout.createSequentialGroup()
+                .addComponent(jLabelPulsation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldPulsation, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonCalculs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(180, 180, 180))
         );
         jPanel_AffichageCalculsLayout.setVerticalGroup(
             jPanel_AffichageCalculsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 112, Short.MAX_VALUE)
+            .addGroup(jPanel_AffichageCalculsLayout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel_AffichageCalculsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_AffichageCalculsLayout.createSequentialGroup()
+                        .addGroup(jPanel_AffichageCalculsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelPulsation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextFieldPulsation))
+                        .addGap(75, 75, 75))
+                    .addGroup(jPanel_AffichageCalculsLayout.createSequentialGroup()
+                        .addComponent(jButtonCalculs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(73, 73, 73))))
         );
 
         javax.swing.GroupLayout jPanel_GrandLayout = new javax.swing.GroupLayout(jPanel_Grand);
@@ -81,11 +129,11 @@ public class Interface extends javax.swing.JFrame {
             .addGroup(jPanel_GrandLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel_GrandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel_Composants, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel_GrandLayout.createSequentialGroup()
                         .addComponent(jPanel_AffichageCircuit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(4, 4, 4)
-                        .addComponent(jPanel_AffichageCalculs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel_Composants, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel_AffichageCalculs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -110,6 +158,10 @@ public class Interface extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTextFieldPulsationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldPulsationMouseClicked
+        jTextFieldPulsation.setText("");        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldPulsationMouseClicked
 
     /**
      * @param args the command line arguments
@@ -147,6 +199,9 @@ public class Interface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCalculs;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelPulsation;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -154,5 +209,6 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_AffichageCircuit;
     private javax.swing.JPanel jPanel_Composants;
     private javax.swing.JPanel jPanel_Grand;
+    private javax.swing.JTextField jTextFieldPulsation;
     // End of variables declaration//GEN-END:variables
 }
