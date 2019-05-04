@@ -18,9 +18,5 @@ public Complex[][] matrice ;
         this.nbLigne = nbLigne;
         this.nbColonne = nbColonne;
         matrice = new Complex[nbLigne][nbColonne] ;
-    }
-
-    
-    
-    
+    }    
 }
