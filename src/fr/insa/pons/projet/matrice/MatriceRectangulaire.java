@@ -46,5 +46,8 @@ static Complex[][] multiplier(Complex[][] M1, Complex[][] M2) throws Exception {
     }
  return M; 
 }
+static Complex[][] triangulation(Complex[][] M1, Complex[] V){
+    
+}
     
 }
