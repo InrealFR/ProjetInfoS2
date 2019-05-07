@@ -23,12 +23,15 @@ public class GenerateurTension extends Composant {
 
     public GenerateurTension() {
      super();
+     fem = 0 ;
     }
 
-    public GenerateurTension(double fem, String nom, double omega, int id, Noeuds NoeudDepart, Noeuds NoeudArrive) {
-        super(nom, omega, id, NoeudDepart, NoeudArrive);
+    public GenerateurTension(double fem, char initiale, int id) {
+        super(initiale, id);
         this.fem = fem;
     }
+
+  
     
     // selecteurs
     public double getFem(){
@@ -58,8 +61,6 @@ public class GenerateurTension extends Composant {
     
     @Override
     public String toString(){
-        return  this.getNom()+this.getId()
-                +"/ fem = "+this.fem
-                +" /l'équation linéaire correspondante est: "+this.equaLineaire();
+        return ("G"+this.getInitiale()+this.getId()+"| fem ="+this.fem); 
     }
 }

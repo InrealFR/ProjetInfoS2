@@ -6,6 +6,7 @@
 package fr.insa.pons.projet.composant ;
 
 import fr.insa.pons.projet.complex.Complex;
+import fr.insa.pons.projet.noeud.Noeuds;
 
 /**
  *
@@ -17,9 +18,16 @@ public class Condensateur extends Composant {
     public double capacite;
     
     //Constructeurs
-    public Condensateur(double c){
-        this.capacite=c;
+    public Condensateur(){
+       super();
+       capacite = 0 ;
     }
+
+    public Condensateur(double capacite, char initiale, double omega, int id, Noeuds NoeudDepart, Noeuds NoeudArrive) {
+        super(initiale, omega, id, NoeudDepart, NoeudArrive);
+        this.capacite = capacite;
+    }
+   
     
     //selecteurs
     public double getCapacite(){

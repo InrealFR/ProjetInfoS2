@@ -6,6 +6,7 @@
 package fr.insa.pons.projet.composant;
 
 import fr.insa.pons.projet.complex.Complex;
+import fr.insa.pons.projet.noeud.Noeuds;
 
 /**
  *
@@ -17,9 +18,16 @@ public class Resistance extends Composant{
     private double resistance;
     
     //constructeur
-    public Resistance(double r){
-        this.resistance=r;
+    public Resistance(){
+        super();
+        resistance = 0;
     }
+
+    public Resistance(double resistance, char initiale, int id) {
+        super(initiale, id);
+        this.resistance = resistance;
+    }
+ 
     
     //selecteurs
     public double getResistance(){
@@ -47,8 +55,8 @@ public class Resistance extends Composant{
     }
     @Override
     public String toString(){
-        return   this.getNom()+this.getId()
-                +" / R= "+this.resistance
-                +" / l'équation linéaire correspondante est: "+this.equaLineaire();
+        return "R :"+this.getInitiale()+this.getId()+" | R = "+resistance ;
+                
     }
+
 }

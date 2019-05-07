@@ -56,6 +56,9 @@ public class Interface extends javax.swing.JFrame {
             .addGap(0, 231, Short.MAX_VALUE)
         );
 
+        jPanel_Composants.setBorder(new javax.swing.border.MatteBorder(null));
+        jPanel_Composants.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
         javax.swing.GroupLayout jPanel_ComposantsLayout = new javax.swing.GroupLayout(jPanel_Composants);
         jPanel_Composants.setLayout(jPanel_ComposantsLayout);
         jPanel_ComposantsLayout.setHorizontalGroup(
@@ -78,6 +81,11 @@ public class Interface extends javax.swing.JFrame {
         jTextFieldPulsation.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextFieldPulsationMouseClicked(evt);
+            }
+        });
+        jTextFieldPulsation.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldPulsationKeyTyped(evt);
             }
         });
 
@@ -148,8 +156,7 @@ public class Interface extends javax.swing.JFrame {
                     .addGroup(jPanel_GrandLayout.createSequentialGroup()
                         .addComponent(jPanel_AffichageCircuit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel_AffichageCalculs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(jPanel_AffichageCalculs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         jMenu1.setText("File");
@@ -177,6 +184,10 @@ public class Interface extends javax.swing.JFrame {
     private void jTextFieldPulsationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldPulsationMouseClicked
         jTextFieldPulsation.setText("");        // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldPulsationMouseClicked
+
+    private void jTextFieldPulsationKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPulsationKeyTyped
+
+    }//GEN-LAST:event_jTextFieldPulsationKeyTyped
 
     /**
      * @param args the command line arguments

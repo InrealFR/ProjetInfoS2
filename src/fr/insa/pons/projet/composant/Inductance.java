@@ -17,6 +17,10 @@ public class Inductance extends Composant {
     private double inductance;
     
     //constructeur
+    public Inductance(){
+        super();
+        inductance = 0 ;
+    }
     public Inductance(double L){
         this.inductance=L;
     }
@@ -47,8 +51,6 @@ public class Inductance extends Composant {
     }
     @Override
     public String toString(){
-        return  this.getNom()+this.getId()
-                +" / L= "+this.inductance
-                +" / l'équation linéaire correspondante est: "+this.equaLineaire();
+        return  " Inductance "+this.getInitiale()+this.getId()+" | I = "+this.getInductance();
     }
 }
