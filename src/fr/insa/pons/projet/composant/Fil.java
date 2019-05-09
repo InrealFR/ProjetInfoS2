@@ -5,6 +5,7 @@
  */
 package fr.insa.pons.projet.composant;
 
+import fr.insa.Lire;
 import fr.insa.pons.projet.complex.Complex;
 
 /**
@@ -17,8 +18,8 @@ public class Fil extends Composant {
         super();
     }
 
-    public Fil(char initiale, int id) {
-        super(initiale, id);
+    public Fil(int id) {
+        super(id);
     }
     
 
@@ -39,7 +40,12 @@ public class Fil extends Composant {
 
     @Override
     public String toString() {
-        return ("F :" + this.getInitiale() + " " + this.getId());
+        return ("[F" + this.getId()+"]");
     }
-
+    
+public static Fil entrerFil(){
+System.out.println("Saisir l'ID :");
+int id = Lire.i();
+return(new Fil(id));
+}
 }

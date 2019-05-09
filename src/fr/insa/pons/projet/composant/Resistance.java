@@ -5,8 +5,8 @@
  */
 package fr.insa.pons.projet.composant;
 
+import fr.insa.Lire;
 import fr.insa.pons.projet.complex.Complex;
-import fr.insa.pons.projet.noeud.Noeuds;
 
 /**
  *
@@ -23,8 +23,8 @@ public class Resistance extends Composant{
         resistance = 0;
     }
 
-    public Resistance(double resistance, char initiale, int id) {
-        super(initiale, id);
+    public Resistance(double resistance, int id) {
+        super(id);
         this.resistance = resistance;
     }
  
@@ -55,8 +55,15 @@ public class Resistance extends Composant{
     }
     @Override
     public String toString(){
-        return "R :"+this.getInitiale()+this.getId()+" | R = "+resistance ;
+        return "[R :"+this.getId()+" | R = "+resistance+"]" ;
                 
     }
+public static Resistance entrerResistance(){
+System.out.println("Entrer ID");
+int id = Lire.i();
+System.out.println("Entrer resistance");
+double resistance = Lire.d();
+return(new Resistance(resistance,id));
+}
 
 }

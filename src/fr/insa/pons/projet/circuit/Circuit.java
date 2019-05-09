@@ -7,6 +7,7 @@ package fr.insa.pons.projet.circuit;
 
 import fr.insa.Lire;
 import fr.insa.pons.projet.composant.*;
+import static fr.insa.pons.projet.composant.Composant.entrerComposant;
 import fr.insa.pons.projet.noeud.Noeuds;
 import static fr.insa.pons.projet.noeud.Noeuds.entrerNoeud;
 import java.util.ArrayList;
@@ -47,8 +48,8 @@ public class Circuit {
     }
 
     public String toString() {
-        return ("\n Liste Composants :" + Composants
-                + "\n Liste Noeuds: " + Noeuds);
+        return ("Liste Composants : " + Composants
+                + "\n Liste Noeuds : " + Noeuds);
     }
 
     public void gestion() {
@@ -61,7 +62,7 @@ public class Circuit {
             rep = Lire.i();
             switch (rep) {
                 case 1: {
-                    this.toString();
+                    System.out.println(this);
                     break;
                 }
                 case 2: {
@@ -74,10 +75,50 @@ public class Circuit {
                     break;
                 }
                 case 3: {
-
+                Composant c = entrerComposant();
+                if(this.testIdC(c.getId())){
+                System.out.println("MAUVAIS ID ! COMPO NON CREE");
+                } else {
+                this.ajouteComposant(c);
+                }
+                    break;
+                }
+                case 0: {
+                    rep = 0;
+                    break;
+                }
+                default: {
+                    System.out.println("Entrez une valeur existante.");
+                    rep = Lire.i();
                 }
             }
         }
+    }
+
+    public static void main(String args[]) {
+        Circuit test = new Circuit();
+        test.gestion();
+    }
+
+    public boolean testIdC(int id) {
+        ArrayList<Composant> compo = this.getComposants();
+        boolean verif = false;
+        int i = 0;
+        while ((verif == false) && (i < compo.size())) {
+            if (compo.get(i).getId() == id) {
+                verif = true;
+            } else {
+                i = i+1;
+            }
+        }
+        return (verif);
+    }
+
+    public void ajouteComposant(Composant c) {
+        if (this.testIdC(c.getId())) {
+            throw new Error("ID en double !!");
+        }
+        this.getComposants().add(c);
     }
 
     public boolean testId(int id) {
@@ -90,7 +131,7 @@ public class Circuit {
             if (noeuds.get(i).getId() == id) {
                 verif = true;
             } else {
-                i = i++;
+                i = i + 1;
             }
         }
         return (verif);
@@ -110,4 +151,5 @@ public class Circuit {
         int i = Lire.i();
         return (this.getNoeuds().get(i));
     }
+
 }

@@ -5,8 +5,8 @@
  */
 package fr.insa.pons.projet.composant ;
 
+import fr.insa.Lire;
 import fr.insa.pons.projet.complex.Complex;
-import fr.insa.pons.projet.noeud.Noeuds;
 
 /**
  *
@@ -26,8 +26,8 @@ public class GenerateurTension extends Composant {
      fem = 0 ;
     }
 
-    public GenerateurTension(double fem, char initiale, int id) {
-        super(initiale, id);
+    public GenerateurTension(double fem, int id) {
+        super(id);
         this.fem = fem;
     }
 
@@ -61,6 +61,14 @@ public class GenerateurTension extends Composant {
     
     @Override
     public String toString(){
-        return ("G"+this.getInitiale()+this.getId()+"| fem ="+this.fem); 
+        return ("[G"+this.getId()+"| fem ="+this.fem+"]"); 
     }
+    
+public static GenerateurTension entrerGenerateur(){
+   System.out.println("Saisir fem :");
+   double fem = Lire.d();
+   System.out.println("Saisir ID :");
+   int id = Lire.i();
+   return(new GenerateurTension(fem,id));
+   }
 }

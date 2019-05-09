@@ -27,7 +27,7 @@ public class Noeuds {
     public Noeuds(){
     coordx = coordy = 0 ;
     id = 0 ;
-    Depart = Arrive = null ;
+    Depart = Arrive = new ArrayList<>() ;
     }
 
     public Noeuds(int id) {
@@ -89,7 +89,7 @@ public class Noeuds {
     }
 
     public String toString (){
-        return "Noeud "+id+" coordx :"+coordx+" coordy :"+coordy ;
+        return "[Noeud "+id+"| coordx : "+coordx+" coordy : "+coordy+"]" ;
     }
     public static Noeuds entrerNoeud(){
     System.out.println("Saisir un id :") ;

@@ -5,6 +5,7 @@
  */
 package fr.insa.pons.projet.composant ;
 
+import fr.insa.Lire;
 import fr.insa.pons.projet.complex.Complex;
 import fr.insa.pons.projet.noeud.Noeuds;
 
@@ -23,8 +24,8 @@ public class Condensateur extends Composant {
        capacite = 0 ;
     }
 
-    public Condensateur(double capacite, char initiale, double omega, int id, Noeuds NoeudDepart, Noeuds NoeudArrive) {
-        super(initiale, omega, id, NoeudDepart, NoeudArrive);
+    public Condensateur(double capacite, int id) {
+        super(id);
         this.capacite = capacite;
     }
    
@@ -55,8 +56,15 @@ public class Condensateur extends Composant {
     }
     @Override
     public String toString(){
-        return this.getNom()+this.getId() 
-                +" / C= "+this.capacite
-                +" / l'équation linéaire correspondante est: "+this.equaLineaire();
+        return "[C"+this.getId()+" | C ="+capacite+"]" ;
+    }
+    
+    public static Condensateur entrerCondensateur(){
+    System.out.println("Entrer capacite :");
+    double c = Lire.d();
+    System.out.println("Entrer id :") ;
+    int id = Lire.i();
+    Condensateur co = new Condensateur(c,id);
+    return(co) ;
     }
 }
