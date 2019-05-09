@@ -27,17 +27,19 @@ public class Noeuds {
     public Noeuds(){
     coordx = coordy = 0 ;
     id = 0 ;
-    Depart = Arrive = new ArrayList<>() ;
+    Depart = Arrive = new ArrayList<Composant>() ;
     }
 
     public Noeuds(int id) {
         this.id = id;
+        Depart = Arrive = new ArrayList<Composant>() ;
     }
 
     public Noeuds(double coordx, double coordy, int id) {
         this.coordx = coordx;
         this.coordy = coordy;
         this.id = id;
+        Depart = Arrive = new ArrayList<Composant>() ;
     }
     
     public Noeuds(double coordx, double coordy, int id, ArrayList<Composant> Depart, ArrayList<Composant> Arrive) {
