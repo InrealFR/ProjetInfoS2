@@ -5,8 +5,8 @@
  */
 package fr.insa.pons.projet.composant ;
 
+import fr.insa.Lire;
 import fr.insa.pons.projet.complex.Complex;
-import fr.insa.pons.projet.noeud.Noeuds;
 
 /**
  *
@@ -23,12 +23,15 @@ public class GenerateurTension extends Composant {
 
     public GenerateurTension() {
      super();
+     fem = 0 ;
     }
 
-    public GenerateurTension(double fem, String nom, double omega, int id, Noeuds NoeudDepart, Noeuds NoeudArrive) {
-        super(nom, omega, id, NoeudDepart, NoeudArrive);
+    public GenerateurTension(double fem, int id) {
+        super(id);
         this.fem = fem;
     }
+
+  
     
     // selecteurs
     public double getFem(){
@@ -58,8 +61,14 @@ public class GenerateurTension extends Composant {
     
     @Override
     public String toString(){
-        return  this.getNom()+this.getId()
-                +"/ fem = "+this.fem
-                +" /l'équation linéaire correspondante est: "+this.equaLineaire();
+        return ("[G"+this.getId()+"| fem ="+this.fem+"]"); 
     }
+    
+public static GenerateurTension entrerGenerateur(){
+   System.out.println("Saisir fem :");
+   double fem = Lire.d();
+   System.out.println("Saisir ID :");
+   int id = Lire.i();
+   return(new GenerateurTension(fem,id));
+   }
 }

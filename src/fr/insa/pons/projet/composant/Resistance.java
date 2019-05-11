@@ -5,6 +5,7 @@
  */
 package fr.insa.pons.projet.composant;
 
+import fr.insa.Lire;
 import fr.insa.pons.projet.complex.Complex;
 
 /**
@@ -17,9 +18,16 @@ public class Resistance extends Composant{
     private double resistance;
     
     //constructeur
-    public Resistance(double r){
-        this.resistance=r;
+    public Resistance(){
+        super();
+        resistance = 0;
     }
+
+    public Resistance(double resistance, int id) {
+        super(id);
+        this.resistance = resistance;
+    }
+ 
     
     //selecteurs
     public double getResistance(){
@@ -47,8 +55,15 @@ public class Resistance extends Composant{
     }
     @Override
     public String toString(){
-        return   this.getNom()+this.getId()
-                +" / R= "+this.resistance
-                +" / l'équation linéaire correspondante est: "+this.equaLineaire();
+        return "[R :"+this.getId()+" | R = "+resistance+"]" ;
+                
     }
+public static Resistance entrerResistance(){
+System.out.println("Entrer ID");
+int id = Lire.i();
+System.out.println("Entrer resistance");
+double resistance = Lire.d();
+return(new Resistance(resistance,id));
+}
+
 }
