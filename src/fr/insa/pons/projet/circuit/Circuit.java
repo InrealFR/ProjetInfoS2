@@ -68,7 +68,7 @@ public class Circuit {
                 case 2: {
                     Noeuds n = entrerNoeud();
                     if (this.testId(n.getId())) { //id unique
-                        System.out.println("Mauvais ID ! Noeud non créer.");
+                        System.out.println("Mauvais ID et/ou coordonnées déjà existantes ! Noeud non créer.");
                     } else {
                         this.ajouteNoeud(n);
                     }
@@ -95,11 +95,11 @@ public class Circuit {
         }
     }
 
-    public static void main(String args[]) {
-        Circuit test = new Circuit();
-        test.gestion();
-    }
-
+    /*public static void main(String args[]) {
+    /   Circuit test = new Circuit();
+    /    test.gestion();
+    /}
+   */
     public boolean testIdC(int id) { //test id composants
         ArrayList<Composant> compo = this.getComposants();
         boolean verif = false;
@@ -138,7 +138,7 @@ public class Circuit {
         ArrayList<Noeuds> noeuds = this.getNoeuds();
         boolean verif = false;
         int i = 0;
-
+        
         while ((verif == false) && (i < noeuds.size())) {
             if (noeuds.get(i).getId() == id) {
                 verif = true;
@@ -148,7 +148,6 @@ public class Circuit {
         }
         return (verif);
     }
-
     public void ajouteNoeud(Noeuds n) {
         //id ?
         if (this.testId(n.getId())) {

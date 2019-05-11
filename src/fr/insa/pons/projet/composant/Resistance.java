@@ -55,7 +55,7 @@ public class Resistance extends Composant{
     }
     @Override
     public String toString(){
-        return "[R :"+this.getId()+" | R = "+resistance+"]" ;
+        return "[R"+this.getId()+" | R = "+resistance+"]" ;
                 
     }
 public static Resistance entrerResistance(){

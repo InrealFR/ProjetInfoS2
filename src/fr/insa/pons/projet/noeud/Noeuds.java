@@ -91,7 +91,7 @@ public class Noeuds {
     }
 
     public String toString (){
-        return "[Noeud "+id+"| coordx : "+coordx+" coordy : "+coordy+"]" ;
+        return "[Noeud "+id+" | coordx : "+coordx+" coordy : "+coordy+"]" ;
     }
     public static Noeuds entrerNoeud(){
     System.out.println("Saisir un id :") ;
