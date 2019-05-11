@@ -46,7 +46,41 @@ static Complex[][] multiplier(Complex[][] M1, Complex[][] M2) throws Exception {
     }
  return M; 
 }
-static Complex[][] triangulation(Complex[][] M1, Complex[] V){
+static Complex[][] triangulation(Complex[][] M1, Complex[][] V){
+    int n = M1.length;
+    Complex C;
+    Complex a = new Complex();
+    for(int e=0;e<n-2;e++){
+        int Imax = 0;
+        
+        for(int i=e;i<n-1;i++){           
+            if(Math.abs(M1[i][e].arg)>Math.abs(M1[Imax][e].arg)){
+            Imax = i;
+        }
+            if(M1[Imax][e]==a){
+                System.out.println("Matrice non inversible");
+            }else {
+                for(int j=0;j<=n;i++){
+                    C = M1[Imax][i];
+                    M1[Imax][i]=M1[e][i];
+                    M1[e][i]=C;
+                }
+                C = V[e][0];
+                V[e][0]=V[Imax][0];
+                V[Imax][0]=C;
+            }
+            for(int l=e+1;l<=n+1;l++){
+                Complex f = Complex.div(M1[l][e],M1[e][e]);
+                M1[l][e] = new Complex();
+                for(int Cal= e+1;Cal<=n+1;Cal++){
+                    M1[l][Cal]=Complex.moins(M1[l][Cal], Complex.mult(f, M1[e][Cal]));
+                }
+                V[l][0]=Complex.moins(V[l][0],Complex.mult(f,V[e][0]));
+            }
+        }
+    }
+    return M1;
+    
     
 }
     

@@ -14,7 +14,7 @@ import java.text.DecimalFormat;
  */
 public class Complex {
 private final double mod ;
-private final double arg ;
+public final double arg ;
 
 DecimalFormat df = new DecimalFormat("#.###");
 public Complex(double mod, double arg) {
@@ -121,6 +121,9 @@ return(mult(a,b.inv())) ;
 
 public Complex puiss(double p){
 return(creePol((Math.pow(mod, p)),p*arg)) ;
+}
+public static Complex ValAbs(Complex a){
+    return(creePol((Math.abs(a.mod)),a.arg));
 }
 
 public static Complex[] eq2(Complex a, Complex b, Complex c){
