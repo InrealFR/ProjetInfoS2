@@ -35,16 +35,22 @@ public Complex() {
     }
     
 public static Complex creeRec(double re, double im){
-return(new Complex(Math.sqrt(Math.pow(re,2)+Math.pow(im,2)),Math.atan2(re, im))) ;
+return(new Complex(Math.sqrt(Math.pow(re,2)+Math.pow(im,2)),Math.atan2(im, re))) ;
 }
-
+public double partReelle(){
+    return this.mod*Math.cos(this.arg);
+}
+public double partImag(){
+    return this.mod*Math.sin(this.arg);
+}
 public static Complex creePol(double mod, double arg){
 return(new Complex(mod,arg)) ;
 }
 @Override
 public String toString(){
-return(df.format(this.mod*Math.cos(arg))+ "+ i*"+ df.format(this.mod*Math.sin(arg)) + " = "+df.format(this.mod)+"*e^"+df.format(this.arg)) ;
+return(df.format(this.partReelle())+ "+ i*"+ df.format(this.partImag()) + " = "+df.format(this.mod)+"*e^"+df.format(this.arg)) ;
 }
+
 public static Complex entrerRec() {
 System.out.println("Partie reelle ?") ;
 double re = Lire.d() ;
@@ -84,27 +90,27 @@ if(test==false){
 return(z); 
 }
 
-public static Complex plus(Complex a, Complex b){
-return(creeRec(a.mod*Math.cos(a.arg)+b.mod*Math.cos(b.arg),a.mod*Math.sin(a.arg)+b.mod*Math.sin(b.arg))) ;
+public Complex plus(Complex a){
+return(creeRec(a.partReelle()+this.partReelle(),a.partImag()+this.partImag())) ;
 }
 
 public static void testPlus(){
 Complex x = entrerChoix();
 Complex y = entrerChoix() ;
 
-System.out.println(plus(y,x)) ;
+System.out.println(y.plus(x)) ;
 }
 
 public Complex opp(){
 return(creePol(1/mod,-1*arg)) ;
 }
 
-public static Complex moins(Complex a, Complex b){
-return(creeRec(a.mod*Math.cos(a.arg)-b.mod*Math.cos(b.arg),a.mod*Math.sin(a.arg)-b.mod*Math.sin(b.arg))) ;
+public Complex moins(Complex a){
+return(creeRec(this.partReelle()-a.partReelle(),this.partImag()-a.partImag())) ;
 }
 
-public static Complex mult(Complex a, Complex b){
-return(creePol((b.mod*a.mod),(b.arg+a.arg))) ;
+public  Complex mult(Complex a){
+return(creePol((this.mod*a.mod),(this.arg+a.arg))) ;
 }
 
 public static Complex mult(Complex a, double b){
@@ -112,11 +118,11 @@ return(creePol(a.mod*b,a.arg)) ;
 }
 
 public Complex inv(){
-return(creePol((1/mod),-1*arg)) ;
+return(creePol((1/this.mod),-1*this.arg)) ;
 }
 
-public static Complex div(Complex a, Complex b){
-return(mult(a,b.inv())) ;
+public  Complex div(Complex a){
+return(this.mult(a.inv())) ;
 }
 
 public Complex puiss(double p){
@@ -127,11 +133,12 @@ public static Complex ValAbs(Complex a){
 }
 
 public static Complex[] eq2(Complex a, Complex b, Complex c){
-Complex delta = moins(b.puiss(2),mult(a,c)) ;
-Complex sol[] = new Complex[1] ;
-sol[0] = div(moins(mult(b,-1),delta.puiss(0.5)),mult(a,2));
-sol[1] = div(plus(mult(b,-1),delta.puiss(0.5)),mult(a,2));
-return(sol);
+Complex delta = b.mult(b).moins(creeRec(4, 0).mult(a).mult(c));
+Complex racDelta = delta.puiss(0.5);
+Complex[] res = new Complex[2];
+res[0] = b.opp().moins(racDelta).div(creeRec(2, 0).mult(a));
+res[1] = b.opp().plus(racDelta).div(creeRec(2, 0).mult(a));
+return(res);
 }
 
 public static void affeq2(){
