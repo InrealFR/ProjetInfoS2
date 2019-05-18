@@ -60,10 +60,10 @@ static Complex[][] triangulation(Complex[][] M1, Complex[][] V){
             if(M1[Imax][e]==a){
                 System.out.println("Matrice non inversible");
             }else {
-                for(int j=0;j<=n;i++){
-                    C = M1[Imax][i];
-                    M1[Imax][i]=M1[e][i];
-                    M1[e][i]=C;
+                for(int j=0;j<=n;j++){
+                    C = M1[Imax][j];
+                    M1[Imax][j]=M1[e][j];
+                    M1[e][j]=C;
                 }
                 C = V[e][0];
                 V[e][0]=V[Imax][0];
