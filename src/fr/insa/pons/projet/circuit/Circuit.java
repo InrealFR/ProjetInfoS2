@@ -95,11 +95,11 @@ public class Circuit {
         }
     }
 
-    /*public static void main(String args[]) {
-    /   Circuit test = new Circuit();
-    /    test.gestion();
-    /}
-   */
+    public static void main(String args[]) {
+       Circuit test = new Circuit();
+        test.gestion();
+    }
+   
     public boolean testIdC(int id) { //test id composants
         ArrayList<Composant> compo = this.getComposants();
         boolean verif = false;

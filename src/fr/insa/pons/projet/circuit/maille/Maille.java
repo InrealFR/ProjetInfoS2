@@ -47,4 +47,7 @@ public class Maille {
     public void setComposants(ArrayList<Composant> composants){
         this.composants = composants;
     }
+    public String toString(){
+        return "la maille "+this.getId()+" contient les composants suivants"+this.getComposants().toString();
+    }
 }
