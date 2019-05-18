@@ -5,9 +5,6 @@
  */
 package fr.insa.pons.projet.matrice;
 import fr.insa.pons.projet.complex.Complex ;
-import static fr.insa.pons.projet.complex.Complex.mult;
-import static fr.insa.pons.projet.complex.Complex.plus;
-
 /**
  *
  * @author hugop
@@ -39,7 +36,7 @@ static Complex[][] multiplier(Complex[][] M1, Complex[][] M2) throws Exception {
                 M[i][j]=new Complex();
                 for(int k=0;k<n;k++)
                 {
-                    M[i][j]=plus(M[i][j],mult(M1[i][k],M2[k][j]));
+                    M[i][j]= M[i][j].plus(M1[i][k].mult(M2[k][j]));
                 }
             }
         }
@@ -70,12 +67,12 @@ static Complex[][] triangulation(Complex[][] M1, Complex[][] V){
                 V[Imax][0]=C;
             }
             for(int l=e+1;l<=n+1;l++){
-                Complex f = Complex.div(M1[l][e],M1[e][e]);
+                Complex f = M1[l][e].div(M1[e][e]);
                 M1[l][e] = new Complex();
                 for(int Cal= e+1;Cal<=n+1;Cal++){
-                    M1[l][Cal]=Complex.moins(M1[l][Cal], Complex.mult(f, M1[e][Cal]));
+                    M1[l][Cal]=M1[l][Cal].moins(f.mult(M1[e][Cal]));
                 }
-                V[l][0]=Complex.moins(V[l][0],Complex.mult(f,V[e][0]));
+                V[l][0]= V[l][0].moins(f.mult(V[e][0]));
             }
         }
     }
