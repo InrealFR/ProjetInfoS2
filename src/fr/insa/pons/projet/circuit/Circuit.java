@@ -54,10 +54,13 @@ public class Circuit {
 
     public void gestion() {
         int rep = -1;
+        ArrayList< ArrayList <Composant> > test = new ArrayList() ;
         while (rep != 0) {
             System.out.println("(1) Afficher le circuit");
             System.out.println("(2) Ajouter un noeud");
             System.out.println("(3) Ajouter un composant");
+            System.out.println("(4) Detection Branches");
+            System.out.println("(5) Detection Mailles");
             System.out.println("(0) Quitter");
             rep = Lire.i();
             switch (rep) {
@@ -83,6 +86,15 @@ public class Circuit {
                     }
                     break;
                 }
+                case 4 : {
+                 test = detectionBranches();
+                 System.out.println(test);
+                }
+                break;
+                case 5 : {
+                ArrayList< ArrayList <Composant> > test2 = detectionMaille(test);  
+                System.out.println(test2);
+                }
                 case 0: {
                     rep = 0;
                     break;
@@ -95,11 +107,11 @@ public class Circuit {
         }
     }
 
-    /*public static void main(String args[]) {
-    /   Circuit test = new Circuit();
-    /    test.gestion();
-    /}
-   */
+    public static void main(String args[]) {
+       Circuit test = new Circuit();
+       test.gestion();
+    }
+   
     public boolean testIdC(int id) { //test id composants
         ArrayList<Composant> compo = this.getComposants();
         boolean verif = false;
@@ -221,16 +233,14 @@ public class Circuit {
                 int lc=this.Noeuds.get(i).getDepart().size();
                 // Ce noeud est au départ d'autants de branches que il existe de composants sortant de ce noeud.
                 
-                Noeuds Depart = new Noeuds();
-                Depart= this.Noeuds.get(i);
+                Noeuds Depart = this.Noeuds.get(i);
                 NDV.add(i);
+                System.out.println("Noeuds deja vus :"+NDV);
                 // On initialise le noeud de départ de la branche et on le répertorie comme déjà vu
                 
                 System.out.println(Depart+" est au départ de "+lc+" branches");
                 
-                Noeuds Nlect = new Noeuds();
-                Nlect = Depart;
-                
+                Noeuds Nlect = Depart ;
                 /*
                 Nlect est un noeud de lecture qui détectera de noeud en noeud les composants de chaque branche.
                 On l'initialise à Depart.
@@ -250,30 +260,31 @@ public class Circuit {
                     //ajout du premier composant de la branche en détection et déplacement de Nlect au noeud de sortie de celui-ci
                 
                     while( (Nlect.getDepart().size()==1) && (Nlect.getArrive().size()==1)){
-                        
+                        System.out.println("JE SUIS LA") ;
                         composantsBranche.add(Nlect.getDepart().get(0));
                         Nlect = Nlect.getDepart().get(0).getNoeudArrive();
                         //ajout de tous les composants en série du premier
                     }
+                    
                     listeBranches.add(composantsBranche);
                     //Il faudrait réinitialiser composantsBranche si nécessaire mais je ne connais pas la commande
-                
+                System.out.println(composantsBranche);
                 }
-                
-                /* 
+                                /* 
                 Il a fini de détecter les branches au départ de Depart.
                 Il faut alors chercher un nouveau noeud de départ pour poursuivre la recherche de branches
                 */
                 
             while ( ((i!=ln)&&(Noeuds.get(i).getDepart().size()<2)) || (NDV.contains(i))){
                 i=i+1;
+                System.out.println("HEHO JE SUIS LA") ;
             }
             
             /*
             On recherche un nouveau noeud de départ si il n'y en a plus, alors i==ln et on sort de la boucle while
             */
             
-            
+           
             }
             
             /*
