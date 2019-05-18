@@ -235,8 +235,9 @@ public class Circuit {
         int ln = this.Noeuds.size();
         int i =0;
         
-        while( (i!= ln) && (this.Noeuds.get(i).getDepart().size()<2)){
+        while( (i!= ln) && ((this.Noeuds.get(i).getDepart().size()+this.Noeuds.get(i).getArrive().size())==2)){
             i=i+1;
+            System.out.println("yop");
         }
         
         /*
@@ -264,6 +265,7 @@ public class Circuit {
             System.out.println("Votre circuit possède plusieurs mailles, début de la détection des branches du circuit");
             ArrayList NDV = new ArrayList();
             
+            //NDV : noeuds deja vu
             while (i!=ln){
                 
                 /*
@@ -300,7 +302,6 @@ public class Circuit {
                     //ajout du premier composant de la branche en détection et déplacement de Nlect au noeud de sortie de celui-ci
                 
                     while( (Nlect.getDepart().size()==1) && (Nlect.getArrive().size()==1)){
-                        System.out.println("JE SUIS LA") ;
                         composantsBranche.add(Nlect.getDepart().get(0));
                         Nlect = Nlect.getDepart().get(0).getNoeudArrive();
                         //ajout de tous les composants en série du premier
@@ -308,7 +309,7 @@ public class Circuit {
                     
                     listeBranches.add(composantsBranche);
                     //Il faudrait réinitialiser composantsBranche si nécessaire mais je ne connais pas la commande
-                System.out.println(composantsBranche);
+                System.out.println("Dans cette branche il y a :"+composantsBranche);
                 }
                                 /* 
                 Il a fini de détecter les branches au départ de Depart.
@@ -331,7 +332,7 @@ public class Circuit {
             */
             
         }
-        System.out.println(listeBranches);
+        System.out.println("Liste : "+listeBranches);
         return listeBranches;
        
     }    
