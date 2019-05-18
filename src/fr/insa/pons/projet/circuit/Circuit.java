@@ -89,7 +89,6 @@ public class Circuit {
                 }
                 case 4 : {
                  test = detectionBranches();
-                 System.out.println(test);
                 }
                 break;
                 case 5 : {
@@ -306,17 +305,17 @@ public class Circuit {
                         Nlect = Nlect.getDepart().get(0).getNoeudArrive();
                         //ajout de tous les composants en série du premier
                     }
-                    
+                    System.out.println("Dans cette branche il y a :"+composantsBranche);
                     listeBranches.add(composantsBranche);
                     //Il faudrait réinitialiser composantsBranche si nécessaire mais je ne connais pas la commande
-                System.out.println("Dans cette branche il y a :"+composantsBranche);
+                
                 }
                                 /* 
                 Il a fini de détecter les branches au départ de Depart.
                 Il faut alors chercher un nouveau noeud de départ pour poursuivre la recherche de branches
                 */
                 
-            while ( ((i!=ln)&&(Noeuds.get(i).getDepart().size()<2)) || (NDV.contains(i))){
+            while (((i!=ln)&&((this.Noeuds.get(i).getDepart().size()+this.Noeuds.get(i).getArrive().size())==2)) || (NDV.contains(i))){
                 i=i+1;
             }
             
