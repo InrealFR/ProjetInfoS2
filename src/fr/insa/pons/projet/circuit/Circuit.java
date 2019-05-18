@@ -175,5 +175,183 @@ public class Circuit {
         }
         return (this.getNoeuds().get(pos));
     }
-
+    
+    
+    public ArrayList< ArrayList <Composant> > detectionBranches(){
+        
+        ArrayList<ArrayList<Composant>> listeBranches = new ArrayList();
+        int ln = this.Noeuds.size();
+        int i =0;
+        
+        while( (i!= ln) && (this.Noeuds.get(i).getDepart().size()<2)){
+            i=i+1;
+        }
+        
+        /*
+        On cherche à savoir si il existe un noeud qui soit l'intersection de 3 branches
+        */
+        
+        if(i==ln){
+            System.out.println("Votre circuit est en série, il comporte une unique maille correspondante aux composants du circuit");
+            listeBranches.add(this.Composants);
+        }
+        
+        /* 
+        Si il n'en existe pas, alors on en conclut que le circuit ne comporte qu'une branche qui constitue une unique maille.
+        Alors la listeBranches ne compte qu'une unique ArrayListe de composants, la listeComposants du circuit this.
+        */
+        
+        else
+        
+        /*
+        Si on a un noeud au départ de plusieurs branches, alors comme il compte au moins une branche entrante,
+        on en conclut qu'il est une intersection  de mailles. On commence alors la recherche de branches.
+        */
+            
+        {
+            System.out.println("Votre circuit possède plusieurs mailles, début de la détection des branches du circuit");
+            ArrayList NDV = new ArrayList();
+            
+            while (i!=ln){
+                
+                /*
+                Tant que on a pas traité tous les noeuds du circuit ayant au moins deux composants sortant
+                */
+                
+                int lc=this.Noeuds.get(i).getDepart().size();
+                // Ce noeud est au départ d'autants de branches que il existe de composants sortant de ce noeud.
+                
+                Noeuds Depart = new Noeuds();
+                Depart= this.Noeuds.get(i);
+                NDV.add(i);
+                // On initialise le noeud de départ de la branche et on le répertorie comme déjà vu
+                
+                System.out.println(Depart+" est au départ de "+lc+" branches");
+                
+                Noeuds Nlect = new Noeuds();
+                Nlect = Depart;
+                
+                /*
+                Nlect est un noeud de lecture qui détectera de noeud en noeud les composants de chaque branche.
+                On l'initialise à Depart.
+                */
+                
+                int j ;
+                
+                for  (j = 0 ; j < lc ; j++) {
+                    
+                    System.out.println("détection de la "+j+"ème branche au depart  de "+Depart);
+                    
+                    ArrayList <Composant> composantsBranche = new ArrayList();
+                    //La liste composantsBranche contiendra les composants de la jème branche au départ de départ
+                    
+                    composantsBranche.add(Depart.getDepart().get(j));
+                    Nlect = Depart.getDepart().get(j).getNoeudArrive();
+                    //ajout du premier composant de la branche en détection et déplacement de Nlect au noeud de sortie de celui-ci
+                
+                    while( (Nlect.getDepart().size()==1) && (Nlect.getArrive().size()==1)){
+                        
+                        composantsBranche.add(Nlect.getDepart().get(0));
+                        Nlect = Nlect.getDepart().get(0).getNoeudArrive();
+                        //ajout de tous les composants en série du premier
+                    }
+                    listeBranches.add(composantsBranche);
+                    //Il faudrait réinitialiser composantsBranche si nécessaire mais je ne connais pas la commande
+                
+                }
+                
+                /* 
+                Il a fini de détecter les branches au départ de Depart.
+                Il faut alors chercher un nouveau noeud de départ pour poursuivre la recherche de branches
+                */
+                
+            while ( ((i!=ln)&&(Noeuds.get(i).getDepart().size()<2)) || (NDV.contains(i))){
+                i=i+1;
+            }
+            
+            /*
+            On recherche un nouveau noeud de départ si il n'y en a plus, alors i==ln et on sort de la boucle while
+            */
+            
+            
+            }
+            
+            /*
+            Fin de la détection de toutes les branches du circuit.
+            */
+            
+        }
+        
+        return listeBranches;
+       
+    }    
+    
+    public static Noeuds getFinBranche (int i , ArrayList < ArrayList <Composant> >  listeBranches ){
+        
+        int l;
+        
+        l=listeBranches.get(i).size();
+        
+        return listeBranches.get(i).get(l).getNoeudArrive();
+        
+    }
+    
+    public static Noeuds getDebutBranche (int i , ArrayList < ArrayList <Composant> >  listeBranches ){
+        
+        return listeBranches.get(i).get(0).getNoeudDepart();
+    }
+    
+    public static void ajouterBranche(int i, ArrayList<Composant> M, ArrayList < ArrayList <Composant> > listeBranches ){
+        
+        int l;
+        int k;
+        
+        l= listeBranches.get(i).size();
+        for (k=0;k<=l;k++){
+            M.add(listeBranches.get(i).get(k));
+        }
+        
+    }
+     
+    public ArrayList< ArrayList <Composant> > detectionMaille(ArrayList< ArrayList <Composant> > listeBranches){
+        
+        ArrayList < ArrayList <Composant> > mailles = new ArrayList();
+        // On crée une liste qui contiendra les composant d'une maille dans chaque colonne
+        
+        int i=0 ;
+        int lb=mailles.size();
+        
+        while (i!=lb) {
+            
+            Noeuds ext1 = new Noeuds();
+            ext1 = getDebutBranche(i,listeBranches);
+            Noeuds ext2 = new Noeuds();
+            ext2 = getFinBranche(i,listeBranches);
+            //on prend une branche dans la liste
+            
+            int j;
+            for (j=(i+1);j<=lb;j++){
+                
+                Noeuds extj1 = new Noeuds();
+                extj1 = getDebutBranche(j,listeBranches);
+                Noeuds extj2 = new Noeuds();
+                extj2 = getFinBranche(j,listeBranches);
+                //on en prend une deuxième
+                
+                if (((extj1==ext1)&&(extj2==ext2))||((extj1==ext2)&&(extj2==ext1))){
+                    
+                    ArrayList <Composant> M = new ArrayList();
+                    ajouterBranche(i,M,listeBranches);
+                    ajouterBranche(j,M,listeBranches);
+                    mailles.add(M);
+                    
+                }
+                else 
+                { 
+                    System.out.println("Soit votre circuit est mal construit, soit on a une exeption, soit l'algo marche pas");
+                }
+            }
+        }
+        return mailles;
+    }
 }
