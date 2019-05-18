@@ -61,6 +61,7 @@ public class Circuit {
             System.out.println("(3) Ajouter un composant");
             System.out.println("(4) Detection Branches");
             System.out.println("(5) Detection Mailles");
+            System.out.println("(6) circuit test") ;
             System.out.println("(0) Quitter");
             rep = Lire.i();
             switch (rep) {
@@ -95,6 +96,45 @@ public class Circuit {
                 ArrayList< ArrayList <Composant> > test2 = detectionMaille(test);  
                 System.out.println(test2);
                 }
+                break ;
+                case 6 : {
+                Noeuds uno = new Noeuds(1.2,14,1);
+                Noeuds dos = new Noeuds(178,152,2);
+                Noeuds tres = new Noeuds(1,1,3);
+                
+                GenerateurTension G = new GenerateurTension(1,1);
+                G.setNoeudDepart(uno);
+                uno.getDepart().add(G);
+                G.setNoeudArrive(dos);
+               dos.getArrive().add(G);
+                
+                Resistance R1 = new Resistance(1,2);
+                R1.setNoeudDepart(dos);
+               dos.getDepart().add(R1);
+                R1.setNoeudArrive(uno);
+               uno.getArrive().add(R1);
+                
+                Resistance R2 = new Resistance(1,3);
+                R2.setNoeudDepart(dos);
+                dos.getDepart().add(R2);
+                R2.setNoeudArrive(tres);
+                tres.getArrive().add(R2);
+                
+                Condensateur C3 = new Condensateur(1,4);
+                C3.setNoeudDepart(tres);
+                tres.getDepart().add(C3);
+                C3.setNoeudArrive(uno);
+                uno.getArrive().add(C3);
+                
+                this.getComposants().add(G);
+                this.getComposants().add(C3);
+                this.getComposants().add(R2);
+                this.getComposants().add(R1);
+                this.getNoeuds().add(uno);
+                this.getNoeuds().add(dos);
+                this.getNoeuds().add(tres);
+                }
+                break ;
                 case 0: {
                     rep = 0;
                     break;
@@ -277,7 +317,6 @@ public class Circuit {
                 
             while ( ((i!=ln)&&(Noeuds.get(i).getDepart().size()<2)) || (NDV.contains(i))){
                 i=i+1;
-                System.out.println("HEHO JE SUIS LA") ;
             }
             
             /*
@@ -292,7 +331,7 @@ public class Circuit {
             */
             
         }
-        
+        System.out.println(listeBranches);
         return listeBranches;
        
     }    

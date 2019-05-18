@@ -27,19 +27,22 @@ public class Noeuds {
     public Noeuds(){
     coordx = coordy = 0 ;
     id = 0 ;
-    Depart = Arrive = new ArrayList<Composant>() ;
+    Depart = new ArrayList<>() ;
+    Arrive = new ArrayList<>();
     }
 
     public Noeuds(int id) {
         this.id = id;
-        Depart = Arrive = new ArrayList<Composant>() ;
+        Depart = new ArrayList<>() ;
+        Arrive = new ArrayList<>();
     }
 
     public Noeuds(double coordx, double coordy, int id) {
         this.coordx = coordx;
         this.coordy = coordy;
         this.id = id;
-        Depart = Arrive = new ArrayList<Composant>() ;
+        Depart = new ArrayList<>() ;
+        Arrive = new ArrayList<>();
     }
     
     public Noeuds(double coordx, double coordy, int id, ArrayList<Composant> Depart, ArrayList<Composant> Arrive) {
@@ -91,7 +94,7 @@ public class Noeuds {
     }
 
     public String toString (){
-        return "[Noeud "+id+" | coordx : "+coordx+" coordy : "+coordy+"]" ;
+        return "[Noeud "+id+" | coordx : "+coordx+" coordy : "+coordy+"]"+"| Depart :"+getDepart()+" | Arrive :"+getArrive();
     }
     public static Noeuds entrerNoeud(){
     System.out.println("Saisir un id :") ;
