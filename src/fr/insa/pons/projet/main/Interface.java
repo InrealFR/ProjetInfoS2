@@ -5,13 +5,15 @@
  */
 package fr.insa.pons.projet.main;
 
-import java.awt.Graphics;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author hugop
  */
 public class Interface extends javax.swing.JFrame {
+
+    double pulse;
 
     /**
      * Creates new form Interface
@@ -72,11 +74,6 @@ public class Interface extends javax.swing.JFrame {
 
         jButtonNoeud.setText("Noeud");
         jButtonNoeud.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jButtonNoeud.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonNoeudActionPerformed(evt);
-            }
-        });
 
         jButtonResistance.setText("Resistance");
 
@@ -190,7 +187,7 @@ public class Interface extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jButtonCalculs)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPaneAffichageCalculs, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+                .addComponent(jScrollPaneAffichageCalculs)
                 .addContainerGap())
         );
 
@@ -239,27 +236,32 @@ public class Interface extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonNoeudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNoeudActionPerformed
-        entrerNoeud Creation_Noeud = new entrerNoeud();
-        Creation_Noeud.setVisible(true);
-    }//GEN-LAST:event_jButtonNoeudActionPerformed
-
     private void jButtonCalculsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCalculsActionPerformed
-    entrerPulsation Choix_Pulsation = new entrerPulsation();  
-    Choix_Pulsation.setVisible(true);// TODO add your handling code here:
+        jPanelEntrerPulse jp = new jPanelEntrerPulse();
+        int rep = JOptionPane.showConfirmDialog(this, jp, "Pulsation", JOptionPane.OK_CANCEL_OPTION);
+        try {
+            if (rep == JOptionPane.OK_OPTION) {
+                pulse = Double.parseDouble(jp.getjPulsation().getText());
+                jTextAreaAffichageCalculs.setText("pulsation ="+pulse) ;
+            } else {
+                JOptionPane.showMessageDialog(this, "Vous avez annulé");
+            }
+        } catch (NumberFormatException e) {
+JOptionPane.showMessageDialog(this, "La pulsation est un REEL !");
+        }
+
     }//GEN-LAST:event_jButtonCalculsActionPerformed
 
     /**
      * @param args the command line arguments
      */
- 
-  public static void main(String args[]) {
-  java.awt.EventQueue.invokeLater(new Runnable() {
+    public static void main(String args[]) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-              new Interface().setVisible(true);
-          }
-    });
-   }
+                new Interface().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCalculs;

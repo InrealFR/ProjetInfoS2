@@ -21,7 +21,7 @@
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="CircuitRLC"/>
     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-      <Color id="Curseur par d&#xe9;faut"/>
+      <Color id="Default Cursor"/>
     </Property>
     <Property name="name" type="java.lang.String" value="framePrincipale" noResource="true"/>
   </Properties>
@@ -117,7 +117,7 @@
               </Border>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Curseur par d&#xe9;faut"/>
+              <Color id="Default Cursor"/>
             </Property>
           </Properties>
 
@@ -205,12 +205,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Noeud"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                      <Color id="Curseur par d&#xe9;faut"/>
+                      <Color id="Default Cursor"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonNoeudActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="jButtonResistance">
                   <Properties>
@@ -292,7 +289,7 @@
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="jButtonCalculs" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPaneAffichageCalculs" pref="96" max="32767" attributes="0"/>
+                      <Component id="jScrollPaneAffichageCalculs" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
