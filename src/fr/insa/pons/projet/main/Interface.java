@@ -5,6 +5,8 @@
  */
 package fr.insa.pons.projet.main;
 
+import fr.insa.pons.projet.circuit.Circuit;
+import fr.insa.pons.projet.noeud.Noeuds;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,7 +14,7 @@ import javax.swing.JOptionPane;
  * @author hugop
  */
 public class Interface extends javax.swing.JFrame {
-
+    Circuit CircuitAffiche ; 
     double pulse;
 
     /**
@@ -20,6 +22,7 @@ public class Interface extends javax.swing.JFrame {
      */
     public Interface() {
         initComponents();
+        CircuitAffiche = new Circuit();
     }
 
     /**
@@ -74,6 +77,11 @@ public class Interface extends javax.swing.JFrame {
 
         jButtonNoeud.setText("Noeud");
         jButtonNoeud.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButtonNoeud.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNoeudActionPerformed(evt);
+            }
+        });
 
         jButtonResistance.setText("Resistance");
 
@@ -244,13 +252,33 @@ public class Interface extends javax.swing.JFrame {
                 pulse = Double.parseDouble(jp.getjPulsation().getText());
                 jTextAreaAffichageCalculs.setText("pulsation ="+pulse) ;
             } else {
-                JOptionPane.showMessageDialog(this, "Vous avez annulé");
+                JOptionPane.showMessageDialog(this, "Vous avez annulé !");
             }
         } catch (NumberFormatException e) {
 JOptionPane.showMessageDialog(this, "La pulsation est un REEL !");
         }
 
     }//GEN-LAST:event_jButtonCalculsActionPerformed
+
+    private void jButtonNoeudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNoeudActionPerformed
+jPanelEntrerNoeud EntrerNoeud = new jPanelEntrerNoeud();
+int rep = JOptionPane.showConfirmDialog(this,EntrerNoeud,"Saisie du Noeud",JOptionPane.OK_CANCEL_OPTION);
+if(rep == JOptionPane.OK_OPTION){
+try {
+Noeuds n = new Noeuds(Double.parseDouble(EntrerNoeud.getjX().getText()),Double.parseDouble(EntrerNoeud.getjY().getText()),Integer.parseInt(EntrerNoeud.getjID().getText())) ;
+CircuitAffiche.ajouteNoeud(n) ;
+System.out.println(CircuitAffiche) ;
+}
+catch(NumberFormatException e){
+JOptionPane.showMessageDialog(this,"ERREUR : VEUILLEZ ENTRER DES NOMBRES !") ;
+}
+} else {
+JOptionPane.showMessageDialog(this,"Vous avez annulé la saisie du Noeud.") ;
+}
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonNoeudActionPerformed
 
     /**
      * @param args the command line arguments
