@@ -5,7 +5,10 @@
  */
 package fr.insa.pons.projet.main;
 
+import static fr.insa.Lire.c;
 import fr.insa.pons.projet.circuit.Circuit;
+import fr.insa.pons.projet.composant.Condensateur;
+import fr.insa.pons.projet.composant.Inductance;
 import fr.insa.pons.projet.composant.Resistance;
 import fr.insa.pons.projet.noeud.Noeuds;
 import javax.swing.JOptionPane;
@@ -93,8 +96,18 @@ public class Interface extends javax.swing.JFrame {
         });
 
         jButtonCondensateur.setText("Condensateur");
+        jButtonCondensateur.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCondensateurActionPerformed(evt);
+            }
+        });
 
         jButtonInductance.setText("Inductance");
+        jButtonInductance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInductanceActionPerformed(evt);
+            }
+        });
 
         jLabelIconNoeud.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelIconNoeud.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fr/insa/pons/projet/main/images/noeud.png"))); // NOI18N
@@ -268,10 +281,10 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCalculsActionPerformed
 
     private void jButtonNoeudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNoeudActionPerformed
-        jPanelEntrerNoeud EntrerNoeud = new jPanelEntrerNoeud();
+        jPanelEntrerNoeud EntrerNoeud = new jPanelEntrerNoeud(); //initiation du jPanel
         int rep = JOptionPane.showConfirmDialog(this, EntrerNoeud, "Saisie du Noeud", JOptionPane.OK_CANCEL_OPTION);
         if (rep == JOptionPane.OK_OPTION) {
-            try {
+            try { //On créer le noeud dans le try pour éviter les problemes avec les textFields
                 Noeuds n = new Noeuds(Double.parseDouble(EntrerNoeud.getjX().getText()), Double.parseDouble(EntrerNoeud.getjY().getText()), Integer.parseInt(EntrerNoeud.getjID().getText()));
                 CircuitAffiche.ajouteNoeud(n);
                 System.out.println(CircuitAffiche);
@@ -292,25 +305,76 @@ public class Interface extends javax.swing.JFrame {
             entrerRes.getjComboBoxArrive().addItem("" + CircuitAffiche.getNoeuds().get(i).getId());
         }
         int rep = JOptionPane.showConfirmDialog(this, entrerRes, "Saisie de Résistance", JOptionPane.OK_CANCEL_OPTION);
-        if(rep == JOptionPane.OK_OPTION){
-        if ((Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())) == (Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim()))) {
-            JOptionPane.showMessageDialog(this, "Erreur : Même noeud de départ et d'arrivée !");
-            throw new Error();
-        } else {
-            try {
-                Resistance res = new Resistance(Double.parseDouble(entrerRes.getjTextFieldResistance().getText()), Integer.parseInt(entrerRes.getjTextFieldId().getText()));
-            CircuitAffiche.ajouteComposant(res, CircuitAffiche.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitAffiche.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())));
-            System.out.println(CircuitAffiche) ;
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "VEUILLEZ ENTRER DES NOMBRES !");
+        if (rep == JOptionPane.OK_OPTION) {
+            if ((Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())) == (Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim()))) {
+                JOptionPane.showMessageDialog(this, "Erreur : Même noeud de départ et d'arrivée !");
+                throw new Error();
+            } else {
+                try {
+                    Resistance res = new Resistance(Double.parseDouble(entrerRes.getjTextFieldResistance().getText()), Integer.parseInt(entrerRes.getjTextFieldId().getText()));
+                    CircuitAffiche.ajouteComposant(res, CircuitAffiche.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitAffiche.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())));
+                    System.out.println(CircuitAffiche);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "VEUILLEZ ENTRER DES NOMBRES !");
+                }
+
             }
-        }
         } else {
-       JOptionPane.showMessageDialog(this, "VOUS AVEZ ANNULE LA SAISIE !");
+            JOptionPane.showMessageDialog(this, "Saisie annulée");
         }
-
-
     }//GEN-LAST:event_jButtonResistanceActionPerformed
+
+    private void jButtonCondensateurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCondensateurActionPerformed
+        jPanelEntrerCondensateur entrerC = new jPanelEntrerCondensateur();
+        for (int i = 0; i < CircuitAffiche.getNoeuds().size(); i++) {
+            entrerC.getjComboBoxDepart().addItem("" + CircuitAffiche.getNoeuds().get(i).getId());
+            entrerC.getjComboBoxArrivee().addItem("" + CircuitAffiche.getNoeuds().get(i).getId());
+        }
+        int rep = JOptionPane.showConfirmDialog(this, entrerC, "Saisie de Condensateur", JOptionPane.OK_CANCEL_OPTION);
+        if (rep == JOptionPane.OK_OPTION) {
+            if ((Integer.parseInt(entrerC.getjComboBoxDepart().getSelectedItem().toString().trim())) == (Integer.parseInt(entrerC.getjComboBoxArrivee().getSelectedItem().toString().trim()))) {
+                JOptionPane.showMessageDialog(this, "Erreur : Même noeud de départ et d'arrivée !");
+                throw new Error();
+            } else {
+                try {
+                    Condensateur c = new Condensateur(Double.parseDouble(entrerC.getjTextFieldCapacite().getText()), Integer.parseInt(entrerC.getjTextFieldID().getText()));
+                    CircuitAffiche.ajouteComposant(c, CircuitAffiche.chercheNoeud(Integer.parseInt(entrerC.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitAffiche.chercheNoeud(Integer.parseInt(entrerC.getjComboBoxArrivee().getSelectedItem().toString().trim())));
+                    System.out.println(CircuitAffiche);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "VEUILLEZ ENTRER DES NOMBRES !");
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Saisie annulée");
+        } // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonCondensateurActionPerformed
+
+    private void jButtonInductanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInductanceActionPerformed
+
+        jPanelEntrerInductance entrerI = new jPanelEntrerInductance();
+        for (int i = 0; i < CircuitAffiche.getNoeuds().size(); i++) {
+            entrerI.getjComboBoxDepart().addItem("" + CircuitAffiche.getNoeuds().get(i).getId());
+            entrerI.getjComboBoxArrivee().addItem("" + CircuitAffiche.getNoeuds().get(i).getId());
+        }
+        int rep = JOptionPane.showConfirmDialog(this, entrerI, "Saisie de l'Inductance", JOptionPane.OK_CANCEL_OPTION);
+        if (rep == JOptionPane.OK_OPTION) {
+            if ((Integer.parseInt(entrerI.getjComboBoxDepart().getSelectedItem().toString().trim())) == (Integer.parseInt(entrerI.getjComboBoxArrivee().getSelectedItem().toString().trim()))) {
+                JOptionPane.showMessageDialog(this, "Erreur : Même noeud de départ et d'arrivée !");
+                throw new Error();
+            } else {
+                try {
+                    Inductance I = new Inductance(Double.parseDouble(entrerI.getjTextFieldCapacite().getText()), Integer.parseInt(entrerI.getjTextFieldID().getText()));
+                    CircuitAffiche.ajouteComposant(I, CircuitAffiche.chercheNoeud(Integer.parseInt(entrerI.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitAffiche.chercheNoeud(Integer.parseInt(entrerI.getjComboBoxArrivee().getSelectedItem().toString().trim())));
+                    System.out.println(CircuitAffiche);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "VEUILLEZ ENTRER DES NOMBRES !");
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Saisie annulée");
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonInductanceActionPerformed
 
     /**
      * @param args the command line arguments
