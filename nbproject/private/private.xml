@@ -3,23 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/hugop/Documents/NetBeansProjects/ProjetInfoS2/src/fr/insa/pons/projet/circuit/Circuit.java</file>
-            <file>file:/C:/Users/hugop/Documents/NetBeansProjects/ProjetInfoS2/src/fr/insa/pons/projet/composant/Inductance.java</file>
-            <file>file:/C:/Users/hugop/Documents/NetBeansProjects/ProjetInfoS2/src/fr/insa/pons/projet/composant/GenerateurTension.java</file>
-            <file>file:/C:/Users/hugop/Documents/NetBeansProjects/ProjetInfoS2/src/fr/insa/pons/projet/composant/Resistance.java</file>
-            <file>file:/C:/Users/hugop/Documents/NetBeansProjects/ProjetInfoS2/src/fr/insa/pons/projet/noeud/Noeuds.java</file>
-            <file>file:/C:/Users/hugop/Documents/NetBeansProjects/ProjetInfoS2/src/fr/insa/pons/projet/composant/Composant.java</file>
-            <file>file:/C:/Users/hugop/Documents/NetBeansProjects/ProjetInfoS2/src/fr/insa/pons/projet/composant/Fil.java</file>
-            <file>file:/C:/Users/hugop/Documents/NetBeansProjects/ProjetInfoS2/src/fr/insa/pons/projet/composant/Condensateur.java</file>
-            <file>file:/C:/Users/hugop/Documents/NetBeansProjects/ProjetInfoS2/src/fr/insa/pons/projet/main/Interface.java</file>
-=======
-            <file>file:/C:/Users/Thomas/Documents/NetBeansProjects/ProjetInfoS2/src/fr/insa/pons/projet/composant/Condensateur.java</file>
-            <file>file:/C:/Users/Thomas/Documents/NetBeansProjects/ProjetInfoS2/src/fr/insa/pons/projet/matrice/MatriceRectangulaire.java</file>
-            <file>file:/C:/Users/Thomas/Documents/NetBeansProjects/ProjetInfoS2/src/fr/insa/pons/projet/complex/Complex.java</file>
-            <file>file:/C:/Users/Thomas/Documents/NetBeansProjects/ProjetInfoS2/src/fr/insa/pons/projet/circuit/Circuit.java</file>
-            <file>file:/C:/Users/Thomas/Documents/NetBeansProjects/ProjetInfoS2/src/fr/insa/pons/projet/composant/Composant.java</file>
->>>>>>> 3206163445e3b42c8766b088ad6ab74eb3916d67
+            <file>file:/home/hpons01/NetBeansProjects/ProjetInfoS2-master/src/fr/insa/pons/projet/main/entrerPulsation.java</file>
+            <file>file:/home/hpons01/NetBeansProjects/ProjetInfoS2-master/src/fr/insa/pons/projet/main/Interface.java</file>
+            <file>file:/home/hpons01/NetBeansProjects/ProjetInfoS2-master/src/fr/insa/pons/projet/main/entrerNoeud.java</file>
+            <file>file:/home/hpons01/NetBeansProjects/ProjetInfoS2-master/src/fr/insa/pons/projet/circuit/Circuit.java</file>
         </group>
     </open-files>
 </project-private>

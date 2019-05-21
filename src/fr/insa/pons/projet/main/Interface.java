@@ -34,7 +34,6 @@ public class Interface extends javax.swing.JFrame {
         jPanel_Composants = new javax.swing.JPanel();
         jPanelComposants = new javax.swing.JPanel();
         jButtonNoeud = new javax.swing.JButton();
-        jButtonFil = new javax.swing.JButton();
         jButtonResistance = new javax.swing.JButton();
         jButtonCondensateur = new javax.swing.JButton();
         jButtonInductance = new javax.swing.JButton();
@@ -42,11 +41,7 @@ public class Interface extends javax.swing.JFrame {
         jLabelIconResistance = new javax.swing.JLabel();
         jLabelIconCondensateur = new javax.swing.JLabel();
         jLabelIconInductance = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jPanel_AffichageCalculs = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabelPulsation = new javax.swing.JLabel();
-        jTextFieldPulsation = new javax.swing.JTextField();
         jButtonCalculs = new javax.swing.JButton();
         jScrollPaneAffichageCalculs = new javax.swing.JScrollPane();
         jTextAreaAffichageCalculs = new javax.swing.JTextArea();
@@ -83,8 +78,6 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
-        jButtonFil.setText("Fil");
-
         jButtonResistance.setText("Resistance");
 
         jButtonCondensateur.setText("Condensateur");
@@ -103,9 +96,6 @@ public class Interface extends javax.swing.JFrame {
         jLabelIconInductance.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelIconInductance.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fr/insa/pons/projet/main/images/inductance.png"))); // NOI18N
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fr/insa/pons/projet/main/images/fil.png"))); // NOI18N
-
         javax.swing.GroupLayout jPanelComposantsLayout = new javax.swing.GroupLayout(jPanelComposants);
         jPanelComposants.setLayout(jPanelComposantsLayout);
         jPanelComposantsLayout.setHorizontalGroup(
@@ -113,16 +103,15 @@ public class Interface extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelComposantsLayout.createSequentialGroup()
                 .addGroup(jPanelComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButtonInductance, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonCondensateur, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jButtonNoeud, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonFil, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonResistance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonResistance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelComposantsLayout.createSequentialGroup()
+                        .addComponent(jButtonCondensateur)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabelIconResistance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanelComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabelIconNoeud, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelIconNoeud, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelIconCondensateur, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabelIconInductance, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE))
                 .addContainerGap())
@@ -133,19 +122,11 @@ public class Interface extends javax.swing.JFrame {
                 .addGroup(jPanelComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonNoeud, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelIconNoeud, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(60, 60, 60)
                 .addGroup(jPanelComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelComposantsLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(jPanelComposantsLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonFil, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(jPanelComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelIconResistance, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonResistance, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19)
+                    .addComponent(jButtonResistance, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelIconResistance, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(jPanelComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelIconCondensateur)
                     .addGroup(jPanelComposantsLayout.createSequentialGroup()
@@ -178,25 +159,13 @@ public class Interface extends javax.swing.JFrame {
 
         jPanel_AffichageCalculs.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        jLabel1.setText("Calculs :");
-
-        jLabelPulsation.setText("Pulsation :");
-
-        jTextFieldPulsation.setText("Entrer pulsation");
-        jTextFieldPulsation.setToolTipText("entrer la pulsation ici");
-        jTextFieldPulsation.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextFieldPulsationMouseClicked(evt);
-            }
-        });
-        jTextFieldPulsation.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextFieldPulsationKeyTyped(evt);
-            }
-        });
-
         jButtonCalculs.setText("Calculer");
         jButtonCalculs.setToolTipText("Met à jour les calculs ");
+        jButtonCalculs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCalculsActionPerformed(evt);
+            }
+        });
 
         jTextAreaAffichageCalculs.setEditable(false);
         jTextAreaAffichageCalculs.setColumns(20);
@@ -208,34 +177,20 @@ public class Interface extends javax.swing.JFrame {
         jPanel_AffichageCalculsLayout.setHorizontalGroup(
             jPanel_AffichageCalculsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_AffichageCalculsLayout.createSequentialGroup()
-                .addComponent(jScrollPaneAffichageCalculs)
+                .addComponent(jScrollPaneAffichageCalculs, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel_AffichageCalculsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel_AffichageCalculsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel_AffichageCalculsLayout.createSequentialGroup()
-                        .addComponent(jLabelPulsation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextFieldPulsation, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonCalculs, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(209, 209, 209))
-                    .addGroup(jPanel_AffichageCalculsLayout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(110, 110, 110))))
+                .addGap(190, 190, 190)
+                .addComponent(jButtonCalculs, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel_AffichageCalculsLayout.setVerticalGroup(
             jPanel_AffichageCalculsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_AffichageCalculsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonCalculs)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel_AffichageCalculsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelPulsation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextFieldPulsation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonCalculs))
-                .addGap(1, 1, 1)
-                .addComponent(jScrollPaneAffichageCalculs, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
+                .addComponent(jScrollPaneAffichageCalculs, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -255,7 +210,7 @@ public class Interface extends javax.swing.JFrame {
             .addGroup(jPanel_GrandLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addGroup(jPanel_GrandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel_Composants, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel_Composants, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel_GrandLayout.createSequentialGroup()
                         .addComponent(jPanel_AffichageCircuit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -284,44 +239,38 @@ public class Interface extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldPulsationKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPulsationKeyTyped
-
-    }//GEN-LAST:event_jTextFieldPulsationKeyTyped
-
-    private void jTextFieldPulsationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldPulsationMouseClicked
-        jTextFieldPulsation.setText("");        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldPulsationMouseClicked
-
     private void jButtonNoeudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNoeudActionPerformed
-
+        entrerNoeud Creation_Noeud = new entrerNoeud();
+        Creation_Noeud.setVisible(true);
     }//GEN-LAST:event_jButtonNoeudActionPerformed
+
+    private void jButtonCalculsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCalculsActionPerformed
+    entrerPulsation Choix_Pulsation = new entrerPulsation();  
+    Choix_Pulsation.setVisible(true);// TODO add your handling code here:
+    }//GEN-LAST:event_jButtonCalculsActionPerformed
 
     /**
      * @param args the command line arguments
      */
  
- /* public static void main(String args[]) {
- / java.awt.EventQueue.invokeLater(new Runnable() {
- /           public void run() {
- /              new Interface().setVisible(true);
- /          }
- /    });
- /   }
-*/
+  public static void main(String args[]) {
+  java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+              new Interface().setVisible(true);
+          }
+    });
+   }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCalculs;
     private javax.swing.JButton jButtonCondensateur;
-    private javax.swing.JButton jButtonFil;
     private javax.swing.JButton jButtonInductance;
     private javax.swing.JButton jButtonNoeud;
     private javax.swing.JButton jButtonResistance;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelIconCondensateur;
     private javax.swing.JLabel jLabelIconInductance;
     private javax.swing.JLabel jLabelIconNoeud;
     private javax.swing.JLabel jLabelIconResistance;
-    private javax.swing.JLabel jLabelPulsation;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -332,6 +281,5 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_Grand;
     private javax.swing.JScrollPane jScrollPaneAffichageCalculs;
     private javax.swing.JTextArea jTextAreaAffichageCalculs;
-    private javax.swing.JTextField jTextFieldPulsation;
     // End of variables declaration//GEN-END:variables
 }
