@@ -6,6 +6,7 @@
 package fr.insa.pons.projet.main;
 
 import fr.insa.pons.projet.circuit.Circuit;
+import fr.insa.pons.projet.composant.Resistance;
 import fr.insa.pons.projet.noeud.Noeuds;
 import javax.swing.JOptionPane;
 
@@ -14,7 +15,8 @@ import javax.swing.JOptionPane;
  * @author hugop
  */
 public class Interface extends javax.swing.JFrame {
-    Circuit CircuitAffiche ; 
+
+    Circuit CircuitAffiche;
     double pulse;
 
     /**
@@ -84,6 +86,11 @@ public class Interface extends javax.swing.JFrame {
         });
 
         jButtonResistance.setText("Resistance");
+        jButtonResistance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonResistanceActionPerformed(evt);
+            }
+        });
 
         jButtonCondensateur.setText("Condensateur");
 
@@ -215,7 +222,7 @@ public class Interface extends javax.swing.JFrame {
             .addGroup(jPanel_GrandLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addGroup(jPanel_GrandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel_Composants, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel_Composants, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel_GrandLayout.createSequentialGroup()
                         .addComponent(jPanel_AffichageCircuit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -250,35 +257,60 @@ public class Interface extends javax.swing.JFrame {
         try {
             if (rep == JOptionPane.OK_OPTION) {
                 pulse = Double.parseDouble(jp.getjPulsation().getText());
-                jTextAreaAffichageCalculs.setText("pulsation ="+pulse) ;
+                jTextAreaAffichageCalculs.setText("pulsation =" + pulse);
             } else {
                 JOptionPane.showMessageDialog(this, "Vous avez annulé !");
             }
         } catch (NumberFormatException e) {
-JOptionPane.showMessageDialog(this, "La pulsation est un REEL !");
+            JOptionPane.showMessageDialog(this, "La pulsation est un REEL !");
         }
 
     }//GEN-LAST:event_jButtonCalculsActionPerformed
 
     private void jButtonNoeudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNoeudActionPerformed
-jPanelEntrerNoeud EntrerNoeud = new jPanelEntrerNoeud();
-int rep = JOptionPane.showConfirmDialog(this,EntrerNoeud,"Saisie du Noeud",JOptionPane.OK_CANCEL_OPTION);
-if(rep == JOptionPane.OK_OPTION){
-try {
-Noeuds n = new Noeuds(Double.parseDouble(EntrerNoeud.getjX().getText()),Double.parseDouble(EntrerNoeud.getjY().getText()),Integer.parseInt(EntrerNoeud.getjID().getText())) ;
-CircuitAffiche.ajouteNoeud(n) ;
-System.out.println(CircuitAffiche) ;
-}
-catch(NumberFormatException e){
-JOptionPane.showMessageDialog(this,"ERREUR : VEUILLEZ ENTRER DES NOMBRES !") ;
-}
-} else {
-JOptionPane.showMessageDialog(this,"Vous avez annulé la saisie du Noeud.") ;
-}
-
+        jPanelEntrerNoeud EntrerNoeud = new jPanelEntrerNoeud();
+        int rep = JOptionPane.showConfirmDialog(this, EntrerNoeud, "Saisie du Noeud", JOptionPane.OK_CANCEL_OPTION);
+        if (rep == JOptionPane.OK_OPTION) {
+            try {
+                Noeuds n = new Noeuds(Double.parseDouble(EntrerNoeud.getjX().getText()), Double.parseDouble(EntrerNoeud.getjY().getText()), Integer.parseInt(EntrerNoeud.getjID().getText()));
+                CircuitAffiche.ajouteNoeud(n);
+                System.out.println(CircuitAffiche);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "ERREUR : VEUILLEZ ENTRER DES NOMBRES !");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Vous avez annulé la saisie du Noeud.");
+        }
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonNoeudActionPerformed
+
+    private void jButtonResistanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonResistanceActionPerformed
+        jPanelEntrerResistance entrerRes = new jPanelEntrerResistance();
+        for (int i = 0; i < CircuitAffiche.getNoeuds().size(); i++) {
+            entrerRes.getjComboBoxDepart().addItem("" + CircuitAffiche.getNoeuds().get(i).getId());
+            entrerRes.getjComboBoxArrive().addItem("" + CircuitAffiche.getNoeuds().get(i).getId());
+        }
+        int rep = JOptionPane.showConfirmDialog(this, entrerRes, "Saisie de Résistance", JOptionPane.OK_CANCEL_OPTION);
+        if(rep == JOptionPane.OK_OPTION){
+        if ((Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())) == (Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim()))) {
+            JOptionPane.showMessageDialog(this, "Erreur : Même noeud de départ et d'arrivée !");
+            throw new Error();
+        } else {
+            try {
+                Resistance res = new Resistance(Double.parseDouble(entrerRes.getjTextFieldResistance().getText()), Integer.parseInt(entrerRes.getjTextFieldId().getText()));
+            CircuitAffiche.ajouteComposant(res, CircuitAffiche.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitAffiche.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())));
+            System.out.println(CircuitAffiche) ;
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "VEUILLEZ ENTRER DES NOMBRES !");
+            }
+        }
+        } else {
+       JOptionPane.showMessageDialog(this, "VOUS AVEZ ANNULE LA SAISIE !");
+        }
+
+
+    }//GEN-LAST:event_jButtonResistanceActionPerformed
 
     /**
      * @param args the command line arguments

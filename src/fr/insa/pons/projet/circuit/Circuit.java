@@ -80,11 +80,11 @@ public class Circuit {
                     break;
                 }
                 case 3: {
-                    Composant c = entrerComposant();
+                    Composant c = Composant.entrerComposant();
                     if (this.testIdC(c.getId())) { //id unique 
                         System.out.println("MAUVAIS ID ! COMPO NON CREE");
                     } else {
-                        this.ajouteComposant(c);
+                        this.entrerComposant(c);
                     }
                     break;
                 }
@@ -165,16 +165,19 @@ public class Circuit {
         }
         return (verif);
     }
-
-    public void ajouteComposant(Composant c) {
-        if (this.testIdC(c.getId())) { //on test d'abord l'id 
-            throw new Error("ID en double !!");
-        }
-        //def des noeuds depart et arrive
+    public void entrerComposant(Composant c){
         System.out.println("Choix Noeud Depart ?");
         Noeuds Depart = choisiNoeud();
         System.out.println("ID Noeud Arrive ?");
         Noeuds Arrive = choisiNoeud();
+        this.ajouteComposant(c,Depart,Arrive) ;
+    }
+    public void ajouteComposant(Composant c, Noeuds Depart, Noeuds Arrive) {
+        if (this.testIdC(c.getId())) { //on test d'abord l'id 
+         JOptionPane.showMessageDialog(null, "ID EN DOUBLE : COMPOSANT NON CREE");
+            throw new Error("ID en double !!");
+        }
+        //def des noeuds depart et arrive
         if (Arrive.getId() == Depart.getId()) {
             throw new Error("Un Composant a un noeud de depart different de l'arrivee !");
         }
@@ -236,18 +239,22 @@ public class Circuit {
         if (this.testId(i) == false) { //on verifie que l'ID du noeud existe bien
             throw new Error("ID non existant !");
         }
+        return (chercheNoeud(i));
+    }
+    
+    public Noeuds chercheNoeud(int id){
         int pos = 0;
         boolean verif = false;
         while ((pos < this.getNoeuds().size()) && (verif == false)) { //on identifie la position du noeud qui nous interesse
-            if (this.getNoeuds().get(pos).getId() == i) {
+            if (this.getNoeuds().get(pos).getId() == id) {
                 verif = true;
             } else {
                 pos = pos + 1;
             }
         }
-        return (this.getNoeuds().get(pos));
+    return(this.getNoeuds().get(pos)) ;
     }
-
+    
     public ArrayList< ArrayList<Composant>> detectionBranches() {
 
         ArrayList<ArrayList<Composant>> listeBranches = new ArrayList();
