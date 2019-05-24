@@ -6,8 +6,8 @@
 package fr.insa.pons.projet.circuit;
 
 import fr.insa.Lire;
+import fr.insa.pons.projet.complex.Complex;
 import fr.insa.pons.projet.composant.*;
-import static fr.insa.pons.projet.composant.Composant.entrerComposant;
 import fr.insa.pons.projet.noeud.Noeuds;
 import static fr.insa.pons.projet.noeud.Noeuds.entrerNoeud;
 import java.util.ArrayList;
@@ -420,6 +420,68 @@ public class Circuit {
         System.out.println(mailles.toString());
         return mailles;
     }
-
     
+    public ArrayList< ArrayList <Composant> > calculMailles(){
+        return (this.detectionMaille(this.detectionBranches()));
+    }
+    
+    
+    
+public void ajoutCaracteristique (Complex [][] mat, int l){
+    int n = this.Composants.size();
+    int i;
+    for (i=0;i<n;i++){
+        mat[l+i][l+i] = this.getComposants().get(i).alpha();
+        mat[l+i][n-1+i] = this.getComposants().get(i).beta();
+    }
+    }
+
+public void ajoutLoiDesNoeuds (Complex [][] mat, int l){
+    int n = this.getComposants().size();
+    int i;
+    int j;
+    for (i=0;i<n;i++){
+        int imoins = this.getNoeuds().get(i).getDepart().size();
+        for (j=0;j<imoins;j++){
+            int id = this.getNoeuds().get(i).getDepart().get(j).getId();
+            mat[l+i][l+id]=-1;
+        }
+        int iplus = this.getNoeuds().get(i).getArrive().size();
+        for (j=0;j<iplus;j++){
+            int id = this.getNoeuds().get(i).getArrive().get(j).getId();
+            mat[l+i][l+id]=1;
+        }
+    }
+}
+
+public void ajoutLoiDesMailles(ArrayList <ArrayList<Composant>> mailles  ,  Complex[][] mat  ,  int l){
+    int n = mailles.size();
+    int i,j;
+    for(i=0;i<n;i++){
+        int nbcompos =mailles.get(i).size();
+        Noeuds noeudDebut = mailles.get(i).get(0).getNoeudDepart();
+        for (j=0;j<nbcompos;j++){
+            if (noeudDebut == mailles.get(i).get(j).getNoeudDepart()){
+                mat [l+i][mailles.get(i).get(j).getId()]=1;
+            } else {
+                mat [l+i][mailles.get(i).get(j).getId()]=-1;
+            }
+            noeudDebut=mailles.get(i).get(j).getNoeudArrive();
+        }
+        
+    }
+}
+
+public Complex[][] MatriceCoefficients(){
+    int n=this.getComposants().size();
+    Complex [][] MatriceCoefficients = new Complex [2n][2n];
+    int l = 0;
+    this.ajoutCaracteristique(MatriceCoefficients, l);
+    l=n-1;
+    this.ajoutLoiDesNoeuds(MatriceCoefficients, l);
+    l=l+this.getNoeuds().size()-1;
+    ArrayList< ArrayList<Composant>> mailles=this.calculMailles();
+    this.ajoutLoiDesMailles(mailles, MatriceCoefficients, l);
+    return MatriceCoefficients;
+}
 }
