@@ -5,7 +5,13 @@
  */
 package fr.insa.pons.projet.main;
 
-import java.awt.Graphics;
+import fr.insa.pons.projet.circuit.Circuit;
+import fr.insa.pons.projet.composant.Condensateur;
+import fr.insa.pons.projet.composant.GenerateurTension;
+import fr.insa.pons.projet.composant.Inductance;
+import fr.insa.pons.projet.composant.Resistance;
+import fr.insa.pons.projet.noeud.Noeuds;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,11 +19,15 @@ import java.awt.Graphics;
  */
 public class Interface extends javax.swing.JFrame {
 
+    Circuit CircuitAffiche;
+    double pulse;
+
     /**
      * Creates new form Interface
      */
     public Interface() {
         initComponents();
+        CircuitAffiche = new Circuit();
     }
 
     /**
@@ -29,12 +39,12 @@ public class Interface extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
         jPanel_Grand = new javax.swing.JPanel();
         jPanel_AffichageCircuit = new javax.swing.JPanel();
         jPanel_Composants = new javax.swing.JPanel();
         jPanelComposants = new javax.swing.JPanel();
         jButtonNoeud = new javax.swing.JButton();
-        jButtonFil = new javax.swing.JButton();
         jButtonResistance = new javax.swing.JButton();
         jButtonCondensateur = new javax.swing.JButton();
         jButtonInductance = new javax.swing.JButton();
@@ -42,17 +52,18 @@ public class Interface extends javax.swing.JFrame {
         jLabelIconResistance = new javax.swing.JLabel();
         jLabelIconCondensateur = new javax.swing.JLabel();
         jLabelIconInductance = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jPanel_AffichageCalculs = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabelPulsation = new javax.swing.JLabel();
-        jTextFieldPulsation = new javax.swing.JTextField();
         jButtonCalculs = new javax.swing.JButton();
         jScrollPaneAffichageCalculs = new javax.swing.JScrollPane();
         jTextAreaAffichageCalculs = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CircuitRLC");
@@ -83,13 +94,26 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
-        jButtonFil.setText("Fil");
-
         jButtonResistance.setText("Resistance");
+        jButtonResistance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonResistanceActionPerformed(evt);
+            }
+        });
 
         jButtonCondensateur.setText("Condensateur");
+        jButtonCondensateur.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCondensateurActionPerformed(evt);
+            }
+        });
 
         jButtonInductance.setText("Inductance");
+        jButtonInductance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInductanceActionPerformed(evt);
+            }
+        });
 
         jLabelIconNoeud.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelIconNoeud.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fr/insa/pons/projet/main/images/noeud.png"))); // NOI18N
@@ -103,9 +127,6 @@ public class Interface extends javax.swing.JFrame {
         jLabelIconInductance.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelIconInductance.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fr/insa/pons/projet/main/images/inductance.png"))); // NOI18N
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fr/insa/pons/projet/main/images/fil.png"))); // NOI18N
-
         javax.swing.GroupLayout jPanelComposantsLayout = new javax.swing.GroupLayout(jPanelComposants);
         jPanelComposants.setLayout(jPanelComposantsLayout);
         jPanelComposantsLayout.setHorizontalGroup(
@@ -113,16 +134,15 @@ public class Interface extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelComposantsLayout.createSequentialGroup()
                 .addGroup(jPanelComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButtonInductance, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonCondensateur, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jButtonNoeud, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonFil, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonResistance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonResistance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelComposantsLayout.createSequentialGroup()
+                        .addComponent(jButtonCondensateur)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabelIconResistance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanelComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabelIconNoeud, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelIconNoeud, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelIconCondensateur, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabelIconInductance, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE))
                 .addContainerGap())
@@ -133,19 +153,11 @@ public class Interface extends javax.swing.JFrame {
                 .addGroup(jPanelComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonNoeud, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelIconNoeud, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(60, 60, 60)
                 .addGroup(jPanelComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelComposantsLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(jPanelComposantsLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonFil, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(jPanelComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelIconResistance, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonResistance, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19)
+                    .addComponent(jButtonResistance, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelIconResistance, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(jPanelComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelIconCondensateur)
                     .addGroup(jPanelComposantsLayout.createSequentialGroup()
@@ -159,13 +171,25 @@ public class Interface extends javax.swing.JFrame {
                         .addGap(36, 36, 36))))
         );
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel_ComposantsLayout = new javax.swing.GroupLayout(jPanel_Composants);
         jPanel_Composants.setLayout(jPanel_ComposantsLayout);
         jPanel_ComposantsLayout.setHorizontalGroup(
             jPanel_ComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_ComposantsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanelComposants, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel_ComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_ComposantsLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanelComposants, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel_ComposantsLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jButton1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel_ComposantsLayout.setVerticalGroup(
@@ -173,30 +197,20 @@ public class Interface extends javax.swing.JFrame {
             .addGroup(jPanel_ComposantsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanelComposants, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(182, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap(141, Short.MAX_VALUE))
         );
 
         jPanel_AffichageCalculs.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        jLabel1.setText("Calculs :");
-
-        jLabelPulsation.setText("Pulsation :");
-
-        jTextFieldPulsation.setText("Entrer pulsation");
-        jTextFieldPulsation.setToolTipText("entrer la pulsation ici");
-        jTextFieldPulsation.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextFieldPulsationMouseClicked(evt);
-            }
-        });
-        jTextFieldPulsation.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextFieldPulsationKeyTyped(evt);
-            }
-        });
-
         jButtonCalculs.setText("Calculer");
         jButtonCalculs.setToolTipText("Met à jour les calculs ");
+        jButtonCalculs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCalculsActionPerformed(evt);
+            }
+        });
 
         jTextAreaAffichageCalculs.setEditable(false);
         jTextAreaAffichageCalculs.setColumns(20);
@@ -208,34 +222,20 @@ public class Interface extends javax.swing.JFrame {
         jPanel_AffichageCalculsLayout.setHorizontalGroup(
             jPanel_AffichageCalculsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_AffichageCalculsLayout.createSequentialGroup()
-                .addComponent(jScrollPaneAffichageCalculs)
+                .addComponent(jScrollPaneAffichageCalculs, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel_AffichageCalculsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel_AffichageCalculsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel_AffichageCalculsLayout.createSequentialGroup()
-                        .addComponent(jLabelPulsation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextFieldPulsation, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonCalculs, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(209, 209, 209))
-                    .addGroup(jPanel_AffichageCalculsLayout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(110, 110, 110))))
+                .addGap(190, 190, 190)
+                .addComponent(jButtonCalculs, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel_AffichageCalculsLayout.setVerticalGroup(
             jPanel_AffichageCalculsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_AffichageCalculsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonCalculs)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel_AffichageCalculsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelPulsation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextFieldPulsation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonCalculs))
-                .addGap(1, 1, 1)
-                .addComponent(jScrollPaneAffichageCalculs, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
+                .addComponent(jScrollPaneAffichageCalculs)
                 .addContainerGap())
         );
 
@@ -268,6 +268,25 @@ public class Interface extends javax.swing.JFrame {
         jMenu2.setText("Edit");
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setText("Autres");
+        jMenu3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu3ActionPerformed(evt);
+            }
+        });
+
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem2.setText("Crédits");
+        jMenuItem2.setToolTipText("");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu3);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -284,22 +303,161 @@ public class Interface extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldPulsationKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPulsationKeyTyped
+    private void jButtonCalculsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCalculsActionPerformed
+        jPanelEntrerPulse jp = new jPanelEntrerPulse();
+        int rep = JOptionPane.showConfirmDialog(this, jp, "Pulsation", JOptionPane.OK_CANCEL_OPTION);
+        try {
+            if (rep == JOptionPane.OK_OPTION) {
+                pulse = Double.parseDouble(jp.getjPulsation().getText());
+                jTextAreaAffichageCalculs.setText("pulsation =" + pulse);
+            } else {
+                JOptionPane.showMessageDialog(this, "Vous avez annulé !");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "La pulsation est un REEL !");
+        }
 
-    }//GEN-LAST:event_jTextFieldPulsationKeyTyped
-
-    private void jTextFieldPulsationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldPulsationMouseClicked
-        jTextFieldPulsation.setText("");        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldPulsationMouseClicked
+    }//GEN-LAST:event_jButtonCalculsActionPerformed
 
     private void jButtonNoeudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNoeudActionPerformed
+        jPanelEntrerNoeud EntrerNoeud = new jPanelEntrerNoeud(); //initiation du jPanel
+        int rep = JOptionPane.showConfirmDialog(this, EntrerNoeud, "Saisie du Noeud", JOptionPane.OK_CANCEL_OPTION);
+        if (rep == JOptionPane.OK_OPTION) {
+            try { //On créer le noeud dans le try pour éviter les problemes avec les textFields
+                Noeuds n = new Noeuds(Double.parseDouble(EntrerNoeud.getjX().getText()), Double.parseDouble(EntrerNoeud.getjY().getText()), Integer.parseInt(EntrerNoeud.getjID().getText()));
+                CircuitAffiche.ajouteNoeud(n);
+                System.out.println(CircuitAffiche);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "ERREUR : VEUILLEZ ENTRER DES NOMBRES !");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Vous avez annulé la saisie du Noeud.");
+        }
 
+        // TODO add your handling code here:
     }//GEN-LAST:event_jButtonNoeudActionPerformed
+
+    private void jButtonResistanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonResistanceActionPerformed
+        jPanelEntrerResistance entrerRes = new jPanelEntrerResistance();
+        for (int i = 0; i < CircuitAffiche.getNoeuds().size(); i++) {
+            entrerRes.getjComboBoxDepart().addItem("" + CircuitAffiche.getNoeuds().get(i).getId());
+            entrerRes.getjComboBoxArrive().addItem("" + CircuitAffiche.getNoeuds().get(i).getId());
+        }
+        int rep = JOptionPane.showConfirmDialog(this, entrerRes, "Saisie de Résistance", JOptionPane.OK_CANCEL_OPTION);
+        if (rep == JOptionPane.OK_OPTION) {
+            if ((Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())) == (Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim()))) {
+                JOptionPane.showMessageDialog(this, "Erreur : Même noeud de départ et d'arrivée !");
+                throw new Error();
+            } else {
+                try {
+                    Resistance res = new Resistance(Double.parseDouble(entrerRes.getjTextFieldResistance().getText()), Integer.parseInt(entrerRes.getjTextFieldId().getText()));
+                    CircuitAffiche.ajouteComposant(res, CircuitAffiche.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitAffiche.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())));
+                    System.out.println(CircuitAffiche);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "VEUILLEZ ENTRER DES NOMBRES !");
+                }
+
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Saisie annulée");
+        }
+    }//GEN-LAST:event_jButtonResistanceActionPerformed
+
+    private void jButtonCondensateurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCondensateurActionPerformed
+        jPanelEntrerCondensateur entrerC = new jPanelEntrerCondensateur();
+        for (int i = 0; i < CircuitAffiche.getNoeuds().size(); i++) {
+            entrerC.getjComboBoxDepart().addItem("" + CircuitAffiche.getNoeuds().get(i).getId());
+            entrerC.getjComboBoxArrivee().addItem("" + CircuitAffiche.getNoeuds().get(i).getId());
+        }
+        int rep = JOptionPane.showConfirmDialog(this, entrerC, "Saisie de Condensateur", JOptionPane.OK_CANCEL_OPTION);
+        if (rep == JOptionPane.OK_OPTION) {
+            if ((Integer.parseInt(entrerC.getjComboBoxDepart().getSelectedItem().toString().trim())) == (Integer.parseInt(entrerC.getjComboBoxArrivee().getSelectedItem().toString().trim()))) {
+                JOptionPane.showMessageDialog(this, "Erreur : Même noeud de départ et d'arrivée !");
+                throw new Error();
+            } else {
+                try {
+                    Condensateur c = new Condensateur(Double.parseDouble(entrerC.getjTextFieldCapacite().getText()), Integer.parseInt(entrerC.getjTextFieldID().getText()));
+                    CircuitAffiche.ajouteComposant(c, CircuitAffiche.chercheNoeud(Integer.parseInt(entrerC.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitAffiche.chercheNoeud(Integer.parseInt(entrerC.getjComboBoxArrivee().getSelectedItem().toString().trim())));
+                    System.out.println(CircuitAffiche);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "VEUILLEZ ENTRER DES NOMBRES !");
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Saisie annulée");
+        } // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonCondensateurActionPerformed
+
+    private void jButtonInductanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInductanceActionPerformed
+
+        jPanelEntrerInductance entrerI = new jPanelEntrerInductance();
+        for (int i = 0; i < CircuitAffiche.getNoeuds().size(); i++) {
+            entrerI.getjComboBoxDepart().addItem("" + CircuitAffiche.getNoeuds().get(i).getId());
+            entrerI.getjComboBoxArrivee().addItem("" + CircuitAffiche.getNoeuds().get(i).getId());
+        }
+        int rep = JOptionPane.showConfirmDialog(this, entrerI, "Saisie de l'Inductance", JOptionPane.OK_CANCEL_OPTION);
+        if (rep == JOptionPane.OK_OPTION) {
+            if ((Integer.parseInt(entrerI.getjComboBoxDepart().getSelectedItem().toString().trim())) == (Integer.parseInt(entrerI.getjComboBoxArrivee().getSelectedItem().toString().trim()))) {
+                JOptionPane.showMessageDialog(this, "Erreur : Même noeud de départ et d'arrivée !");
+                throw new Error();
+            } else {
+                try {
+                    Inductance I = new Inductance(Double.parseDouble(entrerI.getjTextFieldCapacite().getText()), Integer.parseInt(entrerI.getjTextFieldID().getText()));
+                    CircuitAffiche.ajouteComposant(I, CircuitAffiche.chercheNoeud(Integer.parseInt(entrerI.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitAffiche.chercheNoeud(Integer.parseInt(entrerI.getjComboBoxArrivee().getSelectedItem().toString().trim())));
+                    System.out.println(CircuitAffiche);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "VEUILLEZ ENTRER DES NOMBRES !");
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Saisie annulée");
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonInductanceActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
+jFrameCredits credits = new jFrameCredits();
+credits.setVisible(true); //marche po
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    jPanelEntrerGenerateurTension gen = new jPanelEntrerGenerateurTension();
+           for (int i = 0; i < CircuitAffiche.getNoeuds().size(); i++) {
+            gen.getjComboBoxDepart().addItem("" + CircuitAffiche.getNoeuds().get(i).getId());
+            gen.getjComboBoxArrive().addItem("" + CircuitAffiche.getNoeuds().get(i).getId());
+           }
+           int rep = JOptionPane.showConfirmDialog(this, gen, "Saisie du gen", JOptionPane.OK_CANCEL_OPTION);
+        if (rep == JOptionPane.OK_OPTION) {
+            if ((Integer.parseInt(gen.getjComboBoxDepart().getSelectedItem().toString().trim())) == (Integer.parseInt(gen.getjComboBoxArrive().getSelectedItem().toString().trim()))) {
+                JOptionPane.showMessageDialog(this, "Erreur : Même noeud de départ et d'arrivée !");
+                throw new Error();
+            } else {
+                try {
+                    GenerateurTension res = new GenerateurTension(Double.parseDouble(gen.getjTextFieldResistance().getText()), Integer.parseInt(gen.getjTextFieldId().getText()));
+                    CircuitAffiche.ajouteComposant(res, CircuitAffiche.chercheNoeud(Integer.parseInt(gen.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitAffiche.chercheNoeud(Integer.parseInt(gen.getjComboBoxArrive().getSelectedItem().toString().trim())));
+                    System.out.println(CircuitAffiche);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "VEUILLEZ ENTRER DES NOMBRES !");
+                }
+
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Saisie annulée");
+        }
+           
+// TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
- 
+
 
   /*public static void main(String args[]) {
   /java.awt.EventQueue.invokeLater(new Runnable() {
@@ -318,23 +476,32 @@ public class Interface extends javax.swing.JFrame {
  /    });
  /   }
 */
+
+    //  public static void main(String args[]) {
+   //     java.awt.EventQueue.invokeLater(new Runnable() {
+     //       public void run() {
+     //           new Interface().setVisible(true);
+      //      }
+      //  });
+    //}
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonCalculs;
     private javax.swing.JButton jButtonCondensateur;
-    private javax.swing.JButton jButtonFil;
     private javax.swing.JButton jButtonInductance;
     private javax.swing.JButton jButtonNoeud;
     private javax.swing.JButton jButtonResistance;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelIconCondensateur;
     private javax.swing.JLabel jLabelIconInductance;
     private javax.swing.JLabel jLabelIconNoeud;
     private javax.swing.JLabel jLabelIconResistance;
-    private javax.swing.JLabel jLabelPulsation;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanelComposants;
     private javax.swing.JPanel jPanel_AffichageCalculs;
     private javax.swing.JPanel jPanel_AffichageCircuit;
@@ -342,6 +509,5 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_Grand;
     private javax.swing.JScrollPane jScrollPaneAffichageCalculs;
     private javax.swing.JTextArea jTextAreaAffichageCalculs;
-    private javax.swing.JTextField jTextFieldPulsation;
     // End of variables declaration//GEN-END:variables
 }
