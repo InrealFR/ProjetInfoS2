@@ -5,6 +5,8 @@
  */
 package fr.insa.pons.projet.main;
 
+import java.awt.Graphics;
+
 /**
  *
  * @author hugop
@@ -37,10 +39,10 @@ public class Interface extends javax.swing.JFrame {
         jButtonCondensateur = new javax.swing.JButton();
         jButtonInductance = new javax.swing.JButton();
         jLabelIconNoeud = new javax.swing.JLabel();
-        jLabelIconFil = new javax.swing.JLabel();
         jLabelIconResistance = new javax.swing.JLabel();
         jLabelIconCondensateur = new javax.swing.JLabel();
         jLabelIconInductance = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel_AffichageCalculs = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabelPulsation = new javax.swing.JLabel();
@@ -55,6 +57,7 @@ public class Interface extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CircuitRLC");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setName("framePrincipale"); // NOI18N
 
         jPanel_AffichageCircuit.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
@@ -66,7 +69,7 @@ public class Interface extends javax.swing.JFrame {
         );
         jPanel_AffichageCircuitLayout.setVerticalGroup(
             jPanel_AffichageCircuitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 231, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jPanel_Composants.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -74,6 +77,11 @@ public class Interface extends javax.swing.JFrame {
 
         jButtonNoeud.setText("Noeud");
         jButtonNoeud.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButtonNoeud.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNoeudActionPerformed(evt);
+            }
+        });
 
         jButtonFil.setText("Fil");
 
@@ -83,15 +91,20 @@ public class Interface extends javax.swing.JFrame {
 
         jButtonInductance.setText("Inductance");
 
-        jLabelIconNoeud.setText("jLabel2");
+        jLabelIconNoeud.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelIconNoeud.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fr/insa/pons/projet/main/images/noeud.png"))); // NOI18N
 
-        jLabelIconFil.setText("jLabel3");
+        jLabelIconResistance.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelIconResistance.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fr/insa/pons/projet/main/images/resistance.png"))); // NOI18N
 
-        jLabelIconResistance.setText("jLabel4");
+        jLabelIconCondensateur.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelIconCondensateur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fr/insa/pons/projet/main/images/condensateur.png"))); // NOI18N
 
-        jLabelIconCondensateur.setText("jLabel5");
+        jLabelIconInductance.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelIconInductance.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fr/insa/pons/projet/main/images/inductance.png"))); // NOI18N
 
-        jLabelIconInductance.setText("jLabel6");
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fr/insa/pons/projet/main/images/fil.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanelComposantsLayout = new javax.swing.GroupLayout(jPanelComposants);
         jPanelComposants.setLayout(jPanelComposantsLayout);
@@ -100,18 +113,18 @@ public class Interface extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelComposantsLayout.createSequentialGroup()
                 .addGroup(jPanelComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButtonInductance, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonCondensateur, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                    .addComponent(jButtonCondensateur, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jButtonNoeud, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonFil, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonResistance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelIconNoeud, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jLabelIconResistance, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
-                        .addComponent(jLabelIconFil, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jLabelIconCondensateur)
-                    .addComponent(jLabelIconInductance, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanelComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabelIconResistance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanelComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelIconNoeud, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelIconCondensateur, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelIconInductance, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanelComposantsLayout.setVerticalGroup(
@@ -119,23 +132,31 @@ public class Interface extends javax.swing.JFrame {
             .addGroup(jPanelComposantsLayout.createSequentialGroup()
                 .addGroup(jPanelComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonNoeud, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelIconNoeud, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanelComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonFil, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelIconFil, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelIconNoeud, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanelComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelComposantsLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(jPanelComposantsLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonFil, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanelComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelIconResistance, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonResistance, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
+                .addGroup(jPanelComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelIconCondensateur)
+                    .addGroup(jPanelComposantsLayout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jButtonCondensateur, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonResistance, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelIconResistance))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonCondensateur, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelIconCondensateur))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonInductance, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelIconInductance)))
+                .addGroup(jPanelComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelIconInductance)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelComposantsLayout.createSequentialGroup()
+                        .addComponent(jButtonInductance, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36))))
         );
 
         javax.swing.GroupLayout jPanel_ComposantsLayout = new javax.swing.GroupLayout(jPanel_Composants);
@@ -152,7 +173,7 @@ public class Interface extends javax.swing.JFrame {
             .addGroup(jPanel_ComposantsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanelComposants, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(182, Short.MAX_VALUE))
         );
 
         jPanel_AffichageCalculs.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -224,7 +245,7 @@ public class Interface extends javax.swing.JFrame {
             jPanel_GrandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_GrandLayout.createSequentialGroup()
                 .addGroup(jPanel_GrandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel_AffichageCalculs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel_AffichageCalculs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel_AffichageCircuit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel_Composants, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -234,11 +255,11 @@ public class Interface extends javax.swing.JFrame {
             .addGroup(jPanel_GrandLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addGroup(jPanel_GrandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel_Composants, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel_Composants, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel_GrandLayout.createSequentialGroup()
-                        .addComponent(jPanel_AffichageCircuit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel_AffichageCircuit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel_AffichageCalculs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jPanel_AffichageCalculs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         jMenu1.setText("Fichier");
@@ -271,10 +292,15 @@ public class Interface extends javax.swing.JFrame {
         jTextFieldPulsation.setText("");        // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldPulsationMouseClicked
 
+    private void jButtonNoeudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNoeudActionPerformed
+
+    }//GEN-LAST:event_jButtonNoeudActionPerformed
+
     /**
      * @param args the command line arguments
      */
  
+
   /*public static void main(String args[]) {
   /java.awt.EventQueue.invokeLater(new Runnable() {
    /         public void run() {
@@ -283,6 +309,15 @@ public class Interface extends javax.swing.JFrame {
    /   });
    / }
     */
+
+ /* public static void main(String args[]) {
+ / java.awt.EventQueue.invokeLater(new Runnable() {
+ /           public void run() {
+ /              new Interface().setVisible(true);
+ /          }
+ /    });
+ /   }
+*/
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCalculs;
     private javax.swing.JButton jButtonCondensateur;
@@ -291,8 +326,8 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JButton jButtonNoeud;
     private javax.swing.JButton jButtonResistance;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelIconCondensateur;
-    private javax.swing.JLabel jLabelIconFil;
     private javax.swing.JLabel jLabelIconInductance;
     private javax.swing.JLabel jLabelIconNoeud;
     private javax.swing.JLabel jLabelIconResistance;
