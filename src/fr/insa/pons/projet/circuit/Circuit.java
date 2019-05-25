@@ -7,9 +7,9 @@ package fr.insa.pons.projet.circuit;
 
 import fr.insa.Lire;
 import fr.insa.pons.projet.composant.*;
-import static fr.insa.pons.projet.composant.Composant.entrerComposant;
 import fr.insa.pons.projet.noeud.Noeuds;
 import static fr.insa.pons.projet.noeud.Noeuds.entrerNoeud;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -414,5 +414,14 @@ public class Circuit {
             }
         }
         return mailles;
+    }
+    
+    public void dessin (Graphics g){
+        for(int i =0 ; i<this.Composants.size(); i++){
+        this.Composants.get(i).dessine(g) ;
+        }
+        for(int i = 0 ; i<this.Noeuds.size();i++){
+        this.Noeuds.get(i).dessine(g) ;
+        }
     }
 }

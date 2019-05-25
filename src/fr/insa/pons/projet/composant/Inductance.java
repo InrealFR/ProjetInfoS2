@@ -7,6 +7,7 @@ package fr.insa.pons.projet.composant;
 
 import fr.insa.Lire;
 import fr.insa.pons.projet.complex.Complex;
+import java.awt.Graphics;
 
 /**
  *
@@ -58,6 +59,10 @@ public class Inductance extends Composant {
         return "[I" + this.getId() + " | I = " + this.getInductance()+"]";
     }
     
+      public void dessine(Graphics g){
+        
+    }
+      
     public static Inductance entrerInductance(){
     System.out.println("Saisir ID :");
     int id = Lire.i();

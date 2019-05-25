@@ -7,6 +7,7 @@ package fr.insa.pons.projet.composant;
 
 import fr.insa.Lire;
 import fr.insa.pons.projet.complex.Complex;
+import java.awt.Graphics;
 
 /**
  *
@@ -42,7 +43,9 @@ public class Fil extends Composant {
     public String toString() {
         return ("[F" + this.getId()+"]");
     }
-    
+    public void dessine(Graphics g){
+        
+    }
 public static Fil entrerFil(){
 System.out.println("Saisir l'ID :");
 int id = Lire.i();

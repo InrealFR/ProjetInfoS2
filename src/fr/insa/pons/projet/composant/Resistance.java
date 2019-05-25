@@ -7,6 +7,7 @@ package fr.insa.pons.projet.composant;
 
 import fr.insa.Lire;
 import fr.insa.pons.projet.complex.Complex;
+import java.awt.Graphics;
 
 /**
  *
@@ -58,6 +59,11 @@ public class Resistance extends Composant{
         return "[R"+this.getId()+" | R = "+resistance+"]" ;
                 
     }
+    
+      public void dessine(Graphics g){
+        
+    }
+      
 public static Resistance entrerResistance(){
 System.out.println("Entrer ID");
 int id = Lire.i();

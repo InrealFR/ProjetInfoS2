@@ -40,7 +40,7 @@ public class Interface extends javax.swing.JFrame {
 
         jMenuItem1 = new javax.swing.JMenuItem();
         jPanel_Grand = new javax.swing.JPanel();
-        jPanel_AffichageCircuit = new javax.swing.JPanel();
+        jPanel_AffichageCircuit = new AffichageCircuitPanel(this.CircuitAffiche);
         jPanel_Composants = new javax.swing.JPanel();
         jPanelComposants = new javax.swing.JPanel();
         jButtonNoeud = new javax.swing.JButton();
@@ -293,6 +293,9 @@ public class Interface extends javax.swing.JFrame {
         try {
             if (rep == JOptionPane.OK_OPTION) {
                 pulse = Double.parseDouble(jp.getjPulsation().getText());
+                for (int i = 0; i < CircuitAffiche.getComposants().size(); i++) {
+                    CircuitAffiche.getComposants().get(i).setOmega(pulse);
+                }
                 jTextAreaAffichageCalculs.setText("pulsation =" + pulse);
             } else {
                 JOptionPane.showMessageDialog(this, "Vous avez annulé !");
@@ -310,6 +313,8 @@ public class Interface extends javax.swing.JFrame {
             try { //On créer le noeud dans le try pour éviter les problemes avec les textFields
                 Noeuds n = new Noeuds(Double.parseDouble(EntrerNoeud.getjX().getText()), Double.parseDouble(EntrerNoeud.getjY().getText()), Integer.parseInt(EntrerNoeud.getjID().getText()));
                 CircuitAffiche.ajouteNoeud(n);
+                jPanel_AffichageCircuit.getCircuit().ajouteNoeud(n);
+                jPanel_AffichageCircuit.repaint();
                 System.out.println(CircuitAffiche);
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "ERREUR : VEUILLEZ ENTRER DES NOMBRES !");
@@ -404,8 +409,6 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
-jFrameCredits credits = new jFrameCredits();
-credits.setVisible(true); //marche po
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenu3ActionPerformed

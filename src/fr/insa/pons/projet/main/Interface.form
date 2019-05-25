@@ -122,6 +122,10 @@
               </Border>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new AffichageCircuitPanel(this.CircuitAffiche)"/>
+            <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="Interface_jPanel_AffichageCircuit"/>
+          </AuxValues>
 
           <Layout>
             <DimensionLayout dim="0">

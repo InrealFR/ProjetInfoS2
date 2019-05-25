@@ -13,6 +13,7 @@ import static fr.insa.pons.projet.composant.GenerateurTension.entrerGenerateur;
 import static fr.insa.pons.projet.composant.Inductance.entrerInductance;
 import static fr.insa.pons.projet.composant.Resistance.entrerResistance;
 import fr.insa.pons.projet.noeud.Noeuds;
+import java.awt.Graphics;
 import java.util.ArrayList;
 
 /**
@@ -87,6 +88,7 @@ public abstract class Composant {
 
     public abstract String toString();
     
+    public abstract void dessine(Graphics g) ;
     
       public static Composant entrerComposant() {
         ArrayList<Composant>c = new ArrayList<>();
@@ -120,4 +122,5 @@ public abstract class Composant {
         }
          return(c.get(0));
     }
+
 }

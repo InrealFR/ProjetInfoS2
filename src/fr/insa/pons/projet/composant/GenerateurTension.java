@@ -7,6 +7,7 @@ package fr.insa.pons.projet.composant ;
 
 import fr.insa.Lire;
 import fr.insa.pons.projet.complex.Complex;
+import java.awt.Graphics;
 
 /**
  *
@@ -64,6 +65,9 @@ public class GenerateurTension extends Composant {
         return ("[G"+this.getId()+"| fem ="+this.fem+"]"); 
     }
     
+      public void dessine(Graphics g){
+        
+    }
 public static GenerateurTension entrerGenerateur(){
    System.out.println("Saisir fem :");
    double fem = Lire.d();

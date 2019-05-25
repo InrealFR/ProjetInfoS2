@@ -12,6 +12,7 @@ package fr.insa.pons.projet.noeud;
 
 import fr.insa.Lire;
 import fr.insa.pons.projet.composant.Composant;
+import java.awt.Graphics;
 import java.util.ArrayList;
 
 public class Noeuds {
@@ -92,7 +93,10 @@ public class Noeuds {
     public void setArrive(ArrayList<Composant> Arrive) {
         this.Arrive = Arrive;
     }
-
+    public void dessine(Graphics g){
+        g.drawOval((int)this.coordx,(int)this.coordy,5,5) ;
+    }
+    
     public String toString (){
         return "[Noeud "+id+" | coordx : "+coordx+" coordy : "+coordy+"]"+"| Depart :"+getDepart()+" | Arrive :"+getArrive();
     }
