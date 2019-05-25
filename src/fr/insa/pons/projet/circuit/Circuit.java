@@ -65,7 +65,9 @@ public class Circuit {
             System.out.println("(4) Detection Branches");
             System.out.println("(5) Detection Mailles");
             System.out.println("(6) circuit test");
+            System.out.println("(7) Matrice");
             System.out.println("(0) Quitter");
+            
             rep = Lire.i();
             switch (rep) {
                 case 1: {
@@ -138,6 +140,17 @@ public class Circuit {
                     this.getNoeuds().add(uno);
                     this.getNoeuds().add(dos);
                     this.getNoeuds().add(tres);
+                }
+                break;
+                case 7: {
+                Complex[][] mat = this.MatriceCoefficients();
+                int n = mat.length;
+                for  ( int i = 0;i<n;i++){
+                    System.out.println("  ");
+                    for (int j=0;j<n;j++){
+                        System.out.print(mat[i][j]+" ");
+                    }
+                }
                 }
                 break;
                 case 0: {
@@ -437,19 +450,19 @@ public void ajoutCaracteristique (Complex [][] mat, int l){
     }
 
 public void ajoutLoiDesNoeuds (Complex [][] mat, int l){
-    int n = this.getComposants().size();
+    int n = this.getNoeuds().size();
     int i;
     int j;
-    for (i=0;i<n;i++){
+    for (i=0;i<n-1;i++){
         int imoins = this.getNoeuds().get(i).getDepart().size();
-        for (j=0;j<imoins;j++){
+        for (j=0;j<imoins-1;j++){
             int id = this.getNoeuds().get(i).getDepart().get(j).getId();
-            mat[l+i][l+id]=-1;
+            mat[l+i][l+id-1]=Complex.creeRec(-1,0);
         }
         int iplus = this.getNoeuds().get(i).getArrive().size();
-        for (j=0;j<iplus;j++){
+        for (j=0;j<iplus-1;j++){
             int id = this.getNoeuds().get(i).getArrive().get(j).getId();
-            mat[l+i][l+id]=1;
+            mat[l+i][l+id-1]= Complex.creeRec(1,0);
         }
     }
 }
@@ -462,9 +475,9 @@ public void ajoutLoiDesMailles(ArrayList <ArrayList<Composant>> mailles  ,  Comp
         Noeuds noeudDebut = mailles.get(i).get(0).getNoeudDepart();
         for (j=0;j<nbcompos;j++){
             if (noeudDebut == mailles.get(i).get(j).getNoeudDepart()){
-                mat [l+i][mailles.get(i).get(j).getId()]=1;
+                mat [l+i][mailles.get(i).get(j).getId()]= Complex.creeRec(1,0);
             } else {
-                mat [l+i][mailles.get(i).get(j).getId()]=-1;
+                mat [l+i][mailles.get(i).get(j).getId()]=Complex.creeRec(-1, 0);
             }
             noeudDebut=mailles.get(i).get(j).getNoeudArrive();
         }
@@ -474,14 +487,24 @@ public void ajoutLoiDesMailles(ArrayList <ArrayList<Composant>> mailles  ,  Comp
 
 public Complex[][] MatriceCoefficients(){
     int n=this.getComposants().size();
-    Complex [][] MatriceCoefficients = new Complex [2n][2n];
+    Complex [][] MatriceCoefficients = new Complex [2*n][2*n];
+    
+    for  ( int i = 0;i<2*n;i++){
+                    for (int j=0;j<n*2;j++){
+                        MatriceCoefficients[i][j]=Complex.creeRec(0, 0);
+                    }
+                }
     int l = 0;
+    System.out.println("debut de remplissage matrice");
     this.ajoutCaracteristique(MatriceCoefficients, l);
-    l=n-1;
+    l=n;
+    System.out.println("fin caractéristiques matrice");
     this.ajoutLoiDesNoeuds(MatriceCoefficients, l);
+    System.out.println("fin des noeuds");
     l=l+this.getNoeuds().size()-1;
     ArrayList< ArrayList<Composant>> mailles=this.calculMailles();
     this.ajoutLoiDesMailles(mailles, MatriceCoefficients, l);
+    System.out.println(MatriceCoefficients);
     return MatriceCoefficients;
 }
 }
