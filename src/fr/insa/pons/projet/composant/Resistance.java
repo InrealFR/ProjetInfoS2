@@ -46,8 +46,9 @@ public class Resistance extends Composant{
     
     @Override
     public Complex beta(){
-        return Complex.creePol(this.resistance,Math.PI);
+        return Complex.creeRec(this.resistance,0).opp();
     }
+    
     
     @Override
     public Complex gamma(){

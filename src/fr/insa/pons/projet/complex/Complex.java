@@ -102,7 +102,7 @@ System.out.println(y.plus(x)) ;
 }
 
 public Complex opp(){
-return(creePol(1/mod,-1*arg)) ;
+return(creePol(-1*mod,arg)) ;
 }
 
 public Complex moins(Complex a){
