@@ -7,7 +7,7 @@ package fr.insa.pons.projet.composant ;
 
 import fr.insa.Lire;
 import fr.insa.pons.projet.complex.Complex;
-import fr.insa.pons.projet.noeud.Noeuds;
+import java.awt.Graphics;
 
 /**
  *
@@ -22,12 +22,16 @@ public class Condensateur extends Composant {
     public Condensateur(){
        super();
        capacite = 0 ;
+       setNom('C') ;
     }
 
     public Condensateur(double capacite, int id) {
         super(id);
         this.capacite = capacite;
         this.setOmega(1);
+
+        setNom('C') ;
+
     }
    
     
@@ -59,7 +63,9 @@ public class Condensateur extends Composant {
     public String toString(){
         return "[C"+this.getId()+" | C ="+capacite+"]" ;
     }
-    
+    public void dessine(Graphics g){
+        
+    }
     public static Condensateur entrerCondensateur(){
     System.out.println("Entrer capacite :");
     double c = Lire.d();

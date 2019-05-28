@@ -21,11 +21,13 @@ public class Resistance extends Composant{
     public Resistance(){
         super();
         resistance = 0;
+        setNom('R') ;
     }
 
     public Resistance(double resistance, int id) {
         super(id);
         this.resistance = resistance;
+        setNom('R') ;
     }
  
     
@@ -59,6 +61,7 @@ public class Resistance extends Composant{
         return "[R"+this.getId()+" | R = "+resistance+"]" ;
                 
     }
+    
 public static Resistance entrerResistance(){
 System.out.println("Entrer ID");
 int id = Lire.i();

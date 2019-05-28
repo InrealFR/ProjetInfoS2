@@ -13,6 +13,7 @@ import static fr.insa.pons.projet.composant.GenerateurTension.entrerGenerateur;
 import static fr.insa.pons.projet.composant.Inductance.entrerInductance;
 import static fr.insa.pons.projet.composant.Resistance.entrerResistance;
 import fr.insa.pons.projet.noeud.Noeuds;
+import java.awt.Graphics;
 import java.util.ArrayList;
 
 /**
@@ -26,7 +27,9 @@ public abstract class Composant {
     private int id;
     private Noeuds NoeudDepart;
     private Noeuds NoeudArrive;
-
+    private double px ;
+    private double py ;
+    private char Nom ;
     // Constructeur
     public Composant() {
         id = 0;
@@ -37,12 +40,41 @@ public abstract class Composant {
     public Composant(int id) {
         this.id = id;
     }
-
+    
     public Composant(double omega, int id, Noeuds NoeudDepart, Noeuds NoeudArrive) {
         this.id = id;
         this.NoeudDepart = NoeudDepart;
         this.NoeudArrive = NoeudArrive;
         this.omega = 1;
+    }
+    public Composant(double px, double py){
+        this.px = px ;
+        this.py = py ;
+    }
+
+    public char getNom() {
+        return Nom;
+    }
+
+    public void setNom(char Nom) {
+        this.Nom = Nom;
+    }
+    
+    public double getPx() {
+        return px;
+    }
+
+    public void setPx(double px) {
+        this.px = px;
+    }
+
+    public double getPy() {
+        return py;
+    }
+
+    //getters and setters
+    public void setPy(double py) {    
+        this.py = py;
     }
 
     //getters and setters 
@@ -54,7 +86,7 @@ public abstract class Composant {
     public void setOmega(double w){
         this.omega=w;
     }
-    
+
     public int getId() {
         return id;
     }
@@ -121,4 +153,5 @@ public abstract class Composant {
         }
          return(c.get(0));
     }
+
 }

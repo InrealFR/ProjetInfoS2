@@ -11,6 +11,7 @@ import fr.insa.pons.projet.composant.*;
 import fr.insa.pons.projet.matrice.SystemeComplex;
 import fr.insa.pons.projet.noeud.Noeuds;
 import static fr.insa.pons.projet.noeud.Noeuds.entrerNoeud;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -66,6 +67,7 @@ public class Circuit {
             System.out.println("(5) Detection Mailles");
             System.out.println("(6) circuit test");
             System.out.println("(7) Matrice");
+            System.out.println("(8) Solution");
             System.out.println("(0) Quitter");
             
             rep = Lire.i();
@@ -157,11 +159,17 @@ public class Circuit {
                 Complex[] vect = this.vecteurEquation();
                 int l = vect.length;
                 for (int i=0;i<l;i++){
-                        
                     System.out.println(vect[i]);
+                }
+                Complex[] sol = resolutionSystemeMatriciel(this.MatriceCoefficients(),this.vecteurEquation());
+                for (int i=0;i<l;i++){
+                    System.out.println(sol[i]);
                 }
                 }
                 break;
+                case 8: {
+                    this.solutionFinale();
+                }
                 case 0: {
                     rep = 0;
                     break;
@@ -173,7 +181,6 @@ public class Circuit {
             }
         }
     }
-
 
     public static void main(String args[]) {
        Circuit test = new Circuit();
@@ -257,10 +264,6 @@ public class Circuit {
         if (this.testId(n.getId())) {
              JOptionPane.showMessageDialog(null, "ID EN DOUBLE : NOEUD NON CREE");
             throw new Error("ID en double !!");
-        }
-        if (this.testCoords(n.getCoordx(), n.getCoordy())) {
-             JOptionPane.showMessageDialog(null, "COORDS EN DOUBLE : NOEUD NON CREE");
-            throw new Error("Coords déjà existantes !");
         }
         //ajout du noeud dans notre circuit en cours
         this.getNoeuds().add(n);
@@ -548,7 +551,6 @@ public Complex[][] MatriceCoefficients(){
     // on détecte les mailles
     this.ajoutLoiDesMailles(mailles, MatriceCoefficients, l);
     // on ajoute aux lignes restantes de la matrice les coefficients des équations de la loi des mailles
-    System.out.println(MatriceCoefficients);
     return MatriceCoefficients;
 }
 public Complex[] vecteurEquation(){
@@ -563,11 +565,28 @@ public Complex[] vecteurEquation(){
     return vect;
 }
 
-public static Complex[] resolutionProbleme(Complex[][] mat, Complex[]vect){
+public static Complex[] resolutionSystemeMatriciel(Complex[][] mat, Complex[]vect){
     
     SystemeComplex S = new SystemeComplex(mat , vect);
     Complex[] sol = new Complex [vect.length];
     return sol = S.resoudSysteme();
 }
 
+public void solutionFinale(){
+    Complex[][] mat = this.MatriceCoefficients();
+    Complex[] vect = this.vecteurEquation();
+    int l = vect.length;
+    Complex[] sol = resolutionSystemeMatriciel(this.MatriceCoefficients(),this.vecteurEquation());
+        for (int i=0;i<l;i++){
+        System.out.println(sol[i]);
+        }
+        for (int i=0;i<l/2;i++){
+            System.out.println("la tension aux bornes de "+this.Composants.get(i)+" vaut "+sol[i].getMod()+"V");
+        }
+        for (int i=((l/2)-1);i<l;i++){
+            System.out.println("l'intensité qui traverse "+this.Composants.get(i-(l/2)+1)+" vaut "+sol[i].getMod()+"A");
+        }
+            
+            
+        }
 }

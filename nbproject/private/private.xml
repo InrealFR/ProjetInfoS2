@@ -3,14 +3,38 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
+<<<<<<< HEAD
+            <file>file:/C:/Users/hugop/Documents/NetBeansProjects/ProjetInfoS2/src/fr/insa/pons/projet/circuit/Circuit.java</file>
+            <file>file:/C:/Users/hugop/Documents/NetBeansProjects/ProjetInfoS2/src/fr/insa/pons/projet/composant/Inductance.java</file>
+            <file>file:/C:/Users/hugop/Documents/NetBeansProjects/ProjetInfoS2/src/fr/insa/pons/projet/composant/GenerateurTension.java</file>
+            <file>file:/C:/Users/hugop/Documents/NetBeansProjects/ProjetInfoS2/src/fr/insa/pons/projet/composant/Resistance.java</file>
+            <file>file:/C:/Users/hugop/Documents/NetBeansProjects/ProjetInfoS2/src/fr/insa/pons/projet/noeud/Noeuds.java</file>
+            <file>file:/C:/Users/hugop/Documents/NetBeansProjects/ProjetInfoS2/src/fr/insa/pons/projet/main/jPanelEntrerInductance.java</file>
+            <file>file:/C:/Users/hugop/Documents/NetBeansProjects/ProjetInfoS2/src/fr/insa/pons/projet/main/jPanelEntrerNoeud.java</file>
+            <file>file:/C:/Users/hugop/Documents/NetBeansProjects/ProjetInfoS2/src/fr/insa/pons/projet/composant/Composant.java</file>
+            <file>file:/C:/Users/hugop/Documents/NetBeansProjects/ProjetInfoS2/src/fr/insa/pons/projet/composant/Fil.java</file>
+            <file>file:/C:/Users/hugop/Documents/NetBeansProjects/ProjetInfoS2/src/fr/insa/pons/projet/main/Interface.java</file>
+            <file>file:/C:/Users/hugop/Documents/NetBeansProjects/ProjetInfoS2/src/fr/insa/pons/projet/composant/Condensateur.java</file>
+            <file>file:/C:/Users/hugop/Documents/NetBeansProjects/ProjetInfoS2/src/fr/insa/pons/projet/main/jPanelEntrerPulse.java</file>
+=======
+=======
             <file>file:/C:/Users/louise/Documents/NetBeansProjects/ProjetInfoS2/src/fr/insa/pons/projet/complex/Complex.java</file>
+>>>>>>> dbced69b2257903bc156e7e301f2e2f8c1d33089
             <file>file:/C:/Users/louise/Documents/NetBeansProjects/ProjetInfoS2/src/fr/insa/pons/projet/circuit/Circuit.java</file>
             <file>file:/C:/Users/louise/Documents/NetBeansProjects/ProjetInfoS2/src/fr/insa/pons/projet/composant/Resistance.java</file>
             <file>file:/C:/Users/louise/Documents/NetBeansProjects/ProjetInfoS2/src/fr/insa/pons/projet/composant/Condensateur.java</file>
             <file>file:/C:/Users/louise/Documents/NetBeansProjects/ProjetInfoS2/src/fr/insa/pons/projet/matrice/MatriceRectangulaire.java</file>
             <file>file:/C:/Users/louise/Documents/NetBeansProjects/ProjetInfoS2/src/fr/insa/pons/projet/matrice/SystemeComplex.java</file>
+<<<<<<< HEAD
             <file>file:/C:/Users/louise/Documents/NetBeansProjects/ProjetInfoS2/src/fr/insa/pons/projet/composant/Composant.java</file>
+=======
+<<<<<<< HEAD
+>>>>>>> 31a9e61e486f47059703dd2f27f321ca3dcba5d2
+=======
+>>>>>>> 9e1530ad21da2b770ae246815921c6bcc81aef53
             <file>file:/C:/Users/louise/Documents/NetBeansProjects/ProjetInfoS2/src/fr/insa/pons/projet/composant/GenerateurTension.java</file>
+>>>>>>> dbced69b2257903bc156e7e301f2e2f8c1d33089
         </group>
     </open-files>
 </project-private>
