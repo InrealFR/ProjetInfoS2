@@ -25,11 +25,13 @@ public class GenerateurTension extends Composant {
     public GenerateurTension() {
      super();
      fem = 0 ;
+     setNom('G') ;
     }
 
     public GenerateurTension(double fem, int id) {
         super(id);
         this.fem = fem;
+        setNom('G') ;
     }
 
   

@@ -244,10 +244,6 @@ public class Circuit {
              JOptionPane.showMessageDialog(null, "ID EN DOUBLE : NOEUD NON CREE");
             throw new Error("ID en double !!");
         }
-        if (this.testCoords(n.getCoordx(), n.getCoordy())) {
-             JOptionPane.showMessageDialog(null, "COORDS EN DOUBLE : NOEUD NON CREE");
-            throw new Error("Coords déjà existantes !");
-        }
         //ajout du noeud dans notre circuit en cours
         this.getNoeuds().add(n);
     }

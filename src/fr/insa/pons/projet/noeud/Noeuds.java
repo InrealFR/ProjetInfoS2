@@ -45,7 +45,10 @@ public class Noeuds {
         Depart = new ArrayList<>() ;
         Arrive = new ArrayList<>();
     }
-    
+    public Noeuds(double coordx, double coordy){
+        this.coordx = coordx ;
+        this.coordy = coordy ;
+    }
     public Noeuds(double coordx, double coordy, int id, ArrayList<Composant> Depart, ArrayList<Composant> Arrive) {
         this.coordx = coordx;
         this.coordy = coordy;

@@ -21,11 +21,13 @@ public class Resistance extends Composant{
     public Resistance(){
         super();
         resistance = 0;
+        setNom('R') ;
     }
 
     public Resistance(double resistance, int id) {
         super(id);
         this.resistance = resistance;
+        setNom('R') ;
     }
  
     

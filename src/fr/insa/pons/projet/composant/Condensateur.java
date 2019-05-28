@@ -22,11 +22,13 @@ public class Condensateur extends Composant {
     public Condensateur(){
        super();
        capacite = 0 ;
+       setNom('C') ;
     }
 
     public Condensateur(double capacite, int id) {
         super(id);
         this.capacite = capacite;
+        setNom('C') ;
     }
    
     

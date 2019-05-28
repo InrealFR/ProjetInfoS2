@@ -21,6 +21,7 @@ public class Fil extends Composant {
 
     public Fil(int id) {
         super(id);
+        setNom('F') ;
     }
     
 

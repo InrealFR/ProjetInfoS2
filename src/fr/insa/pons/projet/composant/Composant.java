@@ -29,6 +29,7 @@ public abstract class Composant {
     private Noeuds NoeudArrive;
     private double px ;
     private double py ;
+    private char Nom ;
     // Constructeur
     public Composant() {
         omega = 0;
@@ -45,6 +46,18 @@ public abstract class Composant {
         this.id = id;
         this.NoeudDepart = NoeudDepart;
         this.NoeudArrive = NoeudArrive;
+    }
+    public Composant(double px, double py){
+        this.px = px ;
+        this.py = py ;
+    }
+
+    public char getNom() {
+        return Nom;
+    }
+
+    public void setNom(char Nom) {
+        this.Nom = Nom;
     }
     
     public double getPx() {

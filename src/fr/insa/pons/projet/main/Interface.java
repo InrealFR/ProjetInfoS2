@@ -19,15 +19,15 @@ import javax.swing.JOptionPane;
  */
 public class Interface extends javax.swing.JFrame {
 
-    Circuit CircuitAffiche;
+    Circuit CircuitCalculs;
     double pulse;
-
+    int Compo = 0 ;
     /**
      * Creates new form Interface
      */
     public Interface() {
         initComponents();
-        CircuitAffiche = new Circuit();
+        CircuitCalculs = new Circuit();
     }
 
     /**
@@ -227,6 +227,11 @@ public class Interface extends javax.swing.JFrame {
         );
 
         jPanelAffichage1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanelAffichage1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanelAffichage1MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelAffichage1Layout = new javax.swing.GroupLayout(jPanelAffichage1);
         jPanelAffichage1.setLayout(jPanelAffichage1Layout);
@@ -308,8 +313,8 @@ public class Interface extends javax.swing.JFrame {
         try {
             if (rep == JOptionPane.OK_OPTION) {
                 pulse = Double.parseDouble(jp.getjPulsation().getText());
-                for (int i = 0; i < CircuitAffiche.getComposants().size(); i++) {
-                    CircuitAffiche.getComposants().get(i).setOmega(pulse);
+                for (int i = 0; i < CircuitCalculs.getComposants().size(); i++) {
+                    CircuitCalculs.getComposants().get(i).setOmega(pulse);
                 }
                 jTextAreaAffichageCalculs.setText("pulsation =" + pulse);
             } else {
@@ -321,29 +326,28 @@ public class Interface extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonCalculsActionPerformed
 
+    
     private void jButtonNoeudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNoeudActionPerformed
-        jPanelEntrerNoeud EntrerNoeud = new jPanelEntrerNoeud(); //initiation du jPanel
-        int rep = JOptionPane.showConfirmDialog(this, EntrerNoeud, "Saisie du Noeud", JOptionPane.OK_CANCEL_OPTION);
-        if (rep == JOptionPane.OK_OPTION) {
-            try { //On créer le noeud dans le try pour éviter les problemes avec les textFields
-                Noeuds n = new Noeuds(Double.parseDouble(EntrerNoeud.getjX().getText()), Double.parseDouble(EntrerNoeud.getjY().getText()), Integer.parseInt(EntrerNoeud.getjID().getText()));
-                CircuitAffiche.ajouteNoeud(n);
-                System.out.println(CircuitAffiche);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "ERREUR : VEUILLEZ ENTRER DES NOMBRES !");
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Vous avez annulé la saisie du Noeud.");
-        }
+        EntrerNoeud EntrerNoeud = new EntrerNoeud(); //initiation du jPanel
+        jPanelAffichage1.Compo = 1 ;
+int rep = JOptionPane.showConfirmDialog(this, EntrerNoeud, "Saisie du Noeud", JOptionPane.OK_CANCEL_OPTION);
+if(rep == JOptionPane.OK_OPTION){
+if(CircuitCalculs.getNoeuds().isEmpty()){
+CircuitCalculs.getNoeuds().add(new Noeuds(0)) ;
+System.out.println(CircuitCalculs) ;
+} else {
+CircuitCalculs.getNoeuds().add(new Noeuds(CircuitCalculs.getNoeuds().get(CircuitCalculs.getNoeuds().size()-1).getId()+1)) ;
+System.out.println(CircuitCalculs) ;
+}
+}
 
-        // TODO add your handling code here:
     }//GEN-LAST:event_jButtonNoeudActionPerformed
 
     private void jButtonResistanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonResistanceActionPerformed
         jPanelEntrerResistance entrerRes = new jPanelEntrerResistance();
-        for (int i = 0; i < CircuitAffiche.getNoeuds().size(); i++) {
-            entrerRes.getjComboBoxDepart().addItem("" + CircuitAffiche.getNoeuds().get(i).getId());
-            entrerRes.getjComboBoxArrive().addItem("" + CircuitAffiche.getNoeuds().get(i).getId());
+        for (int i = 0; i < CircuitCalculs.getNoeuds().size(); i++) {
+            entrerRes.getjComboBoxDepart().addItem("" + CircuitCalculs.getNoeuds().get(i).getId());
+            entrerRes.getjComboBoxArrive().addItem("" + CircuitCalculs.getNoeuds().get(i).getId());
         }
         int rep = JOptionPane.showConfirmDialog(this, entrerRes, "Saisie de Résistance", JOptionPane.OK_CANCEL_OPTION);
         if (rep == JOptionPane.OK_OPTION) {
@@ -353,8 +357,8 @@ public class Interface extends javax.swing.JFrame {
             } else {
                 try {
                     Resistance res = new Resistance(Double.parseDouble(entrerRes.getjTextFieldResistance().getText()), Integer.parseInt(entrerRes.getjTextFieldId().getText()));
-                    CircuitAffiche.ajouteComposant(res, CircuitAffiche.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitAffiche.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())));
-                    System.out.println(CircuitAffiche);
+                    CircuitCalculs.ajouteComposant(res, CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())));
+                    System.out.println(CircuitCalculs);
                 } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(this, "VEUILLEZ ENTRER DES NOMBRES !");
                 }
@@ -367,9 +371,9 @@ public class Interface extends javax.swing.JFrame {
 
     private void jButtonCondensateurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCondensateurActionPerformed
         jPanelEntrerCondensateur entrerC = new jPanelEntrerCondensateur();
-        for (int i = 0; i < CircuitAffiche.getNoeuds().size(); i++) {
-            entrerC.getjComboBoxDepart().addItem("" + CircuitAffiche.getNoeuds().get(i).getId());
-            entrerC.getjComboBoxArrivee().addItem("" + CircuitAffiche.getNoeuds().get(i).getId());
+        for (int i = 0; i < CircuitCalculs.getNoeuds().size(); i++) {
+            entrerC.getjComboBoxDepart().addItem("" + CircuitCalculs.getNoeuds().get(i).getId());
+            entrerC.getjComboBoxArrivee().addItem("" + CircuitCalculs.getNoeuds().get(i).getId());
         }
         int rep = JOptionPane.showConfirmDialog(this, entrerC, "Saisie de Condensateur", JOptionPane.OK_CANCEL_OPTION);
         if (rep == JOptionPane.OK_OPTION) {
@@ -379,8 +383,8 @@ public class Interface extends javax.swing.JFrame {
             } else {
                 try {
                     Condensateur c = new Condensateur(Double.parseDouble(entrerC.getjTextFieldCapacite().getText()), Integer.parseInt(entrerC.getjTextFieldID().getText()));
-                    CircuitAffiche.ajouteComposant(c, CircuitAffiche.chercheNoeud(Integer.parseInt(entrerC.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitAffiche.chercheNoeud(Integer.parseInt(entrerC.getjComboBoxArrivee().getSelectedItem().toString().trim())));
-                    System.out.println(CircuitAffiche);
+                    CircuitCalculs.ajouteComposant(c, CircuitCalculs.chercheNoeud(Integer.parseInt(entrerC.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitCalculs.chercheNoeud(Integer.parseInt(entrerC.getjComboBoxArrivee().getSelectedItem().toString().trim())));
+                    System.out.println(CircuitCalculs);
                 } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(this, "VEUILLEZ ENTRER DES NOMBRES !");
                 }
@@ -393,9 +397,9 @@ public class Interface extends javax.swing.JFrame {
     private void jButtonInductanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInductanceActionPerformed
 
         jPanelEntrerInductance entrerI = new jPanelEntrerInductance();
-        for (int i = 0; i < CircuitAffiche.getNoeuds().size(); i++) {
-            entrerI.getjComboBoxDepart().addItem("" + CircuitAffiche.getNoeuds().get(i).getId());
-            entrerI.getjComboBoxArrivee().addItem("" + CircuitAffiche.getNoeuds().get(i).getId());
+        for (int i = 0; i < CircuitCalculs.getNoeuds().size(); i++) {
+            entrerI.getjComboBoxDepart().addItem("" + CircuitCalculs.getNoeuds().get(i).getId());
+            entrerI.getjComboBoxArrivee().addItem("" + CircuitCalculs.getNoeuds().get(i).getId());
         }
         int rep = JOptionPane.showConfirmDialog(this, entrerI, "Saisie de l'Inductance", JOptionPane.OK_CANCEL_OPTION);
         if (rep == JOptionPane.OK_OPTION) {
@@ -405,8 +409,8 @@ public class Interface extends javax.swing.JFrame {
             } else {
                 try {
                     Inductance I = new Inductance(Double.parseDouble(entrerI.getjTextFieldCapacite().getText()), Integer.parseInt(entrerI.getjTextFieldID().getText()));
-                    CircuitAffiche.ajouteComposant(I, CircuitAffiche.chercheNoeud(Integer.parseInt(entrerI.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitAffiche.chercheNoeud(Integer.parseInt(entrerI.getjComboBoxArrivee().getSelectedItem().toString().trim())));
-                    System.out.println(CircuitAffiche);
+                    CircuitCalculs.ajouteComposant(I, CircuitCalculs.chercheNoeud(Integer.parseInt(entrerI.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitCalculs.chercheNoeud(Integer.parseInt(entrerI.getjComboBoxArrivee().getSelectedItem().toString().trim())));
+                    System.out.println(CircuitCalculs);
                 } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(this, "VEUILLEZ ENTRER DES NOMBRES !");
                 }
@@ -428,9 +432,9 @@ public class Interface extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     jPanelEntrerGenerateurTension gen = new jPanelEntrerGenerateurTension();
-           for (int i = 0; i < CircuitAffiche.getNoeuds().size(); i++) {
-            gen.getjComboBoxDepart().addItem("" + CircuitAffiche.getNoeuds().get(i).getId());
-            gen.getjComboBoxArrive().addItem("" + CircuitAffiche.getNoeuds().get(i).getId());
+           for (int i = 0; i < CircuitCalculs.getNoeuds().size(); i++) {
+            gen.getjComboBoxDepart().addItem("" + CircuitCalculs.getNoeuds().get(i).getId());
+            gen.getjComboBoxArrive().addItem("" + CircuitCalculs.getNoeuds().get(i).getId());
            }
            int rep = JOptionPane.showConfirmDialog(this, gen, "Saisie du gen", JOptionPane.OK_CANCEL_OPTION);
         if (rep == JOptionPane.OK_OPTION) {
@@ -440,8 +444,8 @@ public class Interface extends javax.swing.JFrame {
             } else {
                 try {
                     GenerateurTension res = new GenerateurTension(Double.parseDouble(gen.getjTextFieldResistance().getText()), Integer.parseInt(gen.getjTextFieldId().getText()));
-                    CircuitAffiche.ajouteComposant(res, CircuitAffiche.chercheNoeud(Integer.parseInt(gen.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitAffiche.chercheNoeud(Integer.parseInt(gen.getjComboBoxArrive().getSelectedItem().toString().trim())));
-                    System.out.println(CircuitAffiche);
+                    CircuitCalculs.ajouteComposant(res, CircuitCalculs.chercheNoeud(Integer.parseInt(gen.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitCalculs.chercheNoeud(Integer.parseInt(gen.getjComboBoxArrive().getSelectedItem().toString().trim())));
+                    System.out.println(CircuitCalculs);
                 } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(this, "VEUILLEZ ENTRER DES NOMBRES !");
                 }
@@ -453,6 +457,10 @@ public class Interface extends javax.swing.JFrame {
            
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jPanelAffichage1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelAffichage1MousePressed
+repaint() ;       // TODO add your handling code here:
+    }//GEN-LAST:event_jPanelAffichage1MousePressed
 
     /**
      * @param args the command line arguments

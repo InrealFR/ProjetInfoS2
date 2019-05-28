@@ -22,11 +22,13 @@ public class Inductance extends Composant {
     public Inductance() {
         super();
         inductance = 0;
+        setNom('L') ;
     }
 
     public Inductance(double L, int id) {
         super(id);
         this.inductance = L;
+        setNom('L') ;
     }
 
     //selecteurs

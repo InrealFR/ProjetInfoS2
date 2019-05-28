@@ -6,24 +6,59 @@
 package fr.insa.pons.projet.main;
 
 import fr.insa.pons.projet.circuit.Circuit;
+import fr.insa.pons.projet.composant.Resistance;
+import fr.insa.pons.projet.noeud.Noeuds;
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 /**
  *
  * @author hugop
  */
-public class JPanelAffichage extends javax.swing.JPanel {
-Circuit CircuitAff ;
+public class JPanelAffichage extends javax.swing.JPanel implements MouseListener {
+
+    private Circuit CircuitAff;
+    int Compo;
+
+    public Circuit getCircuitAff() {
+        return CircuitAff;
+    }
+
+    public void setCircuitAff(Circuit CircuitAff) {
+        this.CircuitAff = CircuitAff;
+    }
 
     /**
      * Creates new form JPanelAffichage
      */
     public JPanelAffichage() {
         initComponents();
+        CircuitAff = new Circuit();
+        this.addMouseListener(this);
+
     }
-public void paintComponent(Graphics g){
-g.fillOval(14,14,14,14);
-}
+
+    @Override
+    public void paintComponent(Graphics g) {
+        for (int i = 0; i < CircuitAff.getNoeuds().size(); i++) {
+            g.setColor(Color.red);
+            g.fillOval((int) CircuitAff.getNoeuds().get(i).getCoordx(), (int) CircuitAff.getNoeuds().get(i).getCoordy(), 10, 10);
+            g.drawString(Integer.toString(CircuitAff.getNoeuds().get(i).getId()),(int) CircuitAff.getNoeuds().get(i).getCoordx() + 20,(int) CircuitAff.getNoeuds().get(i).getCoordy() + 20);
+        }
+        for (int j = 0; j< CircuitAff.getComposants().size();j++){
+         char c = CircuitAff.getComposants().get(j).getNom() ;
+         switch(c){
+         case('R'):{
+         g.setColor(Color.cyan) ;
+         g.drawLine((int)CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx(),(int)CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy(),(int)((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx()+CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx())/2),(int)((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy()+CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy())/2));
+         g.fillRect((int)((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx()+CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx())/2),(int)((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy()+CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy())/2), 40, 20);
+         } break ;
+         }
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,8 +82,44 @@ g.fillOval(14,14,14,14);
             .addGap(0, 298, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+@Override
+    public void mousePressed(MouseEvent e) {
+        switch (Compo) {
+            case (1): {
+                if (CircuitAff.getNoeuds().isEmpty()) {
+                    CircuitAff.getNoeuds().add(new Noeuds( e.getX(), e.getY(),0));
+                     
+                } else {
+                    CircuitAff.getNoeuds().add(new Noeuds(e.getX(), e.getY(),CircuitAff.getNoeuds().get(CircuitAff.getNoeuds().size() - 1).getId() + 1));
+         
+                }
+           
+                Compo = 666;
+            }
+            break;
+        }
+       
+        //To change body of generated methods, choose Tools | Templates.
+    }
 
+    @Override
+    public void mouseClicked(MouseEvent e) {
 
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+//To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) { //To change body of generated methods, choose Tools | Templates.
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }
