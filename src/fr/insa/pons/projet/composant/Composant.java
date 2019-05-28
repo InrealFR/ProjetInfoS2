@@ -31,9 +31,9 @@ public abstract class Composant {
     private char Nom ;
     // Constructeur
     public Composant() {
-        omega = 0;
         id = 0;
         NoeudDepart = NoeudArrive = new Noeuds();
+        omega=1;
     }
 
     public Composant(int id) {
@@ -41,10 +41,10 @@ public abstract class Composant {
     }
     
     public Composant(double omega, int id, Noeuds NoeudDepart, Noeuds NoeudArrive) {
-        this.omega = omega;
         this.id = id;
         this.NoeudDepart = NoeudDepart;
         this.NoeudArrive = NoeudArrive;
+        this.omega = 1;
     }
     public Composant(double px, double py){
         this.px = px ;
@@ -76,6 +76,16 @@ public abstract class Composant {
         this.py = py;
     }
 
+    //getters and setters 
+    
+    public double getOmega(){
+        return omega;
+    }
+    
+    public void setOmega(double w){
+        this.omega=w;
+    }
+
     public int getId() {
         return id;
     }
@@ -83,15 +93,7 @@ public abstract class Composant {
     public void setId(int id) {
         this.id = id;
     }
-
-    public double getOmega() {
-        return this.omega;
-    }
-
-    public void setOmega(double omega) {
-        this.omega = omega;
-    }
-
+    
     public Noeuds getNoeudDepart() {
         return NoeudDepart;
     }
