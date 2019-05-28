@@ -27,7 +27,8 @@ public abstract class Composant {
     private int id;
     private Noeuds NoeudDepart;
     private Noeuds NoeudArrive;
-
+    private double px ;
+    private double py ;
     // Constructeur
     public Composant() {
         omega = 0;
@@ -38,15 +39,31 @@ public abstract class Composant {
     public Composant(int id) {
         this.id = id;
     }
-
+    
     public Composant(double omega, int id, Noeuds NoeudDepart, Noeuds NoeudArrive) {
         this.omega = omega;
         this.id = id;
         this.NoeudDepart = NoeudDepart;
         this.NoeudArrive = NoeudArrive;
     }
+    
+    public double getPx() {
+        return px;
+    }
 
-    //getters and setters 
+    public void setPx(double px) {
+        this.px = px;
+    }
+
+    public double getPy() {
+        return py;
+    }
+
+    //getters and setters
+    public void setPy(double py) {    
+        this.py = py;
+    }
+
     public int getId() {
         return id;
     }
@@ -88,7 +105,6 @@ public abstract class Composant {
 
     public abstract String toString();
     
-    public abstract void dessine(Graphics g) ;
     
       public static Composant entrerComposant() {
         ArrayList<Composant>c = new ArrayList<>();
