@@ -52,6 +52,7 @@ public class Interface extends javax.swing.JFrame {
         jLabelIconCondensateur = new javax.swing.JLabel();
         jLabelIconInductance = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jPanel_AffichageCalculs = new javax.swing.JPanel();
         jButtonCalculs = new javax.swing.JButton();
         jScrollPaneAffichageCalculs = new javax.swing.JScrollPane();
@@ -158,10 +159,17 @@ public class Interface extends javax.swing.JFrame {
                         .addGap(36, 36, 36))))
         );
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Generateur Tension");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Fil");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -170,13 +178,11 @@ public class Interface extends javax.swing.JFrame {
         jPanel_ComposantsLayout.setHorizontalGroup(
             jPanel_ComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_ComposantsLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel_ComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel_ComposantsLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanelComposants, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel_ComposantsLayout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jButton1)))
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1)
+                    .addComponent(jPanelComposants, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel_ComposantsLayout.setVerticalGroup(
@@ -184,9 +190,11 @@ public class Interface extends javax.swing.JFrame {
             .addGroup(jPanel_ComposantsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanelComposants, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(141, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52))
         );
 
         jPanel_AffichageCalculs.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -349,6 +357,7 @@ System.out.println(CircuitCalculs) ;
             entrerRes.getjComboBoxDepart().addItem("" + CircuitCalculs.getNoeuds().get(i).getId());
             entrerRes.getjComboBoxArrive().addItem("" + CircuitCalculs.getNoeuds().get(i).getId());
         }
+        
         int rep = JOptionPane.showConfirmDialog(this, entrerRes, "Saisie de Résistance", JOptionPane.OK_CANCEL_OPTION);
         if (rep == JOptionPane.OK_OPTION) {
             if ((Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())) == (Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim()))) {
@@ -356,14 +365,32 @@ System.out.println(CircuitCalculs) ;
                 throw new Error();
             } else {
                 try {
-                    Resistance res = new Resistance(Double.parseDouble(entrerRes.getjTextFieldResistance().getText()), Integer.parseInt(entrerRes.getjTextFieldId().getText()));
+                    if(CircuitCalculs.getComposants().isEmpty()){
+                    CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())).setCoordx(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())).getId()).getCoordx()) ;
+                    CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())).setCoordy(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())).getId()).getCoordy()) ;
+                    CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())).setCoordx(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())).getId()).getCoordx()) ;
+                    CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())).setCoordy(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())).getId()).getCoordy()) ;
+
+                    Resistance res = new Resistance(Double.parseDouble(entrerRes.getjTextFieldResistance().getText()),0) ;
+                         CircuitCalculs.ajouteComposant(res, CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())));
+                    jPanelAffichage1.getCircuitAff().ajouteComposant(res, CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())));
+                   
+                    } else {
+                    CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())).setCoordx(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())).getId()).getCoordx()) ;
+                    CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())).setCoordy(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())).getId()).getCoordy()) ;
+                    CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())).setCoordx(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())).getId()).getCoordx()) ;
+                    CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())).setCoordy(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())).getId()).getCoordy()) ;
+                    Resistance res = new Resistance(Double.parseDouble(entrerRes.getjTextFieldResistance().getText()),CircuitCalculs.getComposants().get(CircuitCalculs.getComposants().size()-1).getId()+1);
                     CircuitCalculs.ajouteComposant(res, CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())));
+                    jPanelAffichage1.getCircuitAff().ajouteComposant(res, CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())));
                     System.out.println(CircuitCalculs);
+                    }
                 } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(this, "VEUILLEZ ENTRER DES NOMBRES !");
                 }
 
             }
+            System.out.println(CircuitCalculs) ;
         } else {
             JOptionPane.showMessageDialog(this, "Saisie annulée");
         }
@@ -462,6 +489,10 @@ System.out.println(CircuitCalculs) ;
 repaint() ;       // TODO add your handling code here:
     }//GEN-LAST:event_jPanelAffichage1MousePressed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -479,6 +510,7 @@ repaint() ;       // TODO add your handling code here:
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonCalculs;
     private javax.swing.JButton jButtonCondensateur;
     private javax.swing.JButton jButtonInductance;
