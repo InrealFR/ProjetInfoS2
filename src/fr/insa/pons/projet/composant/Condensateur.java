@@ -49,7 +49,7 @@ public class Condensateur extends Composant {
     
     @Override
     public Complex beta(){
-        return Complex.creePol(0,1/(this.capacite*this.getOmega()));
+        return Complex.creePol(1/(this.capacite*this.getOmega()),Math.PI/2);
     }
     
     @Override

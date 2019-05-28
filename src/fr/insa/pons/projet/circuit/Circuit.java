@@ -8,6 +8,7 @@ package fr.insa.pons.projet.circuit;
 import fr.insa.Lire;
 import fr.insa.pons.projet.complex.Complex;
 import fr.insa.pons.projet.composant.*;
+import fr.insa.pons.projet.matrice.SystemeComplex;
 import fr.insa.pons.projet.noeud.Noeuds;
 import static fr.insa.pons.projet.noeud.Noeuds.entrerNoeud;
 import java.awt.Graphics;
@@ -22,6 +23,7 @@ public class Circuit {
 
     private ArrayList<Composant> Composants;
     private ArrayList<Noeuds> Noeuds;
+    private double omega;
 
     public Circuit() {
         Composants = new ArrayList<>();
@@ -31,6 +33,7 @@ public class Circuit {
     public Circuit(ArrayList<Composant> Composants, ArrayList<Noeuds> Noeuds, double omega) {
         this.Composants = Composants;
         this.Noeuds = Noeuds;
+        this.omega= omega;
     }
 
     public ArrayList<Composant> getComposants() {
@@ -47,6 +50,14 @@ public class Circuit {
 
     public void setNoeuds(ArrayList<Noeuds> Noeuds) {
         this.Noeuds = Noeuds;
+    }
+    
+    public double getOmega(){
+        return omega;
+    }
+    
+    public void setOmega(double w){
+        this.omega=w;
     }
 
     public String toString() {
@@ -117,27 +128,31 @@ public class Circuit {
                     dos.getArrive().add(G);
 
                     Resistance R1 = new Resistance(1, 2);
+                    System.out.println("coef béta de r1"+R1.beta());
                     R1.setNoeudDepart(dos);
                     dos.getDepart().add(R1);
                     R1.setNoeudArrive(uno);
                     uno.getArrive().add(R1);
 
                     Resistance R2 = new Resistance(1, 3);
+                    System.out.println("coef béta de r2"+R2.beta());
                     R2.setNoeudDepart(dos);
                     dos.getDepart().add(R2);
                     R2.setNoeudArrive(tres);
                     tres.getArrive().add(R2);
 
                     Condensateur C3 = new Condensateur(1, 4);
+                    System.out.println("coef béta de c"+C3.beta());
                     C3.setNoeudDepart(tres);
                     tres.getDepart().add(C3);
                     C3.setNoeudArrive(uno);
                     uno.getArrive().add(C3);
 
+                    this.setOmega(1);
                     this.getComposants().add(G);
-                    this.getComposants().add(C3);
-                    this.getComposants().add(R2);
                     this.getComposants().add(R1);
+                    this.getComposants().add(R2);
+                    this.getComposants().add(C3);
                     this.getNoeuds().add(uno);
                     this.getNoeuds().add(dos);
                     this.getNoeuds().add(tres);
@@ -147,10 +162,16 @@ public class Circuit {
                 Complex[][] mat = this.MatriceCoefficients();
                 int n = mat.length;
                 for  ( int i = 0;i<n;i++){
-                    System.out.println("  ");
                     for (int j=0;j<n;j++){
-                        System.out.print(mat[i][j]+" ");
+                        System.out.print(mat[i][j]+"             ");
                     }
+                    System.out.println("  ");
+                }
+                Complex[] vect = this.vecteurEquation();
+                int l = vect.length;
+                for (int i=0;i<l;i++){
+                        
+                    System.out.println(vect[i]);
                 }
                 }
                 break;
@@ -435,7 +456,7 @@ public void ajoutCaracteristique (Complex [][] mat, int l){
     int i;
     for (i=0;i<n;i++){
         mat[l+i][l+i] = this.getComposants().get(i).alpha();
-        mat[l+i][n-1+i] = this.getComposants().get(i).beta();
+        mat[l+i][n+i] = this.getComposants().get(i).beta();
     }
     }
 
@@ -467,7 +488,7 @@ public void ajoutLoiDesMailles(ArrayList <ArrayList<Composant>> mailles  ,  Comp
             if (noeudDebut == mailles.get(i).get(j).getNoeudDepart()){
                 mat [l+i][mailles.get(i).get(j).getId()]= Complex.creeRec(1,0);
             } else {
-                mat [l+i][mailles.get(i).get(j).getId()]=Complex.creeRec(-1, 0);
+                mat [l+i][mailles.get(i).get(j).getId()]=Complex.creeRec(1, 0).opp();
             }
             noeudDebut=mailles.get(i).get(j).getNoeudArrive();
         }
@@ -497,4 +518,20 @@ public Complex[][] MatriceCoefficients(){
     System.out.println(MatriceCoefficients);
     return MatriceCoefficients;
 }
+public Complex[] vecteurEquation(){
+    int n = this.getComposants().size();
+    Complex[] vect = new Complex [2*n];
+    for (int i=0;i<n;i++){
+        vect[i]=this.getComposants().get(i).gamma().opp();
+    }
+    return vect;
+}
+
+public static Complex[] resolutionProbleme(Complex[][] mat, Complex[]vect){
+    
+    SystemeComplex S = new SystemeComplex(mat , vect);
+    Complex[] sol = new Complex [vect.length];
+    return sol = S.resoudSysteme();
+}
+
 }
