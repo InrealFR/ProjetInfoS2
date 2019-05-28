@@ -22,17 +22,15 @@ public class Circuit {
 
     private ArrayList<Composant> Composants;
     private ArrayList<Noeuds> Noeuds;
-    private double omega;
-
+    
     public Circuit() {
         Composants = new ArrayList<>();
         Noeuds = new ArrayList<>();
     }
 
-    public Circuit(ArrayList<Composant> Composants, ArrayList<Noeuds> Noeuds, double omega) {
+    public Circuit(ArrayList<Composant> Composants, ArrayList<Noeuds> Noeuds) {
         this.Composants = Composants;
         this.Noeuds = Noeuds;
-        this.omega= omega;
     }
 
     public ArrayList<Composant> getComposants() {
@@ -50,15 +48,6 @@ public class Circuit {
     public void setNoeuds(ArrayList<Noeuds> Noeuds) {
         this.Noeuds = Noeuds;
     }
-    
-    public double getOmega(){
-        return omega;
-    }
-    
-    public void setOmega(double w){
-        this.omega=w;
-    }
-
     public String toString() {
         return ("Liste Composants : " + Composants
                 + "\n Liste Noeuds : " + Noeuds);
@@ -119,35 +108,34 @@ public class Circuit {
                     Noeuds uno = new Noeuds(1.2, 14, 1);
                     Noeuds dos = new Noeuds(178, 152, 2);
                     Noeuds tres = new Noeuds(1, 1, 3);
-
-                    GenerateurTension G = new GenerateurTension(1, 1);
+                    GenerateurTension G = new GenerateurTension(1, 0);
                     G.setNoeudDepart(uno);
                     uno.getDepart().add(G);
                     G.setNoeudArrive(dos);
                     dos.getArrive().add(G);
 
-                    Resistance R1 = new Resistance(1, 2);
+                    Resistance R1 = new Resistance(1, 1);
                     System.out.println("coef béta de r1"+R1.beta());
                     R1.setNoeudDepart(dos);
                     dos.getDepart().add(R1);
                     R1.setNoeudArrive(uno);
                     uno.getArrive().add(R1);
 
-                    Resistance R2 = new Resistance(1, 3);
+                    Resistance R2 = new Resistance(1, 2);
                     System.out.println("coef béta de r2"+R2.beta());
                     R2.setNoeudDepart(dos);
                     dos.getDepart().add(R2);
                     R2.setNoeudArrive(tres);
                     tres.getArrive().add(R2);
 
-                    Condensateur C3 = new Condensateur(1, 4);
+                    Condensateur C3 = new Condensateur(1, 3);
                     System.out.println("coef béta de c"+C3.beta());
                     C3.setNoeudDepart(tres);
                     tres.getDepart().add(C3);
                     C3.setNoeudArrive(uno);
                     uno.getArrive().add(C3);
 
-                    this.setOmega(1);
+                   
                     this.getComposants().add(G);
                     this.getComposants().add(R1);
                     this.getComposants().add(R2);
@@ -190,7 +178,6 @@ public class Circuit {
     public static void main(String args[]) {
        Circuit test = new Circuit();
        test.gestion();
-
     }
    
 
@@ -462,28 +449,50 @@ public class Circuit {
     
     
 public void ajoutCaracteristique (Complex [][] mat, int l){
+    
     int n = this.Composants.size();
     int i;
     for (i=0;i<n;i++){
         mat[l+i][l+i] = this.getComposants().get(i).alpha();
+        //le coefficient de la colonne associée à la tension aux bornes du composant i prend la valeur du alpha de celui-ci
         mat[l+i][n+i] = this.getComposants().get(i).beta();
+        //le coefficient de la colonne associée à l'intensité du courant du composant i prend la valeur du beta de celui-ci
     }
+    // il le fait pour chaque composant du circuit
     }
 
+
+/*
+à la fin, les n premières lignes de la matrice sont remplies
+avec les équations caractéristiques de chaque composant
+*/
+
+
 public void ajoutLoiDesNoeuds (Complex [][] mat, int l){
+    
     int n = this.getNoeuds().size();
     int i;
     int j;
     for (i=0;i<n-1;i++){
+        //On va jusqu'à n-1 car aller jusqu'à n remplirait une ligne qui serait composition linéaire des précédentes
+       
         int imoins = this.getNoeuds().get(i).getDepart().size();
-        for (j=0;j<imoins-1;j++){
+        //On attribut aux intensité des composants aux départ du noeud un sens négatif
+        for (j=0;j<imoins;j++){
+            //pour tous les composants j sortant du noeud i,
+            //on attribut un coefficient -1 à la colonne correspondante à son intensité
             int id = this.getNoeuds().get(i).getDepart().get(j).getId();
-            mat[l+i][l+id-1]=Complex.creeRec(-1,0);
+            mat[l+i][l+id]=Complex.creeRec(-1,0);
+            
         }
+        
         int iplus = this.getNoeuds().get(i).getArrive().size();
-        for (j=0;j<iplus-1;j++){
+        //On attribut aux intensité des composants aux départ du noeud un sens positif
+        for (j=0;j<iplus;j++){
+            //Pour tous les composants j arrivant au noeud i
+            //on attribut un coefficient 1 à la colonne correspondante à son intensité
             int id = this.getNoeuds().get(i).getArrive().get(j).getId();
-            mat[l+i][l+id-1]= Complex.creeRec(1,0);
+            mat[l+i][l+id]= Complex.creeRec(1,0);
         }
     }
 }
@@ -492,45 +501,62 @@ public void ajoutLoiDesMailles(ArrayList <ArrayList<Composant>> mailles  ,  Comp
     int n = mailles.size();
     int i,j;
     for(i=0;i<n;i++){
-        int nbcompos =mailles.get(i).size();
-        Noeuds noeudDebut = mailles.get(i).get(0).getNoeudDepart();
+        int nbcompos = mailles.get(i).size();
+        Noeuds noeudLecture = mailles.get(i).get(0).getNoeudDepart();
         for (j=0;j<nbcompos;j++){
-            if (noeudDebut == mailles.get(i).get(j).getNoeudDepart()){
+            if (noeudLecture == mailles.get(i).get(j).getNoeudDepart()){
+                // si le noeud de lecture est identique au noeud de départ du composant j de la liste
+                // on associe à la colonne correspondante à la tension du composant j le coef 1
                 mat [l+i][mailles.get(i).get(j).getId()]= Complex.creeRec(1,0);
             } else {
+                // sinon on associe à la colonne correspondante à la tension du composant j le coef -1
                 mat [l+i][mailles.get(i).get(j).getId()]=Complex.creeRec(1, 0).opp();
             }
-            noeudDebut=mailles.get(i).get(j).getNoeudArrive();
+            noeudLecture=mailles.get(i).get(j).getNoeudArrive();
+            // on déplace le noeud de lecture au noeud d'arrivée du composant de la maille traité
         }
         
     }
 }
 
 public Complex[][] MatriceCoefficients(){
+    
     int n=this.getComposants().size();
     Complex [][] MatriceCoefficients = new Complex [2*n][2*n];
+    // on crée une matrice carrée de taille 2n
     
     for  ( int i = 0;i<2*n;i++){
                     for (int j=0;j<n*2;j++){
                         MatriceCoefficients[i][j]=Complex.creeRec(0, 0);
                     }
                 }
+    // on initialise tout à 0
+    
     int l = 0;
+    // la variable l sert à idiquer la ligne de remplissage de la matrice de coefficients
+    
     System.out.println("debut de remplissage matrice");
     this.ajoutCaracteristique(MatriceCoefficients, l);
+    // on remplit les n premières lignes avec les équations caractéristiques des n composants
     l=n;
     System.out.println("fin caractéristiques matrice");
     this.ajoutLoiDesNoeuds(MatriceCoefficients, l);
+    // on ajoute aux (nb de noeuds - 1) lignes suivantes les équations des lois des noeuds
     System.out.println("fin des noeuds");
     l=l+this.getNoeuds().size()-1;
     ArrayList< ArrayList<Composant>> mailles=this.calculMailles();
+    // on détecte les mailles
     this.ajoutLoiDesMailles(mailles, MatriceCoefficients, l);
+    // on ajoute aux lignes restantes de la matrice les coefficients des équations de la loi des mailles
     System.out.println(MatriceCoefficients);
     return MatriceCoefficients;
 }
 public Complex[] vecteurEquation(){
     int n = this.getComposants().size();
     Complex[] vect = new Complex [2*n];
+    for (int i=0;i<2*n;i++){
+        vect[i]=Complex.creeRec(0, 0);
+    }
     for (int i=0;i<n;i++){
         vect[i]=this.getComposants().get(i).gamma().opp();
     }

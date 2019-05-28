@@ -27,6 +27,7 @@ public class Condensateur extends Composant {
     public Condensateur(double capacite, int id) {
         super(id);
         this.capacite = capacite;
+        this.setOmega(1);
     }
    
     
