@@ -168,7 +168,18 @@ public class Circuit {
                 }
                 break;
                 case 8: {
-                    this.solutionFinale();
+                    
+                    System.out.println("quelle est la fréquence propre de votre circuit?");
+                    double f = Lire.d();
+                    if (f==0){
+                        throw new Error ("La fréquence est négative ! Recommencez");
+                    }
+                    
+                    int l = this.Composants.size();
+                    for (int i=0;i<l;i++){
+                        this.Composants.get(i).setOmega(f);
+                    }
+                    this.resolutionProbleme();
                 }
                 case 0: {
                     rep = 0;
@@ -339,10 +350,10 @@ public class Circuit {
                 
                 Noeuds Depart = this.Noeuds.get(i);
                 NDV.add(i);
-                System.out.println("Noeuds deja vus :"+NDV);
+               // System.out.println("Noeuds deja vus :"+NDV);
                 // On initialise le noeud de départ de la branche et on le répertorie comme déjà vu
                 
-                System.out.println(Depart+" est au départ de "+lc+" branches");
+                //System.out.println(Depart+" est au départ de "+lc+" branches");
                 
                 Noeuds Nlect = Depart ;
                 /*
@@ -354,7 +365,7 @@ public class Circuit {
                 
                 for  (j = 0 ; j < lc ; j++) {
                     
-                    System.out.println("détection de la "+j+"ème branche au depart  de "+Depart);
+                    //System.out.println("détection de la "+j+"ème branche au depart  de "+Depart);
                     
                     ArrayList <Composant> composantsBranche = new ArrayList();
                     //La liste composantsBranche contiendra les composants de la jème branche au départ de départ
@@ -371,7 +382,7 @@ public class Circuit {
                     
                     listeBranches.add(composantsBranche);
                     //Il faudrait réinitialiser composantsBranche si nécessaire mais je ne connais pas la commande
-                System.out.println(composantsBranche);
+                //System.out.println(composantsBranche);
                 }
                                 /* 
                 Il a fini de détecter les branches au départ de Depart.
@@ -394,7 +405,9 @@ public class Circuit {
             */
             
         }
+        System.out.println("le circuit comporte "+listeBranches.size()+" branches");
         System.out.println(listeBranches);
+        System.out.println(" ");
         return listeBranches;
        
     }    
@@ -430,7 +443,7 @@ public class Circuit {
         
         ArrayList < ArrayList <Composant> > mailles = new ArrayList();
         // On crée une liste qui contiendra les composant d'une maille dans chaque colonne
-        System.out.println("coucou");
+        //System.out.println("coucou");
         int lb=listeBranches.size();
         int j;
         for (j=1;j<lb;j++){
@@ -442,6 +455,7 @@ public class Circuit {
             }
         System.out.println("il existe "+ mailles.size()+ " mailles dans le circuit"); 
         System.out.println(mailles.toString());
+        System.out.println(" ");
         return mailles;
     }
     
@@ -538,14 +552,14 @@ public Complex[][] MatriceCoefficients(){
     int l = 0;
     // la variable l sert à idiquer la ligne de remplissage de la matrice de coefficients
     
-    System.out.println("debut de remplissage matrice");
+    //System.out.println("debut de remplissage matrice");
     this.ajoutCaracteristique(MatriceCoefficients, l);
     // on remplit les n premières lignes avec les équations caractéristiques des n composants
     l=n;
-    System.out.println("fin caractéristiques matrice");
+    //System.out.println("fin caractéristiques matrice");
     this.ajoutLoiDesNoeuds(MatriceCoefficients, l);
     // on ajoute aux (nb de noeuds - 1) lignes suivantes les équations des lois des noeuds
-    System.out.println("fin des noeuds");
+    //System.out.println("fin des noeuds");
     l=l+this.getNoeuds().size()-1;
     ArrayList< ArrayList<Composant>> mailles=this.calculMailles();
     // on détecte les mailles
@@ -553,14 +567,20 @@ public Complex[][] MatriceCoefficients(){
     // on ajoute aux lignes restantes de la matrice les coefficients des équations de la loi des mailles
     return MatriceCoefficients;
 }
+
 public Complex[] vecteurEquation(){
+    
     int n = this.getComposants().size();
     Complex[] vect = new Complex [2*n];
+    //on crée un vecteur de taille 2n
+    
     for (int i=0;i<2*n;i++){
         vect[i]=Complex.creeRec(0, 0);
+        //on initialise toutes les composantes du vecteur à 0
     }
     for (int i=0;i<n;i++){
         vect[i]=this.getComposants().get(i).gamma().opp();
+        //pour les n premières composantes (qui sont associées aux equations des caractéristiques, on attribut la valeur -gamma
     }
     return vect;
 }
@@ -568,25 +588,39 @@ public Complex[] vecteurEquation(){
 public static Complex[] resolutionSystemeMatriciel(Complex[][] mat, Complex[]vect){
     
     SystemeComplex S = new SystemeComplex(mat , vect);
+    // création d'un système Complex avec le vecteurEquation et la matrice de coefficients
     Complex[] sol = new Complex [vect.length];
+    // création du vecteur solution de taille identique à celle du vecteur (ou de la matrice) =2n
     return sol = S.resoudSysteme();
 }
 
-public void solutionFinale(){
+public void resolutionProbleme(){
+    
     Complex[][] mat = this.MatriceCoefficients();
     Complex[] vect = this.vecteurEquation();
     int l = vect.length;
+    
     Complex[] sol = resolutionSystemeMatriciel(this.MatriceCoefficients(),this.vecteurEquation());
+    //résolution du systeme matriciel 
+    
+    //Affichage du vecteur solution
+    System.out.println("le vecteur solution du système d'équation est : ");
         for (int i=0;i<l;i++){
         System.out.println(sol[i]);
         }
+    System.out.println(" ");
+        
+        //Affichage des tensions
+        System.out.println("Voici les tensions aux bornes des composants du circuit");
         for (int i=0;i<l/2;i++){
-            System.out.println("la tension aux bornes de "+this.Composants.get(i)+" vaut "+sol[i].getMod()+"V");
+            System.out.println("la tension aux bornes de "+this.Composants.get(i)+" vaut "+sol[i].getMod()+" V");
         }
-        for (int i=((l/2)-1);i<l;i++){
-            System.out.println("l'intensité qui traverse "+this.Composants.get(i-(l/2)+1)+" vaut "+sol[i].getMod()+"A");
-        }
-            
-            
+        System.out.println(" ");
+        
+        //Affichage des intensités
+        System.out.println("Voici les intensités traversant vos composants");
+        for (int i=((l/2)-1);i<l-1;i++){
+            System.out.println("l'intensité qui traverse "+this.Composants.get(i-(l/2)+1)+" vaut "+sol[i].getMod()+" A");
+        }    
         }
 }
