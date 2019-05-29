@@ -6,12 +6,13 @@
 package fr.insa.pons.projet.main;
 
 import fr.insa.pons.projet.circuit.Circuit;
-import fr.insa.pons.projet.composant.Resistance;
 import fr.insa.pons.projet.noeud.Noeuds;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.geom.AffineTransform;
 
 /**
  *
@@ -42,6 +43,9 @@ public class JPanelAffichage extends javax.swing.JPanel implements MouseListener
 
     @Override
     public void paintComponent(Graphics g) {
+        Graphics2D g2d = (Graphics2D)g;
+        AffineTransform Rx = new AffineTransform();
+        AffineTransform old = g2d.getTransform();
         for (int i = 0; i < CircuitAff.getNoeuds().size(); i++) {
             g.setColor(Color.red);
             g.fillOval((int) CircuitAff.getNoeuds().get(i).getCoordx(), (int) CircuitAff.getNoeuds().get(i).getCoordy(), 10, 10);
@@ -53,7 +57,10 @@ public class JPanelAffichage extends javax.swing.JPanel implements MouseListener
          case('R'):{
          g.setColor(Color.cyan) ;
          g.drawLine((int)CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx(),(int)CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy(),(int)((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx()+CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx())/2),(int)((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy()+CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy())/2));
-         g.fillRect((int)((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx()+CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx())/2),(int)((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy()+CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy())/2), 40, 20);
+         g2d.transform(Rx.getRotateInstance(Math.atan((CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy()-CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy())/(CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx()-CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx())),(int)((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx()+CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx())/2)-20,(int)((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy()+CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy())/2)-10));
+         g.fillRect((int)((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx()+CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx())/2)-20,(int)((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy()+CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy())/2)-10, 40, 20);
+         g2d.setTransform(old);
+         g.drawLine((int)((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx()+CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx())/2),(int)((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy()+CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy())/2),(int)CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx(),(int)CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy()) ;
          } break ;
          }
         }

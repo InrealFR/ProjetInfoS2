@@ -13,7 +13,6 @@ import static fr.insa.pons.projet.composant.GenerateurTension.entrerGenerateur;
 import static fr.insa.pons.projet.composant.Inductance.entrerInductance;
 import static fr.insa.pons.projet.composant.Resistance.entrerResistance;
 import fr.insa.pons.projet.noeud.Noeuds;
-import java.awt.Graphics;
 import java.util.ArrayList;
 
 /**

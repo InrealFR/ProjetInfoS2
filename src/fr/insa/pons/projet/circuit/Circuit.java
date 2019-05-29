@@ -168,7 +168,7 @@ public class Circuit {
                 }
                 break;
                 case 8: {
-                    this.solutionFinale();
+                    this.resolutionProbleme();
                 }
                 case 0: {
                     rep = 0;
@@ -572,7 +572,7 @@ public static Complex[] resolutionSystemeMatriciel(Complex[][] mat, Complex[]vec
     return sol = S.resoudSysteme();
 }
 
-public void solutionFinale(){
+public void resolutionProbleme(){
     Complex[][] mat = this.MatriceCoefficients();
     Complex[] vect = this.vecteurEquation();
     int l = vect.length;
