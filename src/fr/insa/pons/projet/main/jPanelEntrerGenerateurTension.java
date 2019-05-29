@@ -85,9 +85,6 @@ public class jPanelEntrerGenerateurTension extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    public JTextField getjTextFieldId() {
-        return jTextFieldId;
-    }
 
     public JTextField getjTextFieldResistance() {
         return jTextFieldFem;

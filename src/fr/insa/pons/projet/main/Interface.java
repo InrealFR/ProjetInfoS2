@@ -7,6 +7,7 @@ package fr.insa.pons.projet.main;
 
 import fr.insa.pons.projet.circuit.Circuit;
 import fr.insa.pons.projet.composant.Condensateur;
+import fr.insa.pons.projet.composant.Fil;
 import fr.insa.pons.projet.composant.GenerateurTension;
 import fr.insa.pons.projet.composant.Inductance;
 import fr.insa.pons.projet.composant.Resistance;
@@ -21,7 +22,8 @@ public class Interface extends javax.swing.JFrame {
 
     Circuit CircuitCalculs;
     double pulse;
-    int Compo = 0 ;
+    int Compo = 0;
+
     /**
      * Creates new form Interface
      */
@@ -53,6 +55,8 @@ public class Interface extends javax.swing.JFrame {
         jLabelIconInductance = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabelIconGenerateur = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jPanel_AffichageCalculs = new javax.swing.JPanel();
         jButtonCalculs = new javax.swing.JButton();
         jScrollPaneAffichageCalculs = new javax.swing.JScrollPane();
@@ -173,6 +177,14 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
+        jLabelIconGenerateur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fr/insa/pons/projet/main/images/generateur.png"))); // NOI18N
+        jLabelIconGenerateur.setText("jLabel1");
+        jLabelIconGenerateur.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabelIconGenerateur.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fr/insa/pons/projet/main/images/fil.png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+
         javax.swing.GroupLayout jPanel_ComposantsLayout = new javax.swing.GroupLayout(jPanel_Composants);
         jPanel_Composants.setLayout(jPanel_ComposantsLayout);
         jPanel_ComposantsLayout.setHorizontalGroup(
@@ -180,9 +192,16 @@ public class Interface extends javax.swing.JFrame {
             .addGroup(jPanel_ComposantsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel_ComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
-                    .addComponent(jPanelComposants, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanelComposants, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel_ComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel_ComposantsLayout.createSequentialGroup()
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
+                        .addGroup(jPanel_ComposantsLayout.createSequentialGroup()
+                            .addComponent(jButton1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabelIconGenerateur, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel_ComposantsLayout.setVerticalGroup(
@@ -191,9 +210,13 @@ public class Interface extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanelComposants, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel_ComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelIconGenerateur, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel_ComposantsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addGap(52, 52, 52))
         );
 
@@ -334,20 +357,20 @@ public class Interface extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonCalculsActionPerformed
 
-    
+
     private void jButtonNoeudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNoeudActionPerformed
         EntrerNoeud EntrerNoeud = new EntrerNoeud(); //initiation du jPanel
-        jPanelAffichage1.Compo = 1 ;
-int rep = JOptionPane.showConfirmDialog(this, EntrerNoeud, "Saisie du Noeud", JOptionPane.OK_CANCEL_OPTION);
-if(rep == JOptionPane.OK_OPTION){
-if(CircuitCalculs.getNoeuds().isEmpty()){
-CircuitCalculs.getNoeuds().add(new Noeuds(0)) ;
-System.out.println(CircuitCalculs) ;
-} else {
-CircuitCalculs.getNoeuds().add(new Noeuds(CircuitCalculs.getNoeuds().get(CircuitCalculs.getNoeuds().size()-1).getId()+1)) ;
-System.out.println(CircuitCalculs) ;
-}
-}
+        jPanelAffichage1.Compo = 1;
+        int rep = JOptionPane.showConfirmDialog(this, EntrerNoeud, "Saisie du Noeud", JOptionPane.OK_CANCEL_OPTION);
+        if (rep == JOptionPane.OK_OPTION) {
+            if (CircuitCalculs.getNoeuds().isEmpty()) {
+                CircuitCalculs.getNoeuds().add(new Noeuds(0));
+                System.out.println(CircuitCalculs);
+            } else {
+                CircuitCalculs.getNoeuds().add(new Noeuds(CircuitCalculs.getNoeuds().get(CircuitCalculs.getNoeuds().size() - 1).getId() + 1));
+                System.out.println(CircuitCalculs);
+            }
+        }
 
     }//GEN-LAST:event_jButtonNoeudActionPerformed
 
@@ -357,7 +380,7 @@ System.out.println(CircuitCalculs) ;
             entrerRes.getjComboBoxDepart().addItem("" + CircuitCalculs.getNoeuds().get(i).getId());
             entrerRes.getjComboBoxArrive().addItem("" + CircuitCalculs.getNoeuds().get(i).getId());
         }
-        
+
         int rep = JOptionPane.showConfirmDialog(this, entrerRes, "Saisie de Résistance", JOptionPane.OK_CANCEL_OPTION);
         if (rep == JOptionPane.OK_OPTION) {
             if ((Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())) == (Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim()))) {
@@ -365,32 +388,32 @@ System.out.println(CircuitCalculs) ;
                 throw new Error();
             } else {
                 try {
-                    if(CircuitCalculs.getComposants().isEmpty()){
-                    CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())).setCoordx(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())).getId()).getCoordx()) ;
-                    CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())).setCoordy(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())).getId()).getCoordy()) ;
-                    CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())).setCoordx(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())).getId()).getCoordx()) ;
-                    CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())).setCoordy(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())).getId()).getCoordy()) ;
+                    if (CircuitCalculs.getComposants().isEmpty()) {
+                        CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())).setCoordx(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())).getId()).getCoordx());
+                        CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())).setCoordy(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())).getId()).getCoordy());
+                        CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())).setCoordx(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())).getId()).getCoordx());
+                        CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())).setCoordy(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())).getId()).getCoordy());
 
-                    Resistance res = new Resistance(Double.parseDouble(entrerRes.getjTextFieldResistance().getText()),0) ;
-                         CircuitCalculs.ajouteComposant(res, CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())));
-                    jPanelAffichage1.getCircuitAff().ajouteComposant(res, CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())));
-                   
+                        Resistance res = new Resistance(Double.parseDouble(entrerRes.getjTextFieldResistance().getText()), 0);
+                        CircuitCalculs.ajouteComposant(res, CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())));
+                        jPanelAffichage1.getCircuitAff().ajouteComposant(res, CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())));
+
                     } else {
-                    CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())).setCoordx(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())).getId()).getCoordx()) ;
-                    CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())).setCoordy(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())).getId()).getCoordy()) ;
-                    CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())).setCoordx(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())).getId()).getCoordx()) ;
-                    CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())).setCoordy(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())).getId()).getCoordy()) ;
-                    Resistance res = new Resistance(Double.parseDouble(entrerRes.getjTextFieldResistance().getText()),CircuitCalculs.getComposants().get(CircuitCalculs.getComposants().size()-1).getId()+1);
-                    CircuitCalculs.ajouteComposant(res, CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())));
-                    jPanelAffichage1.getCircuitAff().ajouteComposant(res, CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())));
-                    System.out.println(CircuitCalculs);
+                        CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())).setCoordx(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())).getId()).getCoordx());
+                        CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())).setCoordy(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())).getId()).getCoordy());
+                        CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())).setCoordx(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())).getId()).getCoordx());
+                        CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())).setCoordy(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())).getId()).getCoordy());
+                        Resistance res = new Resistance(Double.parseDouble(entrerRes.getjTextFieldResistance().getText()), CircuitCalculs.getComposants().get(CircuitCalculs.getComposants().size() - 1).getId() + 1);
+                        CircuitCalculs.ajouteComposant(res, CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())));
+                        jPanelAffichage1.getCircuitAff().ajouteComposant(res, CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitCalculs.chercheNoeud(Integer.parseInt(entrerRes.getjComboBoxArrive().getSelectedItem().toString().trim())));
+                        System.out.println(CircuitCalculs);
                     }
                 } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(this, "VEUILLEZ ENTRER DES NOMBRES !");
                 }
 
             }
-            System.out.println(CircuitCalculs) ;
+            System.out.println(CircuitCalculs);
         } else {
             JOptionPane.showMessageDialog(this, "Saisie annulée");
         }
@@ -458,12 +481,12 @@ System.out.println(CircuitCalculs) ;
     }//GEN-LAST:event_jMenu3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    jPanelEntrerGenerateurTension gen = new jPanelEntrerGenerateurTension();
-           for (int i = 0; i < CircuitCalculs.getNoeuds().size(); i++) {
+        jPanelEntrerGenerateurTension gen = new jPanelEntrerGenerateurTension();
+        for (int i = 0; i < CircuitCalculs.getNoeuds().size(); i++) {
             gen.getjComboBoxDepart().addItem("" + CircuitCalculs.getNoeuds().get(i).getId());
             gen.getjComboBoxArrive().addItem("" + CircuitCalculs.getNoeuds().get(i).getId());
-           }
-           int rep = JOptionPane.showConfirmDialog(this, gen, "Saisie du gen", JOptionPane.OK_CANCEL_OPTION);
+        }
+        int rep = JOptionPane.showConfirmDialog(this, gen, "Saisie du gen", JOptionPane.OK_CANCEL_OPTION);
         if (rep == JOptionPane.OK_OPTION) {
             if ((Integer.parseInt(gen.getjComboBoxDepart().getSelectedItem().toString().trim())) == (Integer.parseInt(gen.getjComboBoxArrive().getSelectedItem().toString().trim()))) {
                 JOptionPane.showMessageDialog(this, "Erreur : Même noeud de départ et d'arrivée !");
@@ -481,31 +504,63 @@ System.out.println(CircuitCalculs) ;
         } else {
             JOptionPane.showMessageDialog(this, "Saisie annulée");
         }
-           
+
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jPanelAffichage1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelAffichage1MousePressed
-repaint() ;       // TODO add your handling code here:
+        repaint();       // TODO add your handling code here:
     }//GEN-LAST:event_jPanelAffichage1MousePressed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        jPanelEntrerFil fil = new jPanelEntrerFil();
+        for (int i = 0; i < CircuitCalculs.getNoeuds().size(); i++) {
+            fil.getjComboBoxDepart().addItem("" + CircuitCalculs.getNoeuds().get(i).getId());
+            fil.getjComboBoxArrivee().addItem("" + CircuitCalculs.getNoeuds().get(i).getId());
+        }
+        int rep = JOptionPane.showConfirmDialog(this, fil, "Saisie d'un Fil", JOptionPane.OK_CANCEL_OPTION);
+        if (rep == JOptionPane.OK_OPTION) {
+            if ((Integer.parseInt(fil.getjComboBoxDepart().getSelectedItem().toString().trim())) == (Integer.parseInt(fil.getjComboBoxArrivee().getSelectedItem().toString().trim()))) {
+                JOptionPane.showMessageDialog(this, "Erreur : Même noeud de départ et d'arrivée !");
+                throw new Error();
+            } else {
+                if (CircuitCalculs.getComposants().isEmpty()) {
+                    CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxDepart().getSelectedItem().toString().trim())).setCoordx(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxDepart().getSelectedItem().toString().trim())).getId()).getCoordx());
+                    CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxDepart().getSelectedItem().toString().trim())).setCoordy(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxDepart().getSelectedItem().toString().trim())).getId()).getCoordy());
+                    CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxArrivee().getSelectedItem().toString().trim())).setCoordx(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxArrivee().getSelectedItem().toString().trim())).getId()).getCoordx());
+                    CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxArrivee().getSelectedItem().toString().trim())).setCoordy(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxArrivee().getSelectedItem().toString().trim())).getId()).getCoordy());
+                     Fil f = new Fil(0);
+                    CircuitCalculs.ajouteComposant(f, CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxArrivee().getSelectedItem().toString().trim())));
+                    jPanelAffichage1.getCircuitAff().ajouteComposant(f, CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxArrivee().getSelectedItem().toString().trim())));
+
+                } else {
+                    CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxDepart().getSelectedItem().toString().trim())).setCoordx(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxDepart().getSelectedItem().toString().trim())).getId()).getCoordx());
+                    CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxDepart().getSelectedItem().toString().trim())).setCoordy(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxDepart().getSelectedItem().toString().trim())).getId()).getCoordy());
+                    CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxArrivee().getSelectedItem().toString().trim())).setCoordx(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxArrivee().getSelectedItem().toString().trim())).getId()).getCoordx());
+                    CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxArrivee().getSelectedItem().toString().trim())).setCoordy(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxArrivee().getSelectedItem().toString().trim())).getId()).getCoordy());
+                    Fil f = new Fil(CircuitCalculs.getComposants().get(CircuitCalculs.getComposants().size() - 1).getId() + 1);
+                    CircuitCalculs.ajouteComposant(f, CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxArrivee().getSelectedItem().toString().trim())));
+                    jPanelAffichage1.getCircuitAff().ajouteComposant(f, CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxArrivee().getSelectedItem().toString().trim())));
+                    System.out.println(CircuitCalculs);
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "saisie annulée.");
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-
-
-  public static void main(String args[]) {
-  java.awt.EventQueue.invokeLater(new Runnable() {
-          public void run() {
-               Interface GUI = new Interface();
-               GUI.pack();
-               GUI.setVisible(true);
-           }
-      });
+    public static void main(String args[]) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                Interface GUI = new Interface();
+                GUI.pack();
+                GUI.setVisible(true);
+            }
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -516,7 +571,9 @@ repaint() ;       // TODO add your handling code here:
     private javax.swing.JButton jButtonInductance;
     private javax.swing.JButton jButtonNoeud;
     private javax.swing.JButton jButtonResistance;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelIconCondensateur;
+    private javax.swing.JLabel jLabelIconGenerateur;
     private javax.swing.JLabel jLabelIconInductance;
     private javax.swing.JLabel jLabelIconNoeud;
     private javax.swing.JLabel jLabelIconResistance;

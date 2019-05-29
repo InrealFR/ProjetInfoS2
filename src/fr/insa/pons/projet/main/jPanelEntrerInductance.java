@@ -122,11 +122,4 @@ public class jPanelEntrerInductance extends javax.swing.JPanel {
         this.jTextFieldCapacite = jTextFieldCapacite;
     }
 
-    public javax.swing.JTextField getjTextFieldID() {
-        return jTextFieldID;
-    }
-
-    public void setjTextFieldID(javax.swing.JTextField jTextFieldID) {
-        this.jTextFieldID = jTextFieldID;
-    }
 }

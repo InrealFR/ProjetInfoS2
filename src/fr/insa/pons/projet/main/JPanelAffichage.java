@@ -43,27 +43,54 @@ public class JPanelAffichage extends javax.swing.JPanel implements MouseListener
 
     @Override
     public void paintComponent(Graphics g) {
-        Graphics2D g2d = (Graphics2D)g;
+
+        for (int i = 0; i < CircuitAff.getNoeuds().size(); i++) {
+            this.DrawNoeud(g, i);
+        }
+        for (int j = 0; j < CircuitAff.getComposants().size(); j++) {
+            char c = CircuitAff.getComposants().get(j).getNom();
+            switch (c) {
+                case ('R'): {
+                    this.DrawRes(g, j);
+                }
+                break;
+                case ('F'): {
+                    this.DrawFil(g, j);
+                }
+                break;
+                case ('G'): {
+
+                }
+                break;
+            }
+        }
+    }
+
+    private void DrawRes(Graphics g, int j) {
+        g.setColor(Color.blue);
+        Graphics2D g2d = (Graphics2D) g;
         AffineTransform Rx = new AffineTransform();
         AffineTransform old = g2d.getTransform();
-        for (int i = 0; i < CircuitAff.getNoeuds().size(); i++) {
-            g.setColor(Color.red);
-            g.fillOval((int) CircuitAff.getNoeuds().get(i).getCoordx(), (int) CircuitAff.getNoeuds().get(i).getCoordy(), 10, 10);
-            g.drawString(Integer.toString(CircuitAff.getNoeuds().get(i).getId()),(int) CircuitAff.getNoeuds().get(i).getCoordx() + 20,(int) CircuitAff.getNoeuds().get(i).getCoordy() + 20);
-        }
-        for (int j = 0; j< CircuitAff.getComposants().size();j++){
-         char c = CircuitAff.getComposants().get(j).getNom() ;
-         switch(c){
-         case('R'):{
-         g.setColor(Color.cyan) ;
-         g.drawLine((int)CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx(),(int)CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy(),(int)((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx()+CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx())/2),(int)((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy()+CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy())/2));
-         g2d.transform(Rx.getRotateInstance(Math.atan((CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy()-CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy())/(CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx()-CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx())),(int)((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx()+CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx())/2)-20,(int)((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy()+CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy())/2)-10));
-         g.fillRect((int)((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx()+CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx())/2)-20,(int)((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy()+CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy())/2)-10, 40, 20);
-         g2d.setTransform(old);
-         g.drawLine((int)((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx()+CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx())/2),(int)((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy()+CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy())/2),(int)CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx(),(int)CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy()) ;
-         } break ;
-         }
-        }
+        g.drawLine((int) CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx(), (int) CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy(), (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx()) / 2), (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy()) / 2));
+        g2d.transform(Rx.getRotateInstance(Math.atan((CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy() - CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy()) / (CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx() - CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx())), (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx()) / 2), (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy()) / 2)));
+        g.fillRect((int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx()) / 2) - 20, (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy()) / 2) - 10, 40, 20);
+        g.setColor(Color.black);
+        g.drawString(Integer.toString(CircuitAff.getComposants().get(j).getId()), (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx()) / 2) - 20, (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy()) / 2) - 10);
+        g.setColor(Color.blue);
+        g2d.setTransform(old);
+        g.drawLine((int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx()) / 2), (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy()) / 2), (int) CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx(), (int) CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy());
+    }
+
+    private void DrawNoeud(Graphics g, int i) {
+        g.setColor(Color.red);
+        g.fillOval((int) CircuitAff.getNoeuds().get(i).getCoordx() - 5, (int) CircuitAff.getNoeuds().get(i).getCoordy() - 5, 10, 10);
+        g.drawString(Integer.toString(CircuitAff.getNoeuds().get(i).getId()), (int) CircuitAff.getNoeuds().get(i).getCoordx() + 20, (int) CircuitAff.getNoeuds().get(i).getCoordy() + 20);
+    }
+
+    private void DrawFil(Graphics g, int j) {
+        g.setColor(Color.black);
+       g.drawLine((int) CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx(), (int) CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy(), (int) CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx(), (int) CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy());
+       g.drawString(Integer.toString(CircuitAff.getNoeuds().get(j).getId()),(int)((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx()+CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx())/2)+5,(int)((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy()+CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy())/2)+5);
     }
 
     /**
@@ -94,18 +121,18 @@ public class JPanelAffichage extends javax.swing.JPanel implements MouseListener
         switch (Compo) {
             case (1): {
                 if (CircuitAff.getNoeuds().isEmpty()) {
-                    CircuitAff.getNoeuds().add(new Noeuds( e.getX(), e.getY(),0));
-                     
+                    CircuitAff.getNoeuds().add(new Noeuds(e.getX(), e.getY(), 0));
+
                 } else {
-                    CircuitAff.getNoeuds().add(new Noeuds(e.getX(), e.getY(),CircuitAff.getNoeuds().get(CircuitAff.getNoeuds().size() - 1).getId() + 1));
-         
+                    CircuitAff.getNoeuds().add(new Noeuds(e.getX(), e.getY(), CircuitAff.getNoeuds().get(CircuitAff.getNoeuds().size() - 1).getId() + 1));
+
                 }
-           
+
                 Compo = 666;
             }
             break;
         }
-       
+
         //To change body of generated methods, choose Tools | Templates.
     }
 
