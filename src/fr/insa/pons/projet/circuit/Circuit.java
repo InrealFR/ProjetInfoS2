@@ -587,6 +587,6 @@ public void solutionFinale(){
             System.out.println("l'intensité qui traverse "+this.Composants.get(i-(l/2)+1)+" vaut "+sol[i].getMod()+"A");
         }
             
-            
+           
         }
 }
