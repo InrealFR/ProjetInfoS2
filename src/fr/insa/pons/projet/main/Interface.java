@@ -350,7 +350,7 @@ public class Interface extends javax.swing.JFrame {
                 for (int i = 0; i < CircuitCalculs.getComposants().size(); i++) {
                     CircuitCalculs.getComposants().get(i).setOmega(pulse);
                 }
-                jTextAreaAffichageCalculs.setText("pulsation =" + pulse);
+                jTextAreaAffichageCalculs.setText("hah");
             } else {
                 JOptionPane.showMessageDialog(this, "Vous avez annulé !");
             }

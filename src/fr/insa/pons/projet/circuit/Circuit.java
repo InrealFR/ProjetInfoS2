@@ -12,6 +12,7 @@ import fr.insa.pons.projet.matrice.SystemeComplex;
 import fr.insa.pons.projet.noeud.Noeuds;
 import static fr.insa.pons.projet.noeud.Noeuds.entrerNoeud;
 import java.awt.Graphics;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -605,7 +606,7 @@ public void resolutionProbleme(){
     Complex[][] mat = this.MatriceCoefficients();
     Complex[] vect = this.vecteurEquation();
     int l = vect.length;
-    
+    DecimalFormat df = new DecimalFormat("#.###");
     Complex[] sol = resolutionSystemeMatriciel(this.MatriceCoefficients(),this.vecteurEquation());
     //résolution du systeme matriciel 
     
@@ -619,14 +620,14 @@ public void resolutionProbleme(){
         //Affichage des tensions
         System.out.println("Voici les tensions aux bornes des composants du circuit");
         for (int i=0;i<l/2;i++){
-            System.out.println("la tension aux bornes de "+this.Composants.get(i)+" vaut "+sol[i].getMod()+" V");
+            System.out.println("la tension aux bornes de "+this.Composants.get(i)+" vaut "+df.format(sol[i].getMod())+" V");
         }
         System.out.println(" ");
         
         //Affichage des intensités
         System.out.println("Voici les intensités traversant vos composants");
         for (int i=((l/2)-1);i<l-1;i++){
-            System.out.println("l'intensité qui traverse "+this.Composants.get(i-(l/2)+1)+" vaut "+sol[i].getMod()+" A");
+            System.out.println("l'intensité qui traverse "+this.Composants.get(i-(l/2)+1)+" vaut "+df.format(sol[i].getMod())+" A");
         }    
         }
 }
