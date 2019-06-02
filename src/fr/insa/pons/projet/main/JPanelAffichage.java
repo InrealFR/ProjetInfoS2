@@ -13,6 +13,10 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -59,7 +63,15 @@ public class JPanelAffichage extends javax.swing.JPanel implements MouseListener
                 }
                 break;
                 case ('G'): {
-
+                    this.DrawGenerateur(g, j);
+                }
+                break;
+                case ('L'): {
+                    this.DrawInductance(g, j);
+                }
+                break;
+                case ('C'): {
+                    this.DrawCondensateur(g, j);
                 }
                 break;
             }
@@ -75,10 +87,46 @@ public class JPanelAffichage extends javax.swing.JPanel implements MouseListener
         g2d.transform(Rx.getRotateInstance(Math.atan((CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy() - CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy()) / (CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx() - CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx())), (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx()) / 2), (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy()) / 2)));
         g.fillRect((int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx()) / 2) - 20, (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy()) / 2) - 10, 40, 20);
         g.setColor(Color.black);
-        g.drawString(Integer.toString(CircuitAff.getComposants().get(j).getId()), (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx()) / 2) - 20, (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy()) / 2) - 10);
+        g.drawString(CircuitAff.getComposants().get(j).getNom() + Integer.toString(CircuitAff.getComposants().get(j).getId()), (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx()) / 2) - 20, (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy()) / 2) - 10);
         g.setColor(Color.blue);
         g2d.setTransform(old);
         g.drawLine((int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx()) / 2), (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy()) / 2), (int) CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx(), (int) CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy());
+    }
+
+    private void DrawInductance(Graphics g, int j) {
+        g.setColor(Color.magenta);
+        Graphics2D g2d = (Graphics2D) g;
+        AffineTransform Rx = new AffineTransform();
+        AffineTransform old = g2d.getTransform();
+        URL urlImage = (getClass().getResource("/fr/insa/pons/projet/main/images/inductancedraw.png"));
+        try {
+            BufferedImage inductance = ImageIO.read(urlImage);
+            g.drawLine((int) CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx(), (int) CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy(), (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx()) / 2), (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy()) / 2));
+            g2d.transform(Rx.getRotateInstance(Math.atan((CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy() - CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy()) / (CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx() - CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx())), (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx()) / 2), (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy()) / 2)));
+            g.drawImage(inductance, (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx()) / 2) - 64, (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy()) / 2 - 64), null);
+            g2d.setTransform(old);
+            g.drawLine((int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx()) / 2), (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy()) / 2), (int) CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx(), (int) CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy());
+        } catch (IOException e) {
+            System.out.println("mauvais chemin d'accès sur l'image");
+        }
+    }
+
+    private void DrawCondensateur(Graphics g, int j) {
+        g.setColor(Color.yellow);
+        Graphics2D g2d = (Graphics2D) g;
+        AffineTransform Rx = new AffineTransform();
+        AffineTransform old = g2d.getTransform();
+        URL urlImage = (getClass().getResource("/fr/insa/pons/projet/main/images/condensateurdraw.png"));
+        try {
+            BufferedImage condensateur = ImageIO.read(urlImage);
+            g.drawLine((int) CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx(), (int) CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy(), (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx()) / 2), (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy()) / 2));
+            g2d.transform(Rx.getRotateInstance(Math.atan((CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy() - CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy()) / (CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx() - CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx())), (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx()) / 2), (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy()) / 2)));
+            g.drawImage(condensateur, (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx()) / 2) - 64, (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy()) / 2 - 64), null);
+            g2d.setTransform(old);
+            g.drawLine((int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx()) / 2), (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy()) / 2), (int) CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx(), (int) CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy());
+        } catch (IOException e) {
+            System.out.println("mauvais chemin d'accès sur l'image");
+        }
     }
 
     private void DrawNoeud(Graphics g, int i) {
@@ -89,8 +137,19 @@ public class JPanelAffichage extends javax.swing.JPanel implements MouseListener
 
     private void DrawFil(Graphics g, int j) {
         g.setColor(Color.black);
-       g.drawLine((int) CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx(), (int) CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy(), (int) CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx(), (int) CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy());
-       g.drawString(Integer.toString(CircuitAff.getNoeuds().get(j).getId()),(int)((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx()+CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx())/2)+5,(int)((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy()+CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy())/2)+5);
+        g.drawLine((int) CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx(), (int) CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy(), (int) CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx(), (int) CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy());
+        g.drawString(Integer.toString(CircuitAff.getNoeuds().get(j).getId()), (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx()) / 2) + 5, (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy()) / 2) + 5);
+    }
+
+    private void DrawGenerateur(Graphics g, int j) {
+        g.setColor(Color.green);
+        g.drawLine((int) CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx(), (int) CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy(), (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx()) / 2), (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy()) / 2));
+        g.fillOval((int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx()) / 2) - 20, (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy()) / 2) - 20, 40, 40);
+        g.setColor(Color.black);
+        g.drawString(CircuitAff.getComposants().get(j).getNom() + Integer.toString(CircuitAff.getComposants().get(j).getId()), (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx()) / 2) - 20, (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy()) / 2) - 10);
+        g.setColor(Color.green);
+        g.drawLine((int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordx() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx()) / 2), (int) ((CircuitAff.getComposants().get(j).getNoeudDepart().getCoordy() + CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy()) / 2), (int) CircuitAff.getComposants().get(j).getNoeudArrive().getCoordx(), (int) CircuitAff.getComposants().get(j).getNoeudArrive().getCoordy());
+
     }
 
     /**

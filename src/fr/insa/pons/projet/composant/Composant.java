@@ -46,6 +46,13 @@ public abstract class Composant {
         this.NoeudArrive = NoeudArrive;
         this.omega = 1;
     }
+
+    public Composant(int id, Noeuds NoeudDepart, Noeuds NoeudArrive) {
+        this.id = id;
+        this.NoeudDepart = NoeudDepart;
+        this.NoeudArrive = NoeudArrive;
+    }
+    
     public Composant(double px, double py){
         this.px = px ;
         this.py = py ;

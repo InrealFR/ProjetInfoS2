@@ -132,16 +132,12 @@ public class Circuit {
 
                     Condensateur C3 = new Condensateur(1, 3);
                     System.out.println("coef béta de c"+C3.beta());
-                    C3.setNoeudDepart(tres);
-                    tres.getDepart().add(C3);
-                    C3.setNoeudArrive(uno);
-                    uno.getArrive().add(C3);
+                    this.ajouteComposant(C3, tres, uno);
 
                    
                     this.getComposants().add(G);
                     this.getComposants().add(R1);
                     this.getComposants().add(R2);
-                    this.getComposants().add(C3);
                     this.getNoeuds().add(uno);
                     this.getNoeuds().add(dos);
                     this.getNoeuds().add(tres);
@@ -203,7 +199,17 @@ public class Circuit {
     //     Circuit test = new Circuit();
     //     test.gestion();
     //  }
-
+    public boolean testGenerateur(){
+    boolean test = false ;
+    int i = 0 ;
+    while((test==false)&&(i < this.getComposants().size())){
+     if(this.getComposants().get(i).getNom()=='G'){
+     test = true ;
+     }
+     i = i+1 ;
+    }
+    return(test);
+    }
     public boolean testIdC(int id) { //test id composants
         ArrayList<Composant> compo = this.getComposants();
         boolean verif = false;

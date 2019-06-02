@@ -5,6 +5,8 @@
  */
 package fr.insa.pons.projet.main;
 
+import javax.swing.JTextField;
+
 /**
  *
  * @author hugop
@@ -28,7 +30,7 @@ public class jPanelEntrerInductance extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        jTextFieldCapacite = new javax.swing.JTextField();
+        jTextFieldInductance = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jComboBoxDepart = new javax.swing.JComboBox<>();
@@ -66,7 +68,7 @@ public class jPanelEntrerInductance extends javax.swing.JPanel {
                         .addGap(51, 51, 51))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldCapacite, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldInductance, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -75,7 +77,7 @@ public class jPanelEntrerInductance extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextFieldCapacite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldInductance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -95,7 +97,7 @@ public class jPanelEntrerInductance extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField jTextFieldCapacite;
+    private javax.swing.JTextField jTextFieldInductance;
     // End of variables declaration//GEN-END:variables
 
     public javax.swing.JComboBox<String> getjComboBoxArrivee() {
@@ -114,12 +116,14 @@ public class jPanelEntrerInductance extends javax.swing.JPanel {
         this.jComboBoxDepart = jComboBoxDepart;
     }
 
-    public javax.swing.JTextField getjTextFieldCapacite() {
-        return jTextFieldCapacite;
+    public JTextField getjTextFieldInductance() {
+        return jTextFieldInductance;
     }
 
-    public void setjTextFieldCapacite(javax.swing.JTextField jTextFieldCapacite) {
-        this.jTextFieldCapacite = jTextFieldCapacite;
+    public void setjTextFieldInductance(JTextField jTextFieldInductance) {
+        this.jTextFieldInductance = jTextFieldInductance;
     }
+
+  
 
 }

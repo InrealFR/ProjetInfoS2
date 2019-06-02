@@ -7,6 +7,7 @@ package fr.insa.pons.projet.composant;
 
 import fr.insa.Lire;
 import fr.insa.pons.projet.complex.Complex;
+import fr.insa.pons.projet.noeud.Noeuds;
 
 /**
  *
@@ -26,6 +27,12 @@ public class Resistance extends Composant{
 
     public Resistance(double resistance, int id) {
         super(id);
+        this.resistance = resistance;
+        setNom('R') ;
+    }
+
+    public Resistance(double resistance, int id, Noeuds NoeudDepart, Noeuds NoeudArrive) {
+        super(id, NoeudDepart, NoeudArrive);
         this.resistance = resistance;
         setNom('R') ;
     }
