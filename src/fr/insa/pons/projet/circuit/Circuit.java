@@ -176,7 +176,7 @@ public class Circuit {
                     for (int i=0;i<l;i++){
                         this.Composants.get(i).setOmega(f);
                     }
-                    this.resolutionProbleme();
+                    System.out.println(this.resolutionProbleme());
                 }
                 case 0: {
                     rep = 0;
@@ -296,7 +296,6 @@ public class Circuit {
         }
         return (chercheNoeud(i));
     }
-    
     public Noeuds chercheNoeud(int id){
         int pos = 0;
         boolean verif = false;
@@ -317,7 +316,7 @@ public class Circuit {
         int i =0;
         
         
-        while( (i!= ln) && ((this.Noeuds.get(i).getDepart().size()+this.Noeuds.get(i).getArrive().size())<2)){
+        while( (i!= ln) && ((this.Noeuds.get(i).getDepart().size()+this.Noeuds.get(i).getArrive().size())<=2)){
             i=i+1;
         }
         
@@ -412,7 +411,7 @@ public class Circuit {
             */
             
         }
-        System.out.println("le circuit comporte "+listeBranches.size()+" branches");
+       System.out.println("le circuit comporte "+listeBranches.size()+" branches");
         System.out.println(listeBranches);
         System.out.println(" ");
         return listeBranches;
@@ -460,9 +459,9 @@ public class Circuit {
             ajouterBranche(j,M,listeBranches);
             mailles.add(M);
             }
-        System.out.println("il existe "+ mailles.size()+ " mailles dans le circuit"); 
+       System.out.println("il existe "+ mailles.size()+ " mailles dans le circuit"); 
         System.out.println(mailles.toString());
-        System.out.println(" ");
+      System.out.println(" ");
         return mailles;
     }
     
@@ -601,8 +600,8 @@ public static Complex[] resolutionSystemeMatriciel(Complex[][] mat, Complex[]vec
     return sol = S.resoudSysteme();
 }
 
-public void resolutionProbleme(){
-    
+public String resolutionProbleme(){
+    String Affichage ;
     Complex[][] mat = this.MatriceCoefficients();
     Complex[] vect = this.vecteurEquation();
     int l = vect.length;
@@ -611,23 +610,25 @@ public void resolutionProbleme(){
     //résolution du systeme matriciel 
     
     //Affichage du vecteur solution
-    System.out.println("le vecteur solution du système d'équation est : ");
+    Affichage =("le vecteur solution du système d'équation est :\n");
         for (int i=0;i<l;i++){
-        System.out.println(sol[i]);
+        Affichage =Affichage + (sol[i])+"\n";
         }
-    System.out.println(" ");
+    Affichage = Affichage +("\n");
         
         //Affichage des tensions
-        System.out.println("Voici les tensions aux bornes des composants du circuit");
+        Affichage = Affichage + ("Voici les tensions aux bornes des composants du circuit\n");
         for (int i=0;i<l/2;i++){
-            System.out.println("la tension aux bornes de "+this.Composants.get(i)+" vaut "+df.format(sol[i].getMod())+" V");
+            System.out.println(sol[i].getMod());
+            Affichage = Affichage +("la tension aux bornes de "+this.Composants.get(i)+" vaut "+df.format(sol[i].getMod())+" V\n");
         }
-        System.out.println(" ");
+       Affichage = Affichage + "\n";
         
         //Affichage des intensités
-        System.out.println("Voici les intensités traversant vos composants");
+        Affichage = Affichage + ("Voici les intensités traversant vos composants\n");
         for (int i=((l/2)-1);i<l-1;i++){
-            System.out.println("l'intensité qui traverse "+this.Composants.get(i-(l/2)+1)+" vaut "+df.format(sol[i].getMod())+" A");
+              System.out.println(sol[i].getMod());
+           Affichage = Affichage + ("l'intensité qui traverse "+this.Composants.get(i-(l/2)+1)+" vaut "+df.format(sol[i].getMod())+" A\n");
         }    
-        }
+        return (Affichage);}
 }

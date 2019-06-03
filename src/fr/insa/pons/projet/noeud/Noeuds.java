@@ -103,6 +103,31 @@ public class Noeuds {
     public String toString (){
         return "[Noeud "+id+" | coordx : "+coordx+" coordy : "+coordy+"]"+"| Depart :"+getDepart()+" | Arrive :"+getArrive();
     }
+    public void RemoveCompoD(int id){
+    int pos = 0 ;
+    boolean verif = false ;
+    while((pos < this.getDepart().size())&&(verif == false)){
+    if(this.getDepart().get(pos).getId()==id){
+        this.getDepart().remove(pos) ;
+        verif = true ;
+    } else {
+    pos = pos + 1 ;
+    }
+    }
+    }
+       public void RemoveCompoA(int id){
+    int pos = 0 ;
+    boolean verif = false ;
+    while((pos < this.getArrive().size())&&(verif == false)){
+    if(this.getArrive().get(pos).getId()==id){
+        this.getArrive().remove(pos) ;
+        verif = true ;
+    } else {
+    pos = pos + 1 ;
+    }
+    }
+    
+    }
     public static Noeuds entrerNoeud(){
     System.out.println("Saisir un id :") ;
     int id = Lire.i();
