@@ -12,7 +12,8 @@ import fr.insa.pons.projet.composant.GenerateurTension;
 import fr.insa.pons.projet.composant.Inductance;
 import fr.insa.pons.projet.composant.Resistance;
 import fr.insa.pons.projet.noeud.Noeuds;
-import java.awt.Toolkit;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
 /**
@@ -27,9 +28,10 @@ public class Interface extends javax.swing.JFrame {
     /**
      * Creates new form Interface
      */
-    public Interface() {
+    public Interface() throws IOException {
         initComponents();
         CircuitCalculs = new Circuit();
+        this.setIconImage(ImageIO.read((getClass().getResource("/fr/insa/pons/projet/main/images/icon.png"))));
     }
 
     /**
@@ -445,7 +447,7 @@ public class Interface extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Saisie annulée");
         }
-         repaint();
+        repaint();
     }//GEN-LAST:event_jButtonResistanceActionPerformed
 
     private void jButtonCondensateurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCondensateurActionPerformed
@@ -490,7 +492,7 @@ public class Interface extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Saisie annulée");
         } // TODO add your handling code here:
-         repaint();
+        repaint();
     }//GEN-LAST:event_jButtonCondensateurActionPerformed
 
     private void jButtonInductanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInductanceActionPerformed
@@ -514,7 +516,7 @@ public class Interface extends javax.swing.JFrame {
                         CircuitCalculs.chercheNoeud(Integer.parseInt(entrerI.getjComboBoxArrivee().getSelectedItem().toString().trim())).setCoordy(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(entrerI.getjComboBoxArrivee().getSelectedItem().toString().trim())).getId()).getCoordy());
 
                         Inductance L = new Inductance(Double.parseDouble(entrerI.getjTextFieldInductance().getText()), 0);
-                        CircuitCalculs.getComposants().add(L) ;
+                        CircuitCalculs.getComposants().add(L);
                         jPanelAffichage1.getCircuitAff().ajouteComposant(L, CircuitCalculs.chercheNoeud(Integer.parseInt(entrerI.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitCalculs.chercheNoeud(Integer.parseInt(entrerI.getjComboBoxArrivee().getSelectedItem().toString().trim())));
 
                     } else {
@@ -523,7 +525,7 @@ public class Interface extends javax.swing.JFrame {
                         CircuitCalculs.chercheNoeud(Integer.parseInt(entrerI.getjComboBoxArrivee().getSelectedItem().toString().trim())).setCoordx(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(entrerI.getjComboBoxArrivee().getSelectedItem().toString().trim())).getId()).getCoordx());
                         CircuitCalculs.chercheNoeud(Integer.parseInt(entrerI.getjComboBoxArrivee().getSelectedItem().toString().trim())).setCoordy(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(entrerI.getjComboBoxArrivee().getSelectedItem().toString().trim())).getId()).getCoordy());
                         Inductance L = new Inductance(Double.parseDouble(entrerI.getjTextFieldInductance().getText()), CircuitCalculs.getComposants().get(CircuitCalculs.getComposants().size() - 1).getId() + 1);
-                        CircuitCalculs.getComposants().add(L) ;
+                        CircuitCalculs.getComposants().add(L);
                         jPanelAffichage1.getCircuitAff().ajouteComposant(L, CircuitCalculs.chercheNoeud(Integer.parseInt(entrerI.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitCalculs.chercheNoeud(Integer.parseInt(entrerI.getjComboBoxArrivee().getSelectedItem().toString().trim())));
                         System.out.println(CircuitCalculs);
                     }
@@ -536,7 +538,7 @@ public class Interface extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Saisie annulée");
         }
-         repaint();
+        repaint();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonInductanceActionPerformed
 
@@ -573,7 +575,7 @@ public class Interface extends javax.swing.JFrame {
                             CircuitCalculs.chercheNoeud(Integer.parseInt(gen.getjComboBoxArrive().getSelectedItem().toString().trim())).setCoordy(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(gen.getjComboBoxArrive().getSelectedItem().toString().trim())).getId()).getCoordy());
 
                             GenerateurTension G = new GenerateurTension(Double.parseDouble(gen.getjTextFieldFem().getText()), 0);
-                            CircuitCalculs.getComposants().add(G) ;
+                            CircuitCalculs.getComposants().add(G);
                             jPanelAffichage1.getCircuitAff().ajouteComposant(G, CircuitCalculs.chercheNoeud(Integer.parseInt(gen.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitCalculs.chercheNoeud(Integer.parseInt(gen.getjComboBoxArrive().getSelectedItem().toString().trim())));
 
                         } else {
@@ -581,7 +583,7 @@ public class Interface extends javax.swing.JFrame {
                             CircuitCalculs.chercheNoeud(Integer.parseInt(gen.getjComboBoxDepart().getSelectedItem().toString().trim())).setCoordy(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(gen.getjComboBoxDepart().getSelectedItem().toString().trim())).getId()).getCoordy());
                             CircuitCalculs.chercheNoeud(Integer.parseInt(gen.getjComboBoxArrive().getSelectedItem().toString().trim())).setCoordy(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(gen.getjComboBoxArrive().getSelectedItem().toString().trim())).getId()).getCoordy());
                             GenerateurTension G = new GenerateurTension(Double.parseDouble(gen.getjTextFieldFem().getText()), CircuitCalculs.getComposants().get(CircuitCalculs.getComposants().size() - 1).getId() + 1);
-                            CircuitCalculs.getComposants().add(G) ;
+                            CircuitCalculs.getComposants().add(G);
                             jPanelAffichage1.getCircuitAff().ajouteComposant(G, CircuitCalculs.chercheNoeud(Integer.parseInt(gen.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitCalculs.chercheNoeud(Integer.parseInt(gen.getjComboBoxArrive().getSelectedItem().toString().trim())));
                         }
                     } catch (NumberFormatException e) {
@@ -594,7 +596,7 @@ public class Interface extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Saisie annulée");
             }
-             repaint();
+            repaint();
         }
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -621,7 +623,7 @@ public class Interface extends javax.swing.JFrame {
                     CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxArrivee().getSelectedItem().toString().trim())).setCoordx(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxArrivee().getSelectedItem().toString().trim())).getId()).getCoordx());
                     CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxArrivee().getSelectedItem().toString().trim())).setCoordy(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxArrivee().getSelectedItem().toString().trim())).getId()).getCoordy());
                     Fil f = new Fil(0);
-                    CircuitCalculs.getComposants().add(f) ;
+                    CircuitCalculs.getComposants().add(f);
                     jPanelAffichage1.getCircuitAff().ajouteComposant(f, CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxArrivee().getSelectedItem().toString().trim())));
 
                 } else {
@@ -630,7 +632,7 @@ public class Interface extends javax.swing.JFrame {
                     CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxArrivee().getSelectedItem().toString().trim())).setCoordx(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxArrivee().getSelectedItem().toString().trim())).getId()).getCoordx());
                     CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxArrivee().getSelectedItem().toString().trim())).setCoordy(jPanelAffichage1.getCircuitAff().getNoeuds().get(CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxArrivee().getSelectedItem().toString().trim())).getId()).getCoordy());
                     Fil f = new Fil(CircuitCalculs.getComposants().get(CircuitCalculs.getComposants().size() - 1).getId() + 1);
-                    CircuitCalculs.getComposants().add(f) ;
+                    CircuitCalculs.getComposants().add(f);
                     jPanelAffichage1.getCircuitAff().ajouteComposant(f, CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxDepart().getSelectedItem().toString().trim())), CircuitCalculs.chercheNoeud(Integer.parseInt(fil.getjComboBoxArrivee().getSelectedItem().toString().trim())));
                     System.out.println(CircuitCalculs);
                 }
@@ -643,24 +645,24 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButtonSuppressionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSuppressionActionPerformed
-    jPanelSuppression supr = new jPanelSuppression();
+        jPanelSuppression supr = new jPanelSuppression();
         for (int i = 0; i < CircuitCalculs.getComposants().size(); i++) {
             supr.getjComboBoxCompo().addItem("" + CircuitCalculs.getComposants().get(i).getId());
         }
-        int rep = JOptionPane.showConfirmDialog(this,supr,"Suppression",JOptionPane.OK_CANCEL_OPTION) ;
-        if(rep == JOptionPane.OK_OPTION){
-        int id = Integer.parseInt(supr.getjComboBoxCompo().getSelectedItem().toString().trim()) ;
-        CircuitCalculs.chercheNoeud(CircuitCalculs.getComposants().get(id).getNoeudDepart().getId()).RemoveCompoD(id);
-        CircuitCalculs.chercheNoeud(CircuitCalculs.getComposants().get(id).getNoeudArrive().getId()).RemoveCompoA(id);
-        CircuitCalculs.getComposants().remove(id) ;
-        jPanelAffichage1.getCircuitAff().getComposants().remove(id) ;
-        for(int i = id ; i < CircuitCalculs.getComposants().size() ; i++){
-        CircuitCalculs.getComposants().get(i).setId(i) ;
-        jPanelAffichage1.getCircuitAff().getComposants().get(i).setId(i) ;
+        int rep = JOptionPane.showConfirmDialog(this, supr, "Suppression", JOptionPane.OK_CANCEL_OPTION);
+        if (rep == JOptionPane.OK_OPTION) {
+            int id = Integer.parseInt(supr.getjComboBoxCompo().getSelectedItem().toString().trim());
+            CircuitCalculs.chercheNoeud(CircuitCalculs.getComposants().get(id).getNoeudDepart().getId()).RemoveCompoD(id);
+            CircuitCalculs.chercheNoeud(CircuitCalculs.getComposants().get(id).getNoeudArrive().getId()).RemoveCompoA(id);
+            CircuitCalculs.getComposants().remove(id);
+            jPanelAffichage1.getCircuitAff().getComposants().remove(id);
+            for (int i = id; i < CircuitCalculs.getComposants().size(); i++) {
+                CircuitCalculs.getComposants().get(i).setId(i);
+                jPanelAffichage1.getCircuitAff().getComposants().get(i).setId(i);
+            }
+            repaint();
         }
-        repaint() ;
-        }
-        
+
 // TODO add your handling code here:
     }//GEN-LAST:event_jButtonSuppressionActionPerformed
 
@@ -670,9 +672,15 @@ public class Interface extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Interface GUI = new Interface();
-                GUI.pack();
-                GUI.setVisible(true);
+                Interface GUI;
+                try {
+                    GUI = new Interface();
+                    GUI.pack();
+                    GUI.setVisible(true);
+                } catch (IOException e) {
+
+                }
+
             }
         });
     }

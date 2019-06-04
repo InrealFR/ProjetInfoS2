@@ -13,41 +13,40 @@ import java.util.ArrayList;
  * @author lherman01
  */
 public class Maille {
-    
+
     //Attributs
     private int id;
     private ArrayList<Composant> composants;
-    
+
     //Constructeurs
-    public Maille (){
-        
+    public Maille() {
+
     }
-    
-    public Maille(int i , ArrayList<Composant> composantsMaille){
+
+    public Maille(int i, ArrayList<Composant> composantsMaille) {
         this.composants = composantsMaille;
         this.id = i;
     }
-    
+
     //gets
-    
-    public int getId(){
+    public int getId() {
         return this.id;
     }
-    
-    public ArrayList<Composant> getComposants(){
+
+    public ArrayList<Composant> getComposants() {
         return this.composants;
     }
-    
+
     //sets
-    
-    public void setId(int i){
-        this.id=i;
+    public void setId(int i) {
+        this.id = i;
     }
-    
-    public void setComposants(ArrayList<Composant> composants){
+
+    public void setComposants(ArrayList<Composant> composants) {
         this.composants = composants;
     }
-    public String toString(){
-        return "la maille "+this.getId()+" contient les composants suivants"+this.getComposants().toString();
+
+    public String toString() {
+        return "la maille " + this.getId() + " contient les composants suivants" + this.getComposants().toString();
     }
 }
