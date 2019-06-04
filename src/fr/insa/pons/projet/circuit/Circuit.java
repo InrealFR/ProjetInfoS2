@@ -452,15 +452,22 @@ public class Circuit {
         //System.out.println("coucou");
         int lb=listeBranches.size();
         int j;
-        for (j=1;j<lb;j++){
+        if (lb==1){
+            ArrayList <Composant> M = new ArrayList();
+            ajouterBranche(0,M,listeBranches);
+            mailles.add(M);
+        }else{
+          for (j=1;j<lb;j++){
        
             ArrayList <Composant> M = new ArrayList();
             ajouterBranche(0,M,listeBranches);
             ajouterBranche(j,M,listeBranches);
             mailles.add(M);
-            }
-       System.out.println("il existe "+ mailles.size()+ " mailles dans le circuit"); 
-        System.out.println(mailles.toString());
+            }  
+        }
+        
+      System.out.println("il existe "+ mailles.size()+ " mailles dans le circuit"); 
+      System.out.println(mailles.toString());
       System.out.println(" ");
         return mailles;
     }
