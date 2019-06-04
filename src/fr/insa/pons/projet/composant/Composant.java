@@ -26,20 +26,21 @@ public abstract class Composant {
     private int id;
     private Noeuds NoeudDepart;
     private Noeuds NoeudArrive;
-    private double px ;
-    private double py ;
-    private char Nom ;
+    private double px;
+    private double py;
+    private char Nom;
+
     // Constructeur
     public Composant() {
         id = 0;
         NoeudDepart = NoeudArrive = new Noeuds();
-        omega=1;
+        omega = 1;
     }
 
     public Composant(int id) {
         this.id = id;
     }
-    
+
     public Composant(double omega, int id, Noeuds NoeudDepart, Noeuds NoeudArrive) {
         this.id = id;
         this.NoeudDepart = NoeudDepart;
@@ -52,10 +53,10 @@ public abstract class Composant {
         this.NoeudDepart = NoeudDepart;
         this.NoeudArrive = NoeudArrive;
     }
-    
-    public Composant(double px, double py){
-        this.px = px ;
-        this.py = py ;
+
+    public Composant(double px, double py) {
+        this.px = px;
+        this.py = py;
     }
 
     public char getNom() {
@@ -65,7 +66,7 @@ public abstract class Composant {
     public void setNom(char Nom) {
         this.Nom = Nom;
     }
-    
+
     public double getPx() {
         return px;
     }
@@ -79,18 +80,17 @@ public abstract class Composant {
     }
 
     //getters and setters
-    public void setPy(double py) {    
+    public void setPy(double py) {
         this.py = py;
     }
 
     //getters and setters 
-    
-    public double getOmega(){
+    public double getOmega() {
         return omega;
     }
-    
-    public void setOmega(double w){
-        this.omega=w;
+
+    public void setOmega(double w) {
+        this.omega = w;
     }
 
     public int getId() {
@@ -100,7 +100,7 @@ public abstract class Composant {
     public void setId(int id) {
         this.id = id;
     }
-    
+
     public Noeuds getNoeudDepart() {
         return NoeudDepart;
     }
@@ -125,10 +125,9 @@ public abstract class Composant {
     public abstract Complex gamma();
 
     public abstract String toString();
-    
-    
-      public static Composant entrerComposant() {
-        ArrayList<Composant>c = new ArrayList<>();
+
+    public static Composant entrerComposant() {
+        ArrayList<Composant> c = new ArrayList<>();
         System.out.println("Quel composant ?"
                 + "\n (1) Fil"
                 + "\n (2) Generateur de Tension"
@@ -136,28 +135,28 @@ public abstract class Composant {
                 + "\n (4) Inductance"
                 + "\n (5) Condensateur");
         int choix = Lire.i();
-        while((choix != 1)&&(choix !=2)&&(choix !=3)&&(choix!=4)&&(choix !=5)){
-              System.out.println("inexistant");
-                choix = Lire.i();
+        while ((choix != 1) && (choix != 2) && (choix != 3) && (choix != 4) && (choix != 5)) {
+            System.out.println("inexistant");
+            choix = Lire.i();
         }
         switch (choix) {
             case 1:
                 c.add(entrerFil());
-                break ;
+                break;
             case 2:
                 c.add(entrerGenerateur());
-                break ;
+                break;
             case 3:
                 c.add(entrerResistance());
-                break ;
+                break;
             case 4:
                 c.add(entrerInductance());
-                break ;
+                break;
             case 5:
                 c.add(entrerCondensateur());
-                break ;
+                break;
         }
-         return(c.get(0));
+        return (c.get(0));
     }
 
 }
