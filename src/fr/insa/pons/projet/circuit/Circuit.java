@@ -438,7 +438,7 @@ public class Circuit {
         //System.out.println("coucou");
         int lb = listeBranches.size();
         int j;
-<<<<<<< HEAD
+
         if (lb==1){
             ArrayList <Composant> M = new ArrayList();
             ajouterBranche(0,M,listeBranches);
@@ -456,7 +456,7 @@ public class Circuit {
       System.out.println("il existe "+ mailles.size()+ " mailles dans le circuit"); 
       System.out.println(mailles.toString());
       System.out.println(" ");
-=======
+
         for (j = 1; j < lb; j++) {
 
             ArrayList<Composant> M = new ArrayList();
@@ -467,7 +467,7 @@ public class Circuit {
         System.out.println("il existe " + mailles.size() + " mailles dans le circuit");
         System.out.println(mailles.toString());
         System.out.println(" ");
->>>>>>> e06e0706875caa9ec9457ac2c4dfdd4378b07690
+
         return mailles;
     }
 
@@ -480,10 +480,11 @@ public class Circuit {
         int n = this.Composants.size();
         int i;
         for (i = 0; i < n; i++) {
-            mat[l + i][l + i] = this.getComposants().get(i).alpha();
+              mat[l + i][l + i] = this.getComposants().get(i).alpha();
             //le coefficient de la colonne associée à la tension aux bornes du composant i prend la valeur du alpha de celui-ci
             mat[l + i][n + i] = this.getComposants().get(i).beta();
-            //le coefficient de la colonne associée à l'intensité du courant du composant i prend la valeur du beta de celui-ci
+            //le coefficient de la colonne associée à l'intensité du courant du composant i prend la valeur du beta de celui-ci  
+            
         }
         // il le fait pour chaque composant du circuit
     }
@@ -628,14 +629,15 @@ avec les équations caractéristiques de chaque composant
 
         //Affichage des intensités
         Affichage = Affichage + ("Voici les intensités traversant vos composants\n");
-<<<<<<< HEAD
+
         for (int i=((l/2)-1);i<l-1;i++){
               System.out.println(sol[i].getMod());
            Affichage = Affichage + ("l'intensité qui traverse "+this.Composants.get(i-(l/2)+1)+" vaut "+df.format(sol[i].getMod())+" A\n");
         }    
         return (Affichage);}
 }
-=======
+
+/*
         for (int i = ((l / 2) - 1); i < l - 1; i++) {
             System.out.println(sol[i].getMod());
             Affichage = Affichage + ("l'intensité qui traverse " + this.Composants.get(i - (l / 2) + 1) + " vaut " + df.format(sol[i].getMod()) + " A\n");
@@ -643,4 +645,5 @@ avec les équations caractéristiques de chaque composant
         return (Affichage);
     }
 }
->>>>>>> e06e0706875caa9ec9457ac2c4dfdd4378b07690
+*/
+
